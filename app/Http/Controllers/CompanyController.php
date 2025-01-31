@@ -11,8 +11,10 @@ class CompanyController extends Controller
     public function index(){
         $companies = Company::whereHas('user', function ($query) {
             $query->where('active', true);
-        })->get();
-        $users = User::with('company')->get();
+        })->withCount('jobs')->get();
+
+            $users = User::with('company')->get();
+
         return view ('companies.index',compact('companies','users'));
     }
 
