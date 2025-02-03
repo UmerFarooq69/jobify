@@ -68,6 +68,11 @@ class AdminController extends Controller
         $job->delete();
         return redirect()->route('admin.jobs')->with('success', 'Job deleted successfully');
     }
-
+    public function destroyApplication(Application $application)
+    {
+        $application->delete();
+    
+        return redirect()->route('applications.index')->with('success', 'Application deleted successfully');
+    } 
 }
 

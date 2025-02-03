@@ -52,7 +52,12 @@ class DashboardController extends Controller
 
         return view('Users.application', compact('applications', 'jobs', 'companies'));
     }
-    
+    public function destroyApplication(Application $application){
+        
+        $application->delete();
+
+        return redirect()->route('Users.application')->with('success', 'Application deleted successfully');
+    }
 
     public function destroy(Company $company)
     {

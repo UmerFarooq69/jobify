@@ -24,6 +24,7 @@ Route::get('/admin/jobs', [AdminController::class, 'Jobs'])->name('admin.jobs');
 Route::get('/user/jobs', [DashboardController::class, 'Jobs'])->name('Users.jobs');
 Route::get('/user/company', [DashboardController::class, 'company'])->name('Users.company');
 Route::delete('/company/{company}', [DashboardController::class, 'destroy'])->name('company.destroy');
+Route::delete('Users/applications/{application}', [DashboardController::class, 'destroyApplication'])->name('application.destroy');
 
 Route::post('/job', [Job_taskController::class, 'create'])->name('jobs.create');
 Route::get('/job', [Job_taskController::class, 'create'])->name('jobs.create');
@@ -51,4 +52,4 @@ Route::get('/careers', [CareerController::class, 'index'])->name('career.index')
 
 Route::get('/applications', [AdminController::class, 'applications'])->name('applications.index');
 Route::get('/user/applications', [DashboardController::class, 'applications'])->name('Users.application');
-
+Route::delete('/applications/{application}', [AdminController::class, 'destroyApplication'])->name('applications.destroy');

@@ -42,12 +42,20 @@
                         Job: {{ $application->job->job_title}}
                     </div>
                     <a href="{{ asset('storage/' . $application->cv) }}" download 
-                       class="text-blue-500 font-medium hover:text-blue-700 transition flex items-center">
-                        <svg class="w-6 h-6 mr-2 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6a3 3 0 013-3h1m6 0a3 3 0 00-3-3H6a3 3 0 00-3 3v12a3 3 0 003 3h9a3 3 0 003-3v-6" />
-                        </svg>
-                        Download CV
-                    </a>
+                        class="text-blue-500 font-medium hover:text-blue-700 transition flex items-center space-x-2">
+                         <svg class="w-5 h-5 text-blue-500 hover:text-blue-700 transition" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v12m0 0l-3-3m3 3l3-3M5 20h14" />
+                         </svg>
+                         <span>Download CV</span>
+                     </a>
+                     <form action="{{ route('application.destroy', $application->id) }}" method="POST" class="mt-4 text-right">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-red-500 hover:text-red-700 transition duration-200">
+                            <i class="fas fa-trash"></i>
+                            Delete
+                        </button>
+                    </form>
                 </div>
             @endif
         @endforeach

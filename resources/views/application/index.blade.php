@@ -56,6 +56,15 @@
                          </svg>
                          <span>Download CV</span>
                      </a>                     
+
+                    <form action="{{ route('applications.destroy', $application->id) }}" method="POST" class="mt-4 text-right">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-red-500 hover:text-red-700 transition duration-200">
+                            <i class="fas fa-trash"></i>
+                            Delete
+                        </button>
+                    </form>
                 </div>
             @endif
         @endforeach
