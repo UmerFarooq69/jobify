@@ -178,7 +178,7 @@
             {{$slot}}
         </div>
 
-        <footer class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-6 mt-12">
+        <footer class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-6">
             <div class="max-w-7xl mx-auto px-6 text-center">
                 <p class="text-lg">© 2025 Jobify. All rights reserved.</p>
                 <div class="flex justify-center space-x-6 mt-4">

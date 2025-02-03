@@ -33,12 +33,9 @@
                     Go Back
                 </a>
             </div>
-
-            <!-- Apply for Job -->
             <h2 class="text-2xl font-bold text-gray-900 mt-4">Apply for {{ $job->job_title }}</h2>
             <p class="text-gray-700 mb-6">Company: <span class="font-semibold text-gray-800">{{ $job->company->name }}</span></p>
 
-            <!-- Application Form -->
             <form action="{{ route('jobs.submitApplication', $job->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                 @csrf
                 <div>
