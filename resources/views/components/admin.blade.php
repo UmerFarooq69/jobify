@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="icon" href="{{ asset('storage/img/logo.jpeg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
@@ -18,7 +19,7 @@
         <ul>
             <li class="mb-6">
                 <a href="{{route('admin.dashboard')}}" class="flex items-center text-lg hover:bg-blue-700 p-3 rounded-md transition-all">
-                    <i class="fas fa-tacjobs.welcometer-alt mr-4"></i> Dashboard
+                    <i class="fas fa-tachometer-alt mr-4"></i> Dashboard
                 </a>
             </li>
             <li class="mb-6">
@@ -38,7 +39,7 @@
             </li>
             <li class="mb-6">
                 <a href="{{route('applications.index')}}" class="flex items-center text-lg hover:bg-blue-700 p-3 rounded-md transition-all">
-                    <i class="fas fa-users mr-4"></i> Manage Applications
+                    <i class="fas fa-file-alt mr-4"></i> Manage Applications
                 </a>
             </li>
         </ul>

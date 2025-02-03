@@ -16,7 +16,9 @@
                         <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-red-500 hover:underline">Delete</button>
+                            <button type="submit" class="text-red-500 hover:underline">
+                                <i class="fas fa-trash"></i>
+                            </button>
                         </form>
                         <form action="{{ route('admin.users.toggle-status', $user->id) }}" method="POST" style="display:inline;">
                             @csrf

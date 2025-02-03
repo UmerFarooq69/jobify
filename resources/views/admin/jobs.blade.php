@@ -28,12 +28,13 @@
                         <form action="{{ route('admin.jobs.destroy', $job->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-red-500 hover:underline">Delete</button>
+                            <button type="submit" class="text-red-500 hover:underline">
+                                <i class="fas fa-trash"></i>
+                            </button>
                         </form>
                     </div>
                 </div>
             @endforeach
         </div>
-
     </div>
 </x-admin>

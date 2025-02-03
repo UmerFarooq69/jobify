@@ -50,9 +50,12 @@
                         Job: {{ $application->job->job_title }}
                     </div>
                     <a href="{{ asset('storage/' . $application->cv) }}" download 
-                       class="text-blue-500 font-medium hover:text-blue-700 transition">
-                        Download CV
-                    </a>
+                        class="text-blue-500 font-medium hover:text-blue-700 transition flex items-center space-x-2">
+                         <svg class="w-5 h-5 text-blue-500 hover:text-blue-700 transition" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v12m0 0l-3-3m3 3l3-3M5 20h14" />
+                         </svg>
+                         <span>Download CV</span>
+                     </a>                     
                 </div>
             @endif
         @endforeach
