@@ -8,7 +8,7 @@
         <div class="w-full">
             <div class="bg-gradient-to-r from-teal-500 to-indigo-700 text-white py-6 px-8 rounded-2xl shadow-xl transition-all transform hover:scale-105 hover:shadow-2xl hover:bg-teal-600 w-full">
                 <div class="text-left mb-4">
-                    <i class="fas fa-building text-4xl mb-3 transition-transform transform hover:scale-110"></i>
+                    <i class="fas fa-briefcase text-4xl mb-3 transition-transform transform hover:scale-110"></i>
                     <h4 class="text-2xl font-bold text-teal-100">{{ $job->company->name }}</h4>
                     <h3 class="text-xl font-bold text-white">{{ $job->job_title }}</h3>
                     <p class="text-lg font-medium text-teal-200 mt-1">{{ $job->job_type }}</p>

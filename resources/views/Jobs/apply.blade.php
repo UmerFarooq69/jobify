@@ -16,7 +16,7 @@
                 id="jobDescriptionModal" 
                 class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50"
             >
-                <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-2xl transform transition-transform duration-300">
+                <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-4xl transform transition-transform duration-300">
                     <h2 class="text-3xl font-bold text-gray-800 mb-4">Job Description</h2>
                     <p class="text-gray-700">{{ $job->description }}</p>
                     <button 

@@ -8,7 +8,7 @@
         <div class="w-full">
             <div class="bg-gradient-to-r from-teal-500 to-indigo-700 text-white py-6 px-8 rounded-2xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl hover:bg-teal-600 w-full">
                 <div class="text-left mb-4">
-                    <i class="fas fa-users text-4xl mb-3"></i>
+                    <i class="fas fa-money-bill-wave text-4xl mb-3"></i>
                     <h3 class="text-xl font-bold mb-2">PKR: {{ number_format($job->job_salary, 0) }}</h3>
                     <h4 class="text-sm font-medium text-teal-200">Job Title: {{ $job->job_title }}</h4>
                     <p class="text-sm font-medium text-gray-300 mt-1">Job Description: {{ $job->description }}</p>
