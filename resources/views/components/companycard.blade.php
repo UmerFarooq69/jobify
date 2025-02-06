@@ -1,6 +1,6 @@
 <div class="p-6 bg-white shadow-md rounded-lg flex flex-col text-left mx-4">
     <div class="flex justify-center mb-4">
-        <img src="{{ asset('storage/' . $company->image) }}" alt="Company Image" class="w-full md:w-2/3 lg:w-1/2 mx-auto rounded-md shadow-lg">
+        <img src="{{ asset('storage/' . $company->image) }}" alt="Company Image" class="w-[350px] h-[170px] object-cover mx-auto rounded-md shadow-lg">
     </div>
     <h1 class="text-xl font-semibold mt-6">
         Company: <span class="font-normal text-gray-500">{{$company->name}}</span>
