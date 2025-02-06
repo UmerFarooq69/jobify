@@ -26,10 +26,11 @@ class DashboardController extends Controller
         return view('Users.dashboard', compact('totalJobs','totalCompanies', 'companies'));
     }
     
-    public function Jobs(Company $company)
+    public function Jobs()
     {
-        $jobs = $company->jobs;
-        return view('Users.jobs', compact('company', 'jobs'));
+        $jobs = Job_task::whereIn('company_id', Auth::user()->companies->pluck('id'))->get();
+    
+        return view('Users.jobs', compact('jobs'));
     }
     public function company()
     {
@@ -64,5 +65,10 @@ class DashboardController extends Controller
         $company->delete();
 
         return redirect()->route('Users.company')->with('success', 'Company deleted successfully');
+    }
+    public function destroyJob(Job_task $job)
+    {
+        $job->delete();
+        return redirect()->route('Users.jobs')->with('success', 'Job deleted successfully');
     }
 }

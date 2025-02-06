@@ -41,6 +41,7 @@ Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/userscreate', [UserController::class, 'create'])->name('users.create');
 Route::post('/users', [UserController::class, 'store'])->name('users.store');
 Route::patch('/admin/users/{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('admin.users.toggle-status');
+Route::delete('/User/jobs/{job}', [DashboardController::class, 'destroyJob'])->name('Users.jobs.destroy');
 
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('login', [AuthController::class, 'login'])->name('login.submit');
