@@ -2,32 +2,6 @@
     <div class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-teal-500 to-blue-500 p-8">
         <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-4xl transform hover:scale-105 transition-transform duration-300">
 
-            <h1 class="text-xl font-extrabold text-gray-800 mb-2">
-                Job Description: 
-                <span 
-                    class="text-blue-600 text-sm cursor-pointer"
-                    id="jobDescriptionTrigger"
-                >
-                    Click to View
-                </span>
-            </h1>
-
-            <div 
-                id="jobDescriptionModal" 
-                class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50"
-            >
-                <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-4xl transform transition-transform duration-300">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-4">Job Description</h2>
-                    <p class="text-gray-700">{{ $job->description }}</p>
-                    <button 
-                        class="mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        id="closeModal"
-                    >
-                        Close
-                    </button>
-                </div>
-            </div>
-
             <div class="flex justify-end">
                 <a href="{{ url()->previous() }}" class="bg-blue-500 text-white hover:bg-blue-600 hover:text-white font-semibold py-3 px-8 mt-2 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     Go Back
@@ -87,24 +61,4 @@
             </form>
         </div>
     </div>
-
-    <script>
-        const modal = document.getElementById('jobDescriptionModal');
-        const modalTrigger = document.getElementById('jobDescriptionTrigger');
-        const closeModal = document.getElementById('closeModal');
-
-        modalTrigger.addEventListener('click', function() {
-            modal.classList.remove('hidden');
-        });
-
-        closeModal.addEventListener('click', function() {
-            modal.classList.add('hidden');
-        });
-
-        window.addEventListener('click', function(event) {
-            if (event.target === modal) {
-                modal.classList.add('hidden');
-            }
-        });
-    </script>
 </x-form>

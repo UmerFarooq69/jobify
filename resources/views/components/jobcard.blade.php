@@ -1,21 +1,21 @@
 <div class="p-6 bg-white shadow-md rounded-lg flex flex-col text-left mx-4">
     <img src="{{ asset('storage/' . $job->image) }}" alt="Job Image" class="w-[350px] h-[170px] object-cover mx-auto rounded-md shadow-lg">
-    
-    <h1 class="text-xl font-semibold mt-6">
-        Company: <span class="font-normal text-gray-500">{{ ($job->company)->name }}</span>
-    </h1>
-    <h3 class="text-lg mt-2">Job: <span class="font-normal text-gray-500">{{ $job->job_title }}</span></h3>
-    <h3 class="text-lg">Job Type: <span class="font-normal text-gray-500">{{ $job->job_type }}</span></h3>
-    <p class="text-lg">PKR: <span class="font-normal text-gray-500">{{ number_format($job->job_salary, 0) }}</span></p>
-    <p class="text-lg">Applicants: 
+
+    <h3 class="text-xl mt-2"><span class="text-blue-500 font-bold">{{ $job->job_title }}</span></h3>
+    <p class="text-xl font-bold">Rs: <span class="font-bold">{{ number_format($job->job_salary, 0) }}</span></p>
+    <h3 class="text-lg"><i class="mdi mdi-briefcase-variant-outline text-2xl mr-2"></i><span class="font-normal text-gray-500">{{ $job->job_type }}</span></h3>   
+    <h3 class="text-lg"><i class="mdi mdi-map-marker-outline text-2xl mr-2"></i><span class="font-normal text-gray-500">{{ $job->company->location }}</span></h3>
+        <p class="text-lg">Applicants: 
         <span class="font-normal {{ $job->applications->count() < 5 ? 'text-red-500' : 'text-green-500' }}">
             {{ $job->applications->count() }}
         </span>
     </p>    
-    <span class="text-blue-600 text-sm cursor-pointer items-center gap-1 justify-end block ml-auto" 
-          data-modal="jobDescriptionModal-{{ $job->id }}">
-        <i class="fas fa-eye"></i> Quick review
-    </span>
+    <div class="flex justify-end">
+        <button class="bg-blue-600 text-white text-sm font-bold cursor-pointer flex items-center gap-2 px-4 py-2 rounded-full hover:bg-blue-700 transition duration-300"
+                data-modal="jobDescriptionModal-{{ $job->id }}">
+            <i class="fas fa-eye"></i> Quick review
+        </button>
+    </div>    
     <div 
     id="jobDescriptionModal-{{ $job->id }}" 
     class="fixed inset-0 bg-black bg-opacity-60 hidden flex justify-center items-center z-50 transition-opacity duration-300"

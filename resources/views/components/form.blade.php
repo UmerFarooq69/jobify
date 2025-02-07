@@ -7,6 +7,7 @@
     <title>Jobify</title>
     <link rel="icon" href="{{ asset('storage/img/logo.jpeg') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <style>

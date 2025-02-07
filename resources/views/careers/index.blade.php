@@ -1,9 +1,11 @@
 <x-form>
-    <h3 class="text-5xl mb-10 font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-indigo-500 to-pink-600">
-        Careers
-    </h3>
+    <div class="w-full bg-gradient-to-r from-teal-400 via-indigo-500 to-pink-600 py-6">
+        <h3 class="text-3xl font-extrabold text-center text-white">
+            Careers
+        </h3>
+    </div>   
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6 mt-3">
         @foreach ($jobs as $job)
         <div class="w-full">
             <div class="bg-gradient-to-r from-teal-500 to-indigo-700 text-white py-6 px-8 rounded-2xl shadow-xl transition-all transform hover:scale-105 hover:shadow-2xl hover:bg-teal-600 w-full">

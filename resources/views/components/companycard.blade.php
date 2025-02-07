@@ -5,8 +5,8 @@
     <h1 class="text-xl font-semibold mt-6">
         Company: <span class="font-normal text-gray-500">{{$company->name}}</span>
     </h1>
-    <h3 class="text-lg mt-2">City: <span class="font-normal text-gray-500">{{ $company->city }}</span></h3>
-    <h3 class="text-lg">Location: <span class="font-normal text-gray-500">{{ $company->location }}</span></h3>
+    <h3 class="text-lg mt-2"><i class="mdi mdi-city-variant-outline text-2xl mr-2"></i><span class="font-normal text-gray-500">{{ $company->city }}</span></h3>
+    <h3 class="text-lg"><i class="mdi mdi-map-marker-outline text-2xl mr-2"></i><span class="font-normal text-gray-500">{{ $company->location }}</span></h3>
     <h3 class="text-lg mt-2">Jobs Available: 
         <span class="font-normal text-gray-500">{{ $company->jobs_count }}</span>
     </h3>
