@@ -42,6 +42,11 @@
                     <i class="fas fa-file-alt mr-4"></i> Manage Applications
                 </a>
             </li>
+            <li class="mb-6">
+                <a href="{{route('contact.index')}}" class="flex items-center text-lg hover:bg-blue-700 p-3 rounded-md transition-all">
+                    <i class="fas fa-phone-alt mr-4"></i> Who Contact Us
+                </a>
+            </li>
         </ul>
     </div>
     <div class="flex-1 p-8 overflow-auto">

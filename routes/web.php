@@ -58,3 +58,5 @@ Route::delete('/applications/{application}', [AdminController::class, 'destroyAp
 Route::get('/contact', function () {return view('contactus.contact');
 });
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+Route::get('/contact/index', [ContactController::class, 'index'])->name('contact.index');
+Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');

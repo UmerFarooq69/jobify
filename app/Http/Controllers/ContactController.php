@@ -1,28 +1,41 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Contact;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 
 class ContactController extends Controller
 {
+
+    public function index() {
+        $contacts = Contact::latest()->get();
+        return view('contactus.index', compact('contacts'));
+    }
+    
     public function submit(Request $request) {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email',
             'message' => 'required|string',
         ]);
-
-        DB::table('contacts')->insert([
+    
+        Contact::create([
             'name' => $request->name,
             'email' => $request->email,
             'message' => $request->message,
-            'created_at' => now(),
-            'updated_at' => now(),
         ]);
-
+    
         return back()->with('success', 'Your message has been sent successfully!');
     }
+
+    public function destroy(Contact $contact)
+    {
+
+        $contact->delete();
+
+        return redirect()->route('contact.index')->with('success', 'Contact deleted successfully!');
+    }
+
 }
 
