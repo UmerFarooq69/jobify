@@ -8,6 +8,7 @@ use App\Http\Controllers\CareerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SalariesController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [Job_taskController::class, 'index'])->name('jobs.welcome');
@@ -54,3 +55,6 @@ Route::get('/careers', [CareerController::class, 'index'])->name('career.index')
 Route::get('/applications', [AdminController::class, 'applications'])->name('applications.index');
 Route::get('/user/applications', [DashboardController::class, 'applications'])->name('Users.application');
 Route::delete('/applications/{application}', [AdminController::class, 'destroyApplication'])->name('applications.destroy');
+Route::get('/contact', function () {return view('contactus.contact');
+});
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');

@@ -40,7 +40,7 @@
                 <div class="text-center">
                     <h2 class="text-3xl font-bold">Join Us</h2>
                     <p class="text-white/80 mt-4">Contact us today to register your buisness and enjoy seamless access to our platform.</p>
-                    <a href="#" class="inline-block mt-6 bg-white text-blue-500 px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-100 transition">Contact Us</a>
+                    <a href="/contact" class="inline-block mt-6 bg-white text-blue-500 px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-100 transition">Contact Us</a>
                 </div>
             </div>
         </div>

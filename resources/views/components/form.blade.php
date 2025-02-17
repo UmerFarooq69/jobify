@@ -125,6 +125,7 @@
                     <a href="/careers" class="hover:underline">Careers</a>
                     <a href="/salaries" class="hover:underline">Salaries</a>
                     <a href="/company" class="hover:underline">Companies</a>
+                    <a href="/contact" class="hover:underline">Contact Us</a>
                 </div>
 
                 <div class="hidden md:flex space-x-4">
