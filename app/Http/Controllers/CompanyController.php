@@ -30,6 +30,7 @@ class CompanyController extends Controller
             'city' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'image' => 'nullable|image|max:1024',
+            'description' => 'nullable|string|max:1000',
         ]);
         
 
@@ -40,6 +41,7 @@ class CompanyController extends Controller
             'city' => $request->city,
             'location' => $request->location,
             'image' => $imagePath,
+            'description' => $request->description,
         ]);
         
         auth()->user()->company()->save($company);

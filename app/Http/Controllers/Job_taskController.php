@@ -14,7 +14,7 @@
         {
             $jobs = Job_task::whereHas('company.user', function ($query) {
                 $query->where('active', true);
-            })->with('company')->get();
+            })->with('company')->paginate(10);;
             return view('jobs.welcome', compact('jobs')); 
         }
 

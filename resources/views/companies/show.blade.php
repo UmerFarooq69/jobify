@@ -1,7 +1,7 @@
 <x-form>
     <section>
         @if ($jobs->isEmpty())
-            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md shadow-md ml-4">
+            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md shadow-md ml-4 mt-4">
                 <h4 class="font-bold text-lg">Oops!</h4>
                 <p class="text-md">There are no job openings in this company right now. Please check back later!</p>
             </div>

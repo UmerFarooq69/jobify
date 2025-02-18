@@ -10,7 +10,7 @@
                         <th class="px-4 py-2 text-left">Email</th>
                         <th class="px-4 py-2 text-left">Message</th>
                         <th class="px-4 py-2 text-left">Contact time</th>
-                        <th class="px-4 py-2 text-left">Action</th>
+                        <th class="px-12 py-4 text-left">Action</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-700">
@@ -18,11 +18,14 @@
                         <tr class="hover:bg-gray-100">
                             <td class="px-4 py-2">{{ $loop->iteration }}</td>
                             <td class="px-4 py-2">{{ $contact->name }}</td>
-                            <td class="px-4 py-2">{{ $contact->email }}</td>
+                            <td class="px-4 py-2">{{ $contact->email }}</td>                            
                             <td class="px-4 py-2 text-blue-700 font-bold">{{ $contact->message }}</td>
-                            <td class="px-4 py-2">{{ $contact->created_at->format('d M Y, H:i') }}</td>
+                            <td class="px-4 py-2">{{ $contact->created_at->timezone('Asia/Karachi')->format('d M Y, h:i A') }}</td>
                             <td class="px-6 py-4 flex items-center space-x-4">
-                                <form action="{{ route('contacts.destroy', $contact) }}" method="POST">
+                                <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ $contact->email }}" target="_blank" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300">
+                                    Reply
+                                </a>
+                                <form action="{{ route('contacts.destroy', $contact) }}" method="POST" class="inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-500 hover:text-red-700 cursor-pointer">

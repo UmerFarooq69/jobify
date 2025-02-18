@@ -19,6 +19,7 @@
                 $table->string('city');
                 $table->string('location');
                 $table->string('image')->nullable();
+                $table->text('description')->nullable();
                 $table->timestamps();
             });
         }

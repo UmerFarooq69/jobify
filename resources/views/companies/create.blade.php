@@ -24,6 +24,11 @@
                 </div>
 
                 <div>
+                    <label for="description" class="text-gray-700 text-sm font-medium">Company Description</label>
+                    <textarea id="description" name="description" rows="4" required class="w-full mt-2 px-4 py-3 rounded-lg bg-gray-100 text-gray-900 placeholder-gray-400 border border-gray-300 focus:outline-none focus:ring-4 focus:ring-blue-400 focus:border-blue-400 transition-all"></textarea>
+                </div>
+
+                <div>
                     <label for="image" class="text-gray-700 text-sm font-medium">Company Image</label>
                     <input type="file" id="image" name="image" accept="image/*" required class="w-full mt-2 px-4 py-3 rounded-lg bg-gray-100 text-gray-900 placeholder-gray-400 border border-gray-300 focus:outline-none focus:ring-4 focus:ring-blue-400 focus:border-blue-400 transition-all">
                 </div>

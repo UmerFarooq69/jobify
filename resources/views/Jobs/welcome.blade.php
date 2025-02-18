@@ -1,15 +1,23 @@
 <x-form>
     <section>
-        <div class="w-full bg-gradient-to-r from-teal-400 via-indigo-500 to-pink-600 py-6">
-            <h3 class="text-3xl font-extrabold text-center text-white">
-                Jobs Right Now
-            </h3>
-        </div>        
-        <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-8 mt-3">
+        <div class="font-bold text-2xl px-10 pt-2">All jobs</div>  
+        <div class="mt-4">
+            <p class="text-xl text-gray-500 px-10">
+                Showing {{ $jobs->count() }} jobs of {{ $jobs->total() }}
+            </p>
+        </div>
+        <div class="flex justify-between mt-3 ml-auto">
+            <div class="w-full pr-4">
+                <div class="grid grid-cols-1 gap-8">
             @foreach ($jobs as $job)
                 <x-jobcard :job="$job" />
             @endforeach
         </div>
+        </div>
+    </div>
+    <div class="mt-4">
+        {{ $jobs->links() }}
+    </div>
     </section>
 </x-form>
 
