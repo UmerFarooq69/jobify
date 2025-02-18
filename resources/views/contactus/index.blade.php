@@ -19,7 +19,7 @@
                             <td class="px-4 py-2">{{ $loop->iteration }}</td>
                             <td class="px-4 py-2">{{ $contact->name }}</td>
                             <td class="px-4 py-2">{{ $contact->email }}</td>
-                            <td class="px-4 py-2 text-blue-700 font-bold">{{ \Illuminate\Support\Str::limit($contact->message, 50) }}</td>
+                            <td class="px-4 py-2 text-blue-700 font-bold">{{ $contact->message }}</td>
                             <td class="px-4 py-2">{{ $contact->created_at->format('d M Y, H:i') }}</td>
                             <td class="px-6 py-4 flex items-center space-x-4">
                                 <form action="{{ route('contacts.destroy', $contact) }}" method="POST">
