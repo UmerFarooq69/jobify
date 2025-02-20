@@ -2,7 +2,7 @@
     <div class="flex items-center mb-2">
         <img src="{{ asset('storage/' . $job->image) }}" alt="Job Image" class="w-[70px] h-[70px] object-contain rounded-md shadow-lg mr-4">
     </div>
-    
+    <h1 class="font-bold text-lg">Job ID: <span class="text-blue-800">{{$job->id}}</span></h1>
     <h3 class="text-xl mt-1"><span class="text-blue-500 font-bold">{{ $job->job_title }}</span></h3>
 
     <div class="flex items-center justify-between">
