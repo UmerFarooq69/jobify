@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Jobify</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="icon" href="{{ asset('storage/img/logo.jpeg') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
@@ -159,6 +160,7 @@
                 <a href="#" class="hover:underline mb-4">Careers</a>
                 <a href="/salaries" class="hover:underline mb-4">Salaries</a>
                 <a href="/company" class="hover:underline mb-4">Companies</a>
+                <a href="/contact" class="hover:underline">Contact Us</a>
             
                 @auth
                     <a href="{{ route('admin.dashboard') }}" class="inline-block bg-gray-800 text-white py-2 px-6 rounded-lg shadow-md hover:bg-gray-700 transition duration-300 mb-4">
@@ -193,21 +195,49 @@
             </div>
         </footer>
     </div>
-
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            @if(session('success'))
+                Swal.fire({
+                    title: "Success!",
+                    text: "{{ session('success') }}",
+                    icon: "success",
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK"
+                });
+            @endif
+    
+            @if(session('error'))
+                Swal.fire({
+                    title: "Error!",
+                    text: "{{ session('error') }}",
+                    icon: "error",
+                    confirmButtonColor: "#d33",
+                    confirmButtonText: "OK"
+                });
+            @endif
+        });
+    
         const hamburger = document.getElementById("hamburger");
         const mobileMenu = document.getElementById("mobile-menu");
-
+    
         hamburger.addEventListener("click", () => {
             mobileMenu.classList.toggle("hidden");
         });
-
+ 
+        document.addEventListener("click", (event) => {
+            if (!hamburger.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.add("hidden");
+            }
+        });
+    
         document.addEventListener("DOMContentLoaded", () => {
             const loader = document.getElementById("loader");
             setTimeout(() => {
                 loader.classList.add("hidden");
-            }, 500); 
+            }, 500);
         });
     </script>
+    
 </body>
 </html>

@@ -8,6 +8,7 @@ use App\Http\Controllers\CareerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SalariesController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
@@ -124,3 +125,14 @@ Route::post('/contact', [ContactController::class, 'submit'])->name('contact.sub
 Route::get('/contact/index', [ContactController::class, 'index'])->name('contact.index');
 Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
 
+/*
+|--------------------------------------------------------------------------
+| Report Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/problem', function () {
+    return view('reportproblem.ReportProblem');
+});
+Route::get('/problems', [ProblemController::class, 'index'])->name('problems.index');
+Route::post('/report-problem', [ProblemController::class, 'store'])->name('report.problem');
+Route::delete('/problems/{id}', [ProblemController::class, 'destroy'])->name('problems.destroy');

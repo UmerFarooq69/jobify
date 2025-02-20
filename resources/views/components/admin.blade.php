@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="icon" href="{{ asset('storage/img/logo.jpeg') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -47,6 +48,11 @@
                     <i class="fas fa-phone-alt mr-4"></i> Who Contact Us
                 </a>
             </li>
+            <li class="mb-6">
+                <a href="{{route('problems.index')}}" class="flex items-center text-lg hover:bg-blue-700 p-3 rounded-md transition-all">
+                    <i class="fas fa-triangle-exclamation mr-4"></i> Reported Problems
+                </a>
+            </li>
         </ul>
     </div>
     <div class="flex-1 p-8 overflow-auto">
@@ -78,3 +84,25 @@
     </div>
 </body>
 </html>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    @if(session('success'))
+        Swal.fire({
+            title: "Success!",
+            text: "{{ session('success') }}",
+            icon: "success",
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "OK"
+        });
+    @endif
+    @if(session('error'))
+        Swal.fire({
+            title: "Error!",
+            text: "{{ session('error') }}",
+            icon: "error",
+            confirmButtonColor: "#d33",
+            confirmButtonText: "OK"
+        });
+    @endif
+});
+</script>

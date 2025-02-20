@@ -55,6 +55,7 @@
                     <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-800 transition-all duration-300 shadow-md">
                         Send Message
                     </button>
+                    <a href="/problem" class="text-red-500 block text-center mt-6">Report a problem</a>
                 </form>
             </div>
 

@@ -68,26 +68,26 @@
             }
 
             public function submitApplication(Request $request, $jobId)
-{
-    $request->validate([
-        'applicant_name' => 'required|string|max:255',
-        'applicant_email' => 'required|email|max:255',
-        'cv' => 'required|file|mimes:pdf,docx|max:5120',
-    ]);
+            {
+                $request->validate([
+                    'applicant_name' => 'required|string|max:255',
+                    'applicant_email' => 'required|email|max:255',
+                    'cv' => 'required|file|mimes:pdf,docx|max:5120',
+                ]);
 
-    if ($request->hasFile('cv')) {
-        $cvPath = $request->file('cv')->store('cvs', 'public');
-    }
+                if ($request->hasFile('cv')) {
+                    $cvPath = $request->file('cv')->store('cvs', 'public');
+                }
 
-    Application::create([
-        'applicant_name' => $request->applicant_name,
-        'applicant_email' => $request->applicant_email,
-        'cv' => $cvPath,  
-        'job_id' => $jobId,
-    ]);
+                Application::create([
+                    'applicant_name' => $request->applicant_name,
+                    'applicant_email' => $request->applicant_email,
+                    'cv' => $cvPath,  
+                    'job_id' => $jobId,
+                ]);
 
-    return redirect()->route('jobs.welcome')->with('success', 'Application submitted successfully!');
-}
+                return redirect()->route('jobs.welcome')->with('success', 'Application submitted successfully!');
+            }
  
     }
 
