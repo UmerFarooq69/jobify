@@ -24,7 +24,7 @@
                         <p class="text-gray-700 mb-4"><strong>Salary:</strong> {{ $job->job_salary }}</p>
                     </div>
                     <div class="flex justify-between items-center mt-4">
-                        <a href="" class="text-yellow-500 hover:underline">Edit</a>
+                        <a href="{{ route('jobs.edit', $job->id) }}" class="text-yellow-500 hover:underline">Edit</a>
                         <form action="{{ route('admin.jobs.destroy', $job->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')

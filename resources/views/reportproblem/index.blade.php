@@ -9,7 +9,7 @@
                         <th class="px-4 py-2 text-left">Name</th>
                         <th class="px-4 py-2 text-left">Email</th>
                         <th class="px-4 py-2 text-left">Problem</th>
-                        <th class="px-4 py-2 text-left">Report time</th>
+                        <th class="px-4 py-2 text-left">Reporting time</th>
                         <th class="px-4 py-2 text-left">Image</th>
                         <th class="px-12 py-4 text-center">Action</th>
                     </tr>

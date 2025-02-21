@@ -22,7 +22,7 @@
                         <p class="text-gray-700"><strong>Salary:</strong> PKR {{ number_format($job->job_salary) }}</p>
                     </div>
                     <div class="flex justify-between items-center mt-4 border-t pt-3">
-                        <a href="#" class="text-yellow-500 hover:text-yellow-600">Edit</a>
+                        <a href="{{ route('jobs.edit', $job->id) }}" class="text-yellow-500 hover:text-yellow-600">Edit</a>
                         <form action="{{ route('Users.jobs.destroy', $job->id) }}" method="POST" class="inline-block">
                             @csrf
                             @method('DELETE')

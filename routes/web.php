@@ -86,6 +86,8 @@ Route::post('/job', [Job_taskController::class, 'store'])->name('jobs.store');
 Route::get('/jobs/{job}/apply', [Job_taskController::class, 'apply'])->name('jobs.apply');
 Route::post('/jobs/{job}/apply', [Job_taskController::class, 'submitApplication'])->name('jobs.submitApplication');
 Route::get('/jobs/{id}', [SalariesController::class, 'show'])->name('jobs.show');
+Route::get('/jobs/{job}/edit', [Job_taskController::class, 'edit'])->name('jobs.edit');
+Route::put('/jobs/{job}', [Job_taskController::class, 'update'])->name('jobs.update');
 
 /*
 |--------------------------------------------------------------------------

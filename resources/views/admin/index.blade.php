@@ -1,9 +1,4 @@
 <x-admin>
-        @if(session('success'))
-            <div class="mb-4 p-4 bg-green-200 text-green-700 rounded" style="min-height: 50px;">
-                {{ session('success') }}
-            </div>
-        @endif
         <div class="flex flex-wrap mb-6">
             <a href="{{ route('companies.create') }}" class="inline-block bg-gray-800 text-white py-2 px-6 rounded-lg shadow-md hover:bg-gray-700 hover:shadow-lg transition duration-300">Create New Company</a>
         </div>
