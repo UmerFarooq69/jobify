@@ -10,6 +10,7 @@ use App\Http\Controllers\SalariesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 | Public Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/', [Job_taskController::class, 'index'])->name('jobs.welcome');
+Route::get('/', [HomeController::class, 'index']);
+Route::get('jobs/show', [Job_taskController::class, 'index'])->name('jobs.welcome');
 Route::get('/careers', [CareerController::class, 'index'])->name('career.index');
 
 /*

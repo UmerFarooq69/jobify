@@ -108,10 +108,12 @@
         <!-- Navbar -->
         <nav class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-4 shadow-md">
             <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-4">
-                    <img src="{{ asset('storage/img/logo.jpeg') }}" alt="Jobify Logo" class="w-10 h-10 rounded-full">
-                    <span class="text-2xl font-bold">Jobify</span>
-                </div>
+                <div class="flex items-center space-x-3">
+                    <a href="/" class="flex items-center space-x-2">
+                        <img src="{{ asset('storage/img/logo.jpeg') }}" alt="Jobify Logo" class="w-12 h-12 rounded-full">
+                        <span class="text-2xl font-bold text-white">Jobify</span>
+                    </a>
+                </div>                
 
                 <div class="md:hidden flex items-center">
                     <button id="hamburger" class="text-white">
@@ -122,7 +124,7 @@
                 </div>
                 
                 <div class="hidden md:flex space-x-6 text-lg">
-                    <a href="/" class="hover:underline">Jobs</a>
+                    <a href="jobs/show" class="hover:underline">Jobs</a>
                     <a href="/careers" class="hover:underline">Careers</a>
                     <a href="/salaries" class="hover:underline">Salaries</a>
                     <a href="/company" class="hover:underline">Companies</a>
@@ -156,7 +158,7 @@
             </div>
 
             <div id="mobile-menu" class="md:hidden hidden bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-4">
-                <a href="/" class="hover:underline mb-4">Jobs</a>
+                <a href="jobs/show" class="hover:underline mb-4">Jobs</a>
                 <a href="#" class="hover:underline mb-4">Careers</a>
                 <a href="/salaries" class="hover:underline mb-4">Salaries</a>
                 <a href="/company" class="hover:underline mb-4">Companies</a>
