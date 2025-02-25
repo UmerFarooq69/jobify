@@ -1,5 +1,5 @@
 <x-form>
-    <div class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-teal-500 to-blue-500 p-8">
+    <div class="min-h-full flex flex-col items-center justify-center bg-gradient-to-r from-teal-500 to-blue-500 p-8">
         <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-4xl transform hover:scale-105 transition-transform duration-300">
 
             <div class="flex justify-end">

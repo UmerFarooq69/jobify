@@ -7,9 +7,14 @@
                     <tr>
                         <th class="px-4 py-2 text-left">ID</th>
                         <th class="px-4 py-2 text-left">Name</th>
-                        <th class="px-4 py-2 text-left">Email</th>
+                        <th class="px-4 py-2">Email</th>
+                        <th class="px-4 py-2 text-left">Purpose</th>
+                        <th class="px-4 py-2 text-left">Report Type</th>
                         <th class="px-4 py-2 text-left">Problem</th>
-                        <th class="px-4 py-2 text-left">Reporting time</th>
+                        <th class="px-4 py-2 text-left">Job ID</th>
+                        <th class="px-4 py-2 text-left">Company ID</th>
+                        <th class="px-4 py-2 text-left">Company Name</th>
+                        <th class="px-4 py-2 text-left">Reporting Time</th>
                         <th class="px-4 py-2 text-left">Image</th>
                         <th class="px-12 py-4 text-center">Action</th>
                     </tr>
@@ -19,8 +24,33 @@
                         <tr class="hover:bg-gray-100">
                             <td class="px-4 py-2">{{ $loop->iteration }}</td>
                             <td class="px-4 py-2">{{ $problem->name }}</td>
-                            <td class="px-4 py-2">{{ $problem->email }}</td>                            
+                            <td class="px-4 py-2">{{ $problem->email }}</td>
+                            <td class="px-4 py-2">{{ ucfirst(str_replace('_', ' ', $problem->purpose)) }}</td>
+                            <td class="px-4 py-2">{{ ucfirst($problem->report_type) }}</td>
                             <td class="px-4 py-2 text-blue-700 font-bold">{{ $problem->problem }}</td>
+
+                            <td class="px-4 py-2">
+                                @if ($problem->job_id)
+                                    {{ $problem->job_id ?? 'N/A' }}
+                                @endif
+                            </td>
+
+                            <td class="px-8 py-4">
+                                @if ($problem->company_id)
+                                    {{ $problem->company_id ?? optional($problem->job)->company_id ?? 'N/A' }}
+                                    @else
+                                    {{optional($problem->job)->company_id ?? 'N/A'}}
+                                @endif
+                            </td>                                                                                      
+                            
+                            <td class="px-4 py-2">
+                                @if ($problem->company_id)
+                                    {{ optional($problem->company)->name ?? optional($problem->job->company)->name ?? 'N/A' }}
+                                @else
+                                {{ optional(optional($problem->job)->company)->name ?? 'N/A' }}
+                                @endif
+                            </td>                            
+                            
                             <td class="px-4 py-2">{{ $problem->created_at->timezone('Asia/Karachi')->format('d M Y, h:i A') }}</td>
                             
                             <td class="px-4 py-2">

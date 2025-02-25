@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\User;
+use App\Models\Contact;
 use App\Models\Job_task;
 use App\Models\Company;
+use App\Models\ProblemReport;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -21,9 +23,12 @@ class AdminController extends Controller
     {
         $jobs = Job_task::count();
         $companies = Company::count();
+        $applications = Application::count();
+        $reports = ProblemReport::count();
+        $contact = Contact::count();
         $users = User::where('role', '!=', 'admin')->count(); 
         
-        return view('admin.dashboard', compact('jobs', 'companies', 'users'));
+        return view('admin.dashboard', compact('jobs', 'companies', 'users', 'applications', 'contact', 'reports'));
     }
     
     public function showJobs(Company $company)

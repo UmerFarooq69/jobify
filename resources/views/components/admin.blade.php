@@ -58,27 +58,38 @@
     <div class="flex-1 p-8 overflow-auto">
 
         <div class="flex justify-between items-center mb-6">
-            <div class="text-3xl font-semibold text-gray-900">
-                Admin Dashboard
+            <!-- Dashboard Title -->
+            <div class="text-4xl font-bold text-gray-900 tracking-tight">
+                🚀 Admin Dashboard
             </div>
+        
+            <!-- Navigation Buttons -->
             <div class="flex items-center space-x-4">
                 @auth
-                    <a href="{{ route('jobs.welcome') }}" class="inline-block bg-gray-800 text-white py-2 px-6 rounded-lg shadow-md hover:bg-gray-700 transition duration-300">
-                        Main Page
+                    <!-- Main Page Button -->
+                    <a href="{{ route('jobs.welcome') }}"
+                        class="inline-block bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-blue-500 hover:to-cyan-400 hover:shadow-xl">
+                        🏠 Main Page
                     </a>
+        
+                    <!-- Logout Button -->
                     <form action="{{ route('logout') }}" method="POST" class="inline-block">
                         @csrf
-                        <button type="submit" class="bg-red-600 text-white py-2 px-6 rounded-lg shadow-md hover:bg-red-500 transition duration-300">
-                            Logout
+                        <button type="submit"
+                            class="bg-gradient-to-r from-red-600 to-pink-500 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-red-500 hover:to-pink-400 hover:shadow-xl">
+                            🚪 Logout
                         </button>
                     </form>
                 @else
-                    <a href="{{ route('login') }}" class="inline-block bg-gray-800 text-white py-2 px-6 rounded-lg shadow-md hover:bg-gray-700 transition duration-300">
-                        Login
+                    <!-- Login Button -->
+                    <a href="{{ route('login') }}"
+                        class="inline-block bg-gradient-to-r from-green-600 to-lime-500 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-green-500 hover:to-lime-400 hover:shadow-xl">
+                        🔑 Login
                     </a>
                 @endauth
             </div>
         </div>
+        
 
         {{ $slot }}
     </div>

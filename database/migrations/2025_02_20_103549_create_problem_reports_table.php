@@ -15,8 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
+            $table->enum('purpose', ['report_problem', 'report_job', 'report_company']);
+            $table->enum('report_type', ['spam', 'fraud', 'harassment', 'misinformation', 'other']);
             $table->text('problem');
             $table->string('image')->nullable();
+            $table->unsignedBigInteger('job_id')->nullable();
+            $table->unsignedBigInteger('company_id')->nullable();
             $table->timestamps();
         });
     }

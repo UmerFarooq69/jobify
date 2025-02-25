@@ -131,30 +131,36 @@
                     <a href="/contact" class="hover:underline">Contact Us</a>
                 </div>
 
-                <div class="hidden md:flex space-x-4">
+                <div class="hidden md:flex space-x-4 items-center">
                     @auth
                         @if(auth()->user()->role === 'admin')
-                            <a href="{{ route('admin.dashboard') }}" class="inline-block bg-gray-800 text-white py-2 px-6 rounded-lg shadow-md hover:bg-gray-700 transition duration-300">
-                                Admin Dashboard
+                            <a href="{{ route('admin.dashboard') }}"
+                                class="inline-block bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-purple-500 hover:to-indigo-500 hover:shadow-xl">
+                                🚀 Admin Dashboard
                             </a>
                         @else
-                            <a href="{{ route('Users.dashboard') }}" class="inline-block bg-gray-800 text-white py-2 px-6 rounded-lg shadow-md hover:bg-gray-700 transition duration-300">
-                                User Dashboard
+                            <a href="{{ route('Users.dashboard') }}"
+                                class="inline-block bg-gradient-to-r from-blue-600 to-teal-500 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-blue-500 hover:to-teal-400 hover:shadow-xl">
+                                👤 User Dashboard
                             </a>
                         @endif
-
+                
                         <form action="{{ route('logout') }}" method="POST" class="inline-block">
                             @csrf
-                            <button type="submit" class="bg-red-600 text-white py-2 px-6 rounded-lg shadow-md hover:bg-red-500 transition duration-300">
-                                Logout
+                            <button type="submit"
+                                class="bg-gradient-to-r from-red-600 to-pink-500 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-red-500 hover:to-pink-400 hover:shadow-xl">
+                                🚪 Logout
                             </button>
                         </form>
                     @else
-                        <a href="{{ route('login') }}" class="inline-block bg-gray-800 text-white py-2 px-6 rounded-lg shadow-md hover:bg-gray-700 transition duration-300">
-                            Login
+                        <a href="{{ route('login') }}"
+                            class="inline-block bg-gradient-to-r from-green-600 to-lime-500 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-green-500 hover:to-lime-400 hover:shadow-xl">
+                            🔑 Login
                         </a>
                     @endauth
-                </div>     
+                </div>
+                
+                     
             </div>
 
             <div id="mobile-menu" class="md:hidden hidden bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-4">
