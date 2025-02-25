@@ -23,8 +23,8 @@
             
 
             <div class="pt-4">
-                <label for="is_active" class="text-white font-semibold">Active</label>
-                <input type="checkbox" id="is_active" name="is_active" value="1" checked class="w-5 h-5 mt-2 bg-gray-700 border-none focus:ring-2 focus:ring-blue-500">
+                <label for="active" class="text-white font-semibold">Active</label>
+                <input type="checkbox" id="active" name="active" value="1" checked class="w-5 h-5 mt-2 bg-gray-700 border-none focus:ring-2 focus:ring-blue-500">
             </div>
 
             <button type="submit" class="w-full mt-6 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500">

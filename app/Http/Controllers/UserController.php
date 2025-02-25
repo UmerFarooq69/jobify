@@ -20,14 +20,14 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
+            'password' => 'required|min:6',
             'role' => 'nullable|in:admin,user',
             'active' => 'nullable|boolean',
         ]);
 
         $role = $request->has('role') && $request->role === 'admin' ? 'admin' : 'user';
     
-        $user = User::create([
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
