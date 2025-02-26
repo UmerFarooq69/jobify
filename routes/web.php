@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [HomeController::class, 'index']);
-Route::get('jobs/show', [Job_taskController::class, 'index'])->name('jobs.welcome');
+Route::get('welcome', [Job_taskController::class, 'index'])->name('jobs.welcome');
 Route::get('/careers', [CareerController::class, 'index'])->name('career.index');
 
 /*

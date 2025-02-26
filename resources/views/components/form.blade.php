@@ -125,12 +125,12 @@
                 </div>
                 
                 <div class="hidden md:flex space-x-6 text-lg">
-                    <a href="jobs/show" class="hover:underline">Jobs</a>
-                    <a href="/careers" class="hover:underline">Careers</a>
-                    <a href="/salaries" class="hover:underline">Salaries</a>
-                    <a href="/company" class="hover:underline">Companies</a>
-                    <a href="/contact" class="hover:underline">Contact Us</a>
-                </div>
+                    <a href="{{ route('jobs.welcome') }}" class="hover:underline">Jobs</a>
+                    <a href="{{ route('career.index') }}" class="hover:underline">Careers</a>
+                    <a href="{{ route('salaries.index') }}" class="hover:underline">Salaries</a>
+                    <a href="{{ route('companies') }}" class="hover:underline">Companies</a>
+                    <a href="{{ route('contact.index') }}" class="hover:underline">Contact Us</a>
+                </div>                
 
                 <div class="hidden md:flex space-x-4 items-center">
                     @auth
@@ -165,11 +165,11 @@
             </div>
 
             <div id="mobile-menu" class="md:hidden hidden bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-4">
-                <a href="jobs/show" class="hover:underline mb-4">Jobs</a>
-                <a href="#" class="hover:underline mb-4">Careers</a>
-                <a href="/salaries" class="hover:underline mb-4">Salaries</a>
-                <a href="/company" class="hover:underline mb-4">Companies</a>
-                <a href="/contact" class="hover:underline">Contact Us</a>
+                <a href="{{ route('jobs.welcome') }}" class="hover:underline">Jobs</a>
+                    <a href="{{ route('career.index') }}" class="hover:underline">Careers</a>
+                    <a href="{{ route('salaries.index') }}" class="hover:underline">Salaries</a>
+                    <a href="{{ route('companies') }}" class="hover:underline">Companies</a>
+                    <a href="{{ route('contact.index') }}" class="hover:underline">Contact Us</a>
             
                 @auth
                     <a href="{{ route('admin.dashboard') }}" class="inline-block bg-gray-800 text-white py-2 px-6 rounded-lg shadow-md hover:bg-gray-700 transition duration-300 mb-4">
