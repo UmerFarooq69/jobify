@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Jobify</title>
+    <script src="{{ asset('js/autocomplete.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="icon" href="{{ asset('storage/img/logo.jpeg') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -154,7 +155,7 @@
                         </form>
                     @else
                         <a href="{{ route('login') }}"
-                            class="inline-block bg-gradient-to-r from-green-600 to-lime-500 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-green-500 hover:to-lime-400 hover:shadow-xl">
+                            class="inline-block bg-gradient-to-r from-blue-600 to-indigo-500 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-blue-500 hover:to-indigo-400 hover:shadow-xl">
                             🔑 Login
                         </a>
                     @endauth
@@ -198,7 +199,7 @@
                 <div class="flex justify-center space-x-6 mt-4">
                     <a href="#" class="hover:underline">Privacy Policy</a>
                     <a href="#" class="hover:underline">Terms of Service</a>
-                    <a href="#" class="hover:underline">Contact Us</a>
+                    <a href="/contact" class="hover:underline">Contact Us</a>
                 </div>
             </div>
         </footer>

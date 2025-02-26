@@ -14,9 +14,18 @@ class Job_taskController extends Controller
     {
         $jobs = Job_task::whereHas('company.user', function ($query) {
             $query->where('active', true);
-        })->with('company')->paginate(10);;
-        return view('jobs.welcome', compact('jobs')); 
+        })
+        ->with('company')
+        ->paginate(10);
+        
+        $jobTypes = Job_task::select('job_type')->distinct()->pluck('job_type');
+        $locations = Company::select('location')->distinct()->pluck('location');
+        $companies = Company::select('name')->distinct()->pluck('name');
+        $cities = Company::select('city')->distinct()->pluck('city');
+        
+        return view('jobs.welcome', compact('jobs', 'jobTypes', 'locations', 'companies', 'cities'));
     }
+    
     public function create()
     {
         $jobTypes = [
@@ -81,37 +90,38 @@ class Job_taskController extends Controller
         ]);
         
         $job->update($request->all());
-
+        
         if (Auth::user()->role === 'admin') {
-
-        return redirect()->route('admin.jobs')->with('success', 'Job updated successfully.');
+            
+            return redirect()->route('admin.jobs')->with('success', 'Job updated successfully.');
         } else {
-
+            
             return redirect()->route('Users.jobs')->with('success', 'Job updated successfully.');    }
         }
         
-    public function apply($jobId)
-    {
-        $job = Job_task::findOrFail($jobId);
-        return view('jobs.apply', compact('job'));
+        public function apply($jobId)
+        {
+            $job = Job_task::findOrFail($jobId);
+            return view('jobs.apply', compact('job'));
+        }
+        
+        public function submitApplication(Request $request, $jobId)
+        {
+            $request->validate([
+                'applicant_name' => 'required|string|max:255',
+                'applicant_email' => 'required|email|max:255',
+                'cv' => 'required|file|mimes:pdf,docx|max:5120',
+            ]);
+            if ($request->hasFile('cv')) {
+                $cvPath = $request->file('cv')->store('cvs', 'public');
+            }
+            Application::create([
+                'applicant_name' => $request->applicant_name,
+                'applicant_email' => $request->applicant_email,
+                'cv' => $cvPath,  
+                'job_id' => $jobId,
+            ]);
+            return redirect()->route('jobs.welcome')->with('success', 'Application submitted successfully!');
+        }
     }
     
-    public function submitApplication(Request $request, $jobId)
-    {
-        $request->validate([
-            'applicant_name' => 'required|string|max:255',
-            'applicant_email' => 'required|email|max:255',
-            'cv' => 'required|file|mimes:pdf,docx|max:5120',
-        ]);
-        if ($request->hasFile('cv')) {
-            $cvPath = $request->file('cv')->store('cvs', 'public');
-        }
-        Application::create([
-            'applicant_name' => $request->applicant_name,
-            'applicant_email' => $request->applicant_email,
-            'cv' => $cvPath,  
-            'job_id' => $jobId,
-        ]);
-        return redirect()->route('jobs.welcome')->with('success', 'Application submitted successfully!');
-    }
-}

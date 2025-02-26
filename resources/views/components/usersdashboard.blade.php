@@ -13,7 +13,7 @@
 <body class="bg-gray-100">
 
 <div class="flex h-screen">
-    <div class="w-64 bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-6">
+    <div class="w-68 bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-6">
         <div class="text-3xl font-semibold mb-10 text-center">
             User Panel
         </div>
