@@ -125,11 +125,26 @@
                 </div>
                 
                 <div class="hidden md:flex space-x-6 text-lg">
-                    <a href="{{ route('jobs.welcome') }}" class="hover:underline">Jobs</a>
-                    <a href="{{ route('career.index') }}" class="hover:underline">Careers</a>
-                    <a href="{{ route('salaries.index') }}" class="hover:underline">Salaries</a>
-                    <a href="{{ route('companies') }}" class="hover:underline">Companies</a>
-                    <a href="{{ route('contact.index') }}" class="hover:underline">Contact Us</a>
+                    <a href="{{ route('jobs.welcome') }}" 
+               class="hover:underline {{ request()->routeIs('jobs.welcome') ? 'font-bold border-b-2 border-white' : '' }}">
+               Jobs
+            </a>
+            <a href="{{ route('career.index') }}" 
+               class="hover:underline {{ request()->routeIs('career.index') ? 'font-bold border-b-2 border-white' : '' }}">
+               Careers
+            </a>
+            <a href="{{ route('salaries.index') }}" 
+               class="hover:underline {{ request()->routeIs('salaries.index') ? 'font-bold border-b-2 border-white' : '' }}">
+               Salaries
+            </a>
+            <a href="{{ route('companies') }}" 
+               class="hover:underline {{ request()->routeIs('companies') ? 'font-bold border-b-2 border-white' : '' }}">
+               Companies
+            </a>
+            <a href="{{ route('contact.submit') }}" 
+               class="hover:underline {{ request()->routeIs('contact.submit') ? 'font-bold border-b-2 border-white' : '' }}">
+               Contact Us
+            </a>
                 </div>                
 
                 <div class="hidden md:flex space-x-4 items-center">
@@ -165,11 +180,26 @@
             </div>
 
             <div id="mobile-menu" class="md:hidden hidden bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-4">
-                <a href="{{ route('jobs.welcome') }}" class="hover:underline">Jobs</a>
-                    <a href="{{ route('career.index') }}" class="hover:underline">Careers</a>
-                    <a href="{{ route('salaries.index') }}" class="hover:underline">Salaries</a>
-                    <a href="{{ route('companies') }}" class="hover:underline">Companies</a>
-                    <a href="{{ route('contact.index') }}" class="hover:underline">Contact Us</a>
+                <a href="{{ route('jobs.welcome') }}" 
+               class="hover:underline {{ request()->routeIs('jobs.welcome') ? 'font-bold border-b-2 border-white' : '' }}">
+               Jobs
+            </a>
+            <a href="{{ route('career.index') }}" 
+               class="hover:underline {{ request()->routeIs('career.index') ? 'font-bold border-b-2 border-white' : '' }}">
+               Careers
+            </a>
+            <a href="{{ route('salaries.index') }}" 
+               class="hover:underline {{ request()->routeIs('salaries.index') ? 'font-bold border-b-2 border-white' : '' }}">
+               Salaries
+            </a>
+            <a href="{{ route('companies') }}" 
+               class="hover:underline {{ request()->routeIs('companies') ? 'font-bold border-b-2 border-white' : '' }}">
+               Companies
+            </a>
+            <a href="{{ route('contact.submit') }}" 
+               class="hover:underline {{ request()->routeIs('contact.submit') ? 'font-bold border-b-2 border-white' : '' }}">
+               Contact Us
+            </a>
             
                 @auth
                     <a href="{{ route('admin.dashboard') }}" class="inline-block bg-gray-800 text-white py-2 px-6 rounded-lg shadow-md hover:bg-gray-700 transition duration-300 mb-4">

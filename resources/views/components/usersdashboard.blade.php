@@ -19,26 +19,30 @@
         </div>
         <ul>
             <li class="mb-6">
-                <a href="{{route('Users.dashboard')}}" class="flex items-center text-lg hover:bg-blue-700 p-3 rounded-md transition-all">
+                <a href="{{ route('Users.dashboard') }}" 
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('Users.dashboard') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
                     <i class="fas fa-tachometer-alt mr-4"></i> Dashboard
                 </a>
             </li>
             <li class="mb-6">
-                <a href="{{route('Users.jobs')}}" class="flex items-center text-lg hover:bg-blue-700 p-3 rounded-md transition-all">
+                <a href="{{ route('Users.jobs') }}" 
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('Users.jobs') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
                     <i class="fas fa-briefcase mr-4"></i> Manage Jobs
                 </a>
             </li>
             <li class="mb-6">
-                <a href="{{ route('Users.company') }}" class="flex items-center text-lg hover:bg-blue-700 p-3 rounded-md transition-all">
+                <a href="{{ route('Users.company') }}" 
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('Users.company') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
                     <i class="fas fa-building mr-4"></i> Manage Companies
                 </a>
             </li>
             <li class="mb-6">
-                <a href="{{route('Users.application')}}" class="flex items-center text-lg hover:bg-blue-700 p-3 rounded-md transition-all">
+                <a href="{{ route('Users.application') }}" 
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('Users.application') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
                     <i class="fas fa-file-alt mr-4"></i> Manage Applications
                 </a>
             </li>
-        </ul>
+        </ul>        
     </div>
     <div class="flex-1 p-8 overflow-auto">
 

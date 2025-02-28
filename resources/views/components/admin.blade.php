@@ -19,41 +19,48 @@
         </div>
         <ul>
             <li class="mb-6">
-                <a href="{{route('admin.dashboard')}}" class="flex items-center text-lg hover:bg-blue-700 p-3 rounded-md transition-all">
+                <a href="{{ route('admin.dashboard') }}" 
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('admin.dashboard') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
                     <i class="fas fa-tachometer-alt mr-4"></i> Dashboard
                 </a>
             </li>
             <li class="mb-6">
-                <a href="{{route('admin.jobs')}}" class="flex items-center text-lg hover:bg-blue-700 p-3 rounded-md transition-all">
+                <a href="{{ route('admin.jobs') }}" 
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('admin.jobs') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
                     <i class="fas fa-briefcase mr-4"></i> Manage Jobs
                 </a>
             </li>
             <li class="mb-6">
-                <a href="{{route('admin.index')}}" class="flex items-center text-lg hover:bg-blue-700 p-3 rounded-md transition-all">
+                <a href="{{ route('admin.index') }}" 
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('admin.index') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
                     <i class="fas fa-building mr-4"></i> Manage Companies
                 </a>
             </li>
             <li class="mb-6">
-                <a href="{{route('users.index')}}" class="flex items-center text-lg hover:bg-blue-700 p-3 rounded-md transition-all">
+                <a href="{{ route('users.index') }}" 
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('users.index') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
                     <i class="fas fa-users mr-4"></i> Manage Users
                 </a>
             </li>
             <li class="mb-6">
-                <a href="{{route('applications.index')}}" class="flex items-center text-lg hover:bg-blue-700 p-3 rounded-md transition-all">
+                <a href="{{ route('applications.index') }}" 
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('applications.index') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
                     <i class="fas fa-file-alt mr-4"></i> Manage Applications
                 </a>
             </li>
             <li class="mb-6">
-                <a href="{{route('contact.index')}}" class="flex items-center text-lg hover:bg-blue-700 p-3 rounded-md transition-all">
+                <a href="{{ route('contact.index') }}" 
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('contact.index') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
                     <i class="fas fa-phone-alt mr-4"></i> Who Contact Us
                 </a>
             </li>
             <li class="mb-6">
-                <a href="{{route('problems.index')}}" class="flex items-center text-lg hover:bg-blue-700 p-3 rounded-md transition-all">
+                <a href="{{ route('problems.index') }}" 
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('problems.index') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
                     <i class="fas fa-triangle-exclamation mr-4"></i> Reported Problems
                 </a>
             </li>
-        </ul>
+        </ul>        
     </div>
     <div class="flex-1 p-8 overflow-auto">
 
