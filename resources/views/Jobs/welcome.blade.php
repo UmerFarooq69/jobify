@@ -17,15 +17,14 @@
                     >
                     <div id="suggestions" class="absolute bg-white shadow-lg rounded-md hidden w-full mt-1 z-50"></div>
                 </div>
-                
-                <!-- Filters -->
+
                 <div class="flex flex-wrap gap-4 w-full md:w-auto">
                     @php
                     $filters = [
                     'job_type' => ['label' => 'Select Job Type', 'options' => $jobTypes],
                     'location' => ['label' => 'Select Location', 'options' => $locations],
                     'company' => ['label' => 'Select Company', 'options' => $companies],
-                    'city' => ['label' => 'Select City', 'options' => $cities], // New City Filter
+                    'city' => ['label' => 'Select City', 'options' => $cities],
                     ];
                     @endphp
                     
@@ -120,8 +119,7 @@
                 suggestionsBox.classList.add('hidden');
             }
         });
-        
-        // Clear form fields when "Clear Form" button is clicked
+
         clearButton.addEventListener("click", function () {
             document.querySelector("form").reset();
             document.querySelectorAll("select").forEach(select => select.selectedIndex = 0);

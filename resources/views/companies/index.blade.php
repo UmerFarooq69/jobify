@@ -1,6 +1,6 @@
 <x-form>
     <div class="bg-gray-200 min-h-48 flex items-center justify-center pt-3">
-        <img src="{{ asset('storage/img/logo.jpeg') }}" alt="Logo" class="w-[500px] mr-6 mb-4"> <!-- Added margin-bottom -->
+        <img src="{{ asset('storage/img/logo.jpeg') }}" alt="Logo" class="w-[500px] mr-6 mb-4">
         <div class="max-w-3xl bg-white shadow-lg p-8 rounded-lg">
             <div class="flex items-center space-x-4">
                 <h2 class="text-4xl font-semibold">Find a workplace that works for you</h2>

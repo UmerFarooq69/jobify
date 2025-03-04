@@ -16,7 +16,7 @@ class AdminController extends Controller
     {
           $companies = Company::all();
 
-          return view('admin.index', compact('companies'));
+          return view('admin.companies', compact('companies'));
     }
 
     public function dashboard()
@@ -60,12 +60,12 @@ class AdminController extends Controller
     {
         $company->delete();
 
-        return redirect()->route('admin.index')->with('success', 'Company deleted successfully');
+        return redirect()->route('admin.companies')->with('success', 'Company deleted successfully');
     }
     public function destroyUser(User $user)
     {
         $user->delete();
-        return redirect()->route('admin.index')->with('success', 'User deleted successfully');
+        return redirect()->route('admin.companies')->with('success', 'User deleted successfully');
     }
 
     public function destroyJob(Job_task $job)

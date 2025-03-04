@@ -31,8 +31,8 @@
                 </a>
             </li>
             <li class="mb-6">
-                <a href="{{ route('admin.index') }}" 
-                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('admin.index') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
+                <a href="{{ route('admin.companies') }}" 
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('admin.companies') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
                     <i class="fas fa-building mr-4"></i> Manage Companies
                 </a>
             </li>

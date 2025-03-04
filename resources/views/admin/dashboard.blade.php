@@ -30,7 +30,7 @@
             <i class="fas fa-briefcase mr-2"></i> Manage Jobs
         </a>
 
-        <a href="{{ route('admin.index') }}" class="bg-gradient-to-r from-blue-400 to-blue-600 text-white py-3 px-6 rounded-md shadow-lg hover:from-blue-500 hover:to-blue-700 transition-all duration-300 text-center flex items-center justify-center">
+        <a href="{{ route('admin.companies') }}" class="bg-gradient-to-r from-blue-400 to-blue-600 text-white py-3 px-6 rounded-md shadow-lg hover:from-blue-500 hover:to-blue-700 transition-all duration-300 text-center flex items-center justify-center">
             <i class="fas fa-building mr-2"></i> Manage Companies
         </a>
 

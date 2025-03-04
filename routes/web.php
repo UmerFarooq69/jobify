@@ -39,7 +39,7 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 */
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/admin/index', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/admin/index', [AdminController::class, 'index'])->name('admin.companies');
 
     // Jobs Management
     Route::get('/admin/jobs', [AdminController::class, 'Jobs'])->name('admin.jobs');
