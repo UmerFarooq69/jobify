@@ -19,7 +19,8 @@
                         </h2>
                         <p class="text-gray-700 mb-1"><strong>Company:</strong> {{ $job->company->name }}</p>
                         <p class="text-gray-700 mb-1"><strong>Job Type:</strong> {{ $job->job_type }}</p>
-                        <p class="text-gray-700"><strong>Salary:</strong> PKR {{ number_format($job->job_salary) }}</p>
+                        <p class="text-gray-700 mb-1"><strong>Salary:</strong> PKR {{ number_format($job->job_salary) }}</p>
+                        <p class="text-gray-700"><strong>Job ID:</strong> {{ $job->id }}</p>
                     </div>
                     <div class="flex justify-between items-center mt-4 border-t pt-3">
                         <a href="{{ route('jobs.edit', $job->id) }}" class="text-yellow-500 hover:text-yellow-600">Edit</a>

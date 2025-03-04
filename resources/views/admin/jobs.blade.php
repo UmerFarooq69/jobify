@@ -21,7 +21,8 @@
                         </h2>
                         <p class="text-gray-700 mb-1"><strong>Company:</strong> {{ $job->company->name }}</p>
                         <p class="text-gray-700 mb-1"><strong>Job Type:</strong> {{ $job->job_type }}</p>
-                        <p class="text-gray-700 mb-4"><strong>Salary:</strong> {{ $job->job_salary }}</p>
+                        <p class="text-gray-700 mb-1"><strong>Salary:</strong> {{ $job->job_salary }}</p>
+                        <p class="text-gray-700"><strong>Job ID:</strong> {{ $job->id }}</p>
                     </div>
                     <div class="flex justify-between items-center mt-4">
                         <a href="{{ route('jobs.edit', $job->id) }}" class="text-yellow-500 hover:underline">Edit</a>

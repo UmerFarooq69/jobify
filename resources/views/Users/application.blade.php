@@ -22,6 +22,13 @@
             </div>
         </div>
     </form>    
+    <div class="mb-6 text-lg font-semibold text-gray-800">
+        @if(request('company_id'))
+            Showing {{ $applications->where('job.company_id', request('company_id'))->count() }} applications for {{ $companies->firstWhere('id', request('company_id'))->name }}
+        @else
+            Total Applications: {{ $applications->count() }}
+        @endif
+    </div>
     
     @if($applications->isEmpty())
         <div class="flex flex-col items-center justify-center p-10 bg-gray-50 border border-gray-200 rounded-lg">
@@ -36,10 +43,16 @@
             @if(request('company_id') == null || $application->job->company->id == request('company_id'))
                 <div class="border border-gray-300 p-4 my-4 rounded-lg bg-gray-50 shadow">
                     <div class="text-lg font-semibold text-gray-800">
-                        Applicant name: <span class="text-blue-500"> {{ $application->applicant_name}}</span>
+                        Applicant Name: <span class="text-blue-500"> {{ $application->applicant_name}}</span>
+                    </div>
+                    <div class="text-lg font-semibold text-gray-800">
+                        Applicant Email: <span class="text-blue-500"> {{ $application->applicant_email}}</span>
                     </div>
                     <div class="text-lg font-semibold text-gray-800">
                         Job: {{ $application->job->job_title}}
+                    </div>
+                    <div class="text-lg font-semibold text-gray-800">
+                        Job ID: {{ $application->job->id }}
                     </div>
                     <a href="{{ asset('storage/' . $application->cv) }}" download 
                         class="text-blue-500 font-medium hover:text-blue-700 transition flex items-center space-x-2">
