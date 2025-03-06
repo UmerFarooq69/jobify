@@ -16,11 +16,10 @@
                 <span class="font-normal text-gray-500">{{ $job->job_type }}</span>
             </h3>
         </div>
-                <div class="flex space-x-2">
-            <button class="bg-blue-600 text-white text-lg cursor-pointer flex items-center gap-2 px-3 py-3 rounded-full hover:bg-blue-700 transition duration-300" data-modal="jobDescriptionModal-{{ $job->id }}">
-                <i class="fas fa-eye"></i> Quick review
+        <div class="flex space-x-2">
+            <button class="w-10 h-10 bg-blue-600 mt-2 text-white text-lg cursor-pointer flex justify-center items-center rounded-full hover:bg-blue-700 transition duration-300" data-modal="jobDescriptionModal-{{ $job->id }}">
+                <i class="fas fa-eye"></i>
             </button>
-
             <a href="{{ route('jobs.apply', $job->id) }}" class="bg-gradient-to-r from-green-400 to-green-600 text-white py-4 px-4 rounded-md shadow-lg hover:from-green-500 hover:to-green-700 transition-all duration-300 text-lg">
                 Apply for this job
             </a>

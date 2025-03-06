@@ -223,16 +223,53 @@
             {{$slot}}
         </div>
 
-        <footer class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white mt-4">
-            <div class="max-w-7xl mx-auto px-6 text-center">
-                <p class="text-lg">© 2025 Jobify. All rights reserved.</p>
-                <div class="flex justify-center space-x-6 mt-4">
-                    <a href="#" class="hover:underline">Privacy Policy</a>
-                    <a href="#" class="hover:underline">Terms of Service</a>
-                    <a href="/contact" class="hover:underline">Contact Us</a>
+        <footer class="bg-white text-blue-900 py-8 border-t border-gray-300 mt-1">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <img src="{{ asset('storage/img/logo.jpeg') }}" alt="Jobify Logo" class="h-16 mb-2"> 
+                    <h2 class="text-xl font-bold">Jobify</h2>
+                    <p class="mt-2 text-lg">
+                        Jobify is the leading HR outsourcing firm in the whole world
+                        with two decades of specialized experience.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-xl font-bold">Quick Links</h2>
+                    <ul class="mt-2 space-y-1">
+                        <li><a href="#" class="hover:underline">Blogs</a></li>
+                        <li><a href="#" class="hover:underline">About Us</a></li>
+                        <li><a href="#" class="hover:underline">Resources</a></li>
+                        <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+                    </ul>
+                </div>
+ 
+                <div>
+                    <h2 class="text-xl font-bold">Our Partners</h2>
+                    <ul class="mt-2 space-y-1">
+                        <li>Intellisense</li>
+                        <li>Ecare</li>
+                        <li>MCare360</li>
+                        <li>World Health Coorporation</li>
+                        <li>MONUSCO</li>
+                    </ul>
+                </div>
+        
+                <!-- Contact Info -->
+                <div class="col-span-1 md:col-span-3 text-center mt-6">
+                    <h2 class="text-xl font-bold">CONTACT US</h2>
+                    <p class="mt-2 text-sm">Jobify</p>
+                    <p class="text-sm">Ross Resenditia, Canal Rd, Quaid-i-Azam Campus, Lahore, Punjab, Pakistan</p>
+                    <p class="text-sm">info@jobify.official</p>
+                    <p class="text-sm font-bold text-green-600">+92-301-4370259</p>
+                    <div class="flex justify-center space-x-4 mt-4">
+                        <a href="#" class="text-blue-600 text-2xl"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-blue-700 text-2xl"><i class="fab fa-linkedin"></i></a>
+                    </div>
                 </div>
             </div>
         </footer>
+        
     </div>
     <script>
     document.addEventListener("DOMContentLoaded", function() {

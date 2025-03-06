@@ -227,11 +227,10 @@
                 disableOnInteraction: false, 
             },
             breakpoints: {
-                768: { slidesPerView: 2 },
+                768: { slidesPerView: 3 },
             }
         });
 
-        // Manually enable navigation buttons
         document.querySelector(".swiper-button-next").addEventListener("click", () => swiper.slideNext());
         document.querySelector(".swiper-button-prev").addEventListener("click", () => swiper.slidePrev());
     });
