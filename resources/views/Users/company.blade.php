@@ -32,8 +32,8 @@
                         <a href="{{ route('companies.show', $company) }}" class="text-blue-500 hover:text-blue-600">
                             View Jobs
                         </a>
-                        <a href="#" class="text-yellow-500 hover:text-yellow-600">Edit</a>
-                        <form action="{{ route('company.destroy', $company) }}" method="POST" class="inline-block">
+                        <a href="{{route('company.edit', $company)}}" class="text-yellow-500 hover:text-yellow-600">Edit</a>
+                        <form action="{{ route('user.company.destroy', $company) }}" method="POST" class="inline-block">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-red-500 hover:text-red-600">

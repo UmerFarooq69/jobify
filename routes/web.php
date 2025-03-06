@@ -46,11 +46,10 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/admin/jobs/{job}', [AdminController::class, 'destroyJob'])->name('admin.jobs.destroy');
 
     // User Management
-    Route::delete('/admin/users/{user}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
     Route::patch('/admin/users/{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('admin.users.toggle-status');
 
     // Company Management
-    Route::delete('/company/{company}', [AdminController::class, 'destroy'])->name('company.destroy');
+    Route::delete('admin/company/{company}', [AdminController::class, 'destroy'])->name('company.destroy');
     Route::get('/companies/{company}/jobs', [AdminController::class, 'showJobs'])->name('companies.show');
 
     // Applications Management
@@ -72,7 +71,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Company
     Route::get('/user/company', [DashboardController::class, 'company'])->name('Users.company');
-    Route::delete('/company/{company}', [DashboardController::class, 'destroy'])->name('company.destroy');
+    Route::delete('/company/{company}', [DashboardController::class, 'destroy'])->name('user.company.destroy');
 
     // Applications
     Route::get('/user/applications', [DashboardController::class, 'applications'])->name('Users.application');
@@ -101,6 +100,9 @@ Route::get('/company', [CompanyController::class, 'index'])->name('companies');
 Route::post('/companies', [CompanyController::class, 'store'])->name('companies.store');
 Route::get('/company/create', [CompanyController::class, 'create'])->name('companies.create');
 Route::get('/company/{company}/jobs', [CompanyController::class, 'showJobs'])->name('company.jobs');
+Route::get('/company/{company}/edit', [CompanyController::class, 'edit'])->name('company.edit');
+Route::put('/company/{company}', [CompanyController::class, 'update'])->name('company.update');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -110,6 +112,7 @@ Route::get('/company/{company}/jobs', [CompanyController::class, 'showJobs'])->n
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
 Route::post('/users', [UserController::class, 'store'])->name('users.store');
+Route::delete('/admin/users/{user}', [UserController::class, 'destroyUser'])->name('users.destroy');
 
 /*
 |--------------------------------------------------------------------------

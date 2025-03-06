@@ -16,11 +16,11 @@
                     </div>
                     <div class="flex justify-between items-center">
                         <a href="{{ route('companies.show', $company) }}" class="text-blue-500 hover:underline">View Jobs</a>
-                        <a href="#" class="text-yellow-500 hover:underline">Edit</a>
+                        <a href="{{route('company.edit', $company)}}" class="text-yellow-500 hover:underline">Edit</a>
                         <form action="{{ route('company.destroy', $company) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-red-500 hover:underline">
+                            <button type="submit" class="text-red-500 hover:underline delete-btn">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </form>
