@@ -13,10 +13,10 @@
 
                     <div class="flex justify-between items-center">
                         <a href="" class="text-yellow-500 hover:underline">Edit</a>
-                        <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-red-500 hover:underline">
+                            <button type="submit" class="text-red-500 hover:underline delete-btn">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </form>
@@ -34,6 +34,5 @@
                 </div>
             @endforeach
         </div>
-
     </div>
 </x-admin>

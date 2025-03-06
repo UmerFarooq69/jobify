@@ -27,7 +27,7 @@
                         <form action="{{ route('Users.jobs.destroy', $job->id) }}" method="POST" class="inline-block">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-red-500 hover:text-red-600">
+                            <button type="submit" class="text-red-500 hover:text-red-600 delete-btn">
                                 <i class="fas fa-trash"></i> Delete
                             </button>
                         </form>

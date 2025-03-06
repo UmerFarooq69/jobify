@@ -62,11 +62,6 @@ class AdminController extends Controller
 
         return redirect()->route('admin.companies')->with('success', 'Company deleted successfully');
     }
-    public function destroyUser(User $user)
-    {
-        $user->delete();
-        return redirect()->route('admin.companies')->with('success', 'User deleted successfully');
-    }
 
     public function destroyJob(Job_task $job)
     {

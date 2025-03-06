@@ -34,13 +34,21 @@ class UserController extends Controller
             'active' => $request->input('active', true),  
             'role' => $role,
         ]);
-        return redirect()->route('jobs.welcome')->with('success', 'User created successfully!');
-    }       
+        return redirect()->route('users.index')->with('success', 'User created successfully!');
+    }   
+        
     public function toggleStatus(User $user)
     {
         $user->active = !$user->active;
         $user->save();
     
         return redirect()->back()->with('success', 'User status updated successfully.');
+    }
+
+    public function destroyUser(User $user)
+    {
+        $user->delete();
+        
+        return redirect()->route('users.index')->with('success', 'User deleted successfully');
     }
 }

@@ -36,7 +36,7 @@
                         <form action="{{ route('user.company.destroy', $company) }}" method="POST" class="inline-block">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-red-500 hover:text-red-600">
+                            <button type="submit" class="text-red-500 hover:text-red-600 delete-btn" >
                                 <i class="fas fa-trash"></i> Delete
                             </button>
                         </form>
