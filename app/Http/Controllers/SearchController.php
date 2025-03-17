@@ -57,4 +57,17 @@ class SearchController extends Controller
 
         return response()->json($suggestions);
     }
+
+    public function adminjobs(Request $request)
+    {
+        $query = Job_task::query();
+    
+        if ($request->has('job_id') && !empty($request->job_id)) {
+            $query->where('id', $request->job_id);
+        }
+    
+        $jobs = $query->get();
+    
+        return view('admin.jobs', compact('jobs'));
+    }
 }

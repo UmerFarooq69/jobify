@@ -152,3 +152,4 @@ Route::delete('/problems/{id}', [ProblemController::class, 'destroy'])->name('pr
 */
 Route::get('/search', [SearchController::class, 'search'])->name('jobs.search');
 Route::get('/autocomplete', [SearchController::class, 'autocomplete']);
+Route::get('/admin/job/search', [SearchController::class, 'adminjobs'])->name('admin.search');
