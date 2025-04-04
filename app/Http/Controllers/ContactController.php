@@ -36,6 +36,21 @@ class ContactController extends Controller
 
         return redirect()->route('contact.index')->with('success', 'Contact deleted successfully!');
     }
-
+    public function seen(Contact $contact)
+    {
+        $contact->status = 'seen';
+        $contact->save();
+    
+        return back()->with('success', 'Contact marked as seen.');
+    }
+    
+    public function pending(Contact $contact)
+    {
+        $contact->status = 'pending';
+        $contact->save();
+    
+        return back()->with('error', 'Contact pending.');
+    }
+    
 }
 
