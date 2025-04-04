@@ -10,8 +10,7 @@
         </form>
         <!-- Create New Job Button -->
         <a href="{{ route('jobs.create') }}" 
-        class="bg-gray-800 text-white py-2 px-4 rounded-lg shadow-md hover:bg-gray-700 hover:shadow-lg transition duration-300">
-            Create New Job
+        class="bg-blue-600 text-white py-2 px-6 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">           + Create New Job
         </a>
     </div>
     <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -10,7 +10,7 @@
                         <th class="px-4 py-2 text-left">Email</th>
                         <th class="px-4 py-2 text-left">Message</th>
                         <th class="px-4 py-2 text-left">Contact time</th>
-                        <th class="px-12 py-4 text-left">Action</th>
+                        <th class="px-24 py-4 text-left">Action</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-700">
@@ -25,14 +25,6 @@
                                 <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ $contact->email }}" target="_blank" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition">
                                     Reply
                                 </a>
-                                
-                                <form action="{{ route('contacts.destroy', $contact) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-500 hover:text-red-700 cursor-pointer">
-                                        <i class="fas fa-trash-alt hover:scale-105 transition-all duration-200"></i>
-                                    </button>
-                                </form>
                             
                                 @if($contact->status == 'pending')
                                     <form action="{{ route('contacts.seen', $contact) }}" method="POST">
@@ -53,8 +45,15 @@
                                         {{ ucfirst($contact->status) }}
                                     </span>
                                 @endif
-                            </td>
-                            
+                                                                
+                                <form action="{{ route('contacts.destroy', $contact) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-500 hover:text-red-700 cursor-pointer pl-3">
+                                        <i class="fas fa-trash-alt fa-xl hover:scale-105 transition-all duration-200"></i>
+                                    </button>
+                                </form>
+                            </td>   
                         </tr>
                     @endforeach
                 </tbody>

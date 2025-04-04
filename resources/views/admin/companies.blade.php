@@ -1,6 +1,7 @@
 <x-admin>
         <div class="flex flex-wrap mb-6">
-            <a href="{{ route('companies.create') }}" class="inline-block bg-gray-800 text-white py-2 px-6 rounded-lg shadow-md hover:bg-gray-700 hover:shadow-lg transition duration-300">Create New Company</a>
+            <a href="{{ route('companies.create') }}" class="bg-blue-600 text-white py-2 px-6 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
+                + Create New Company</a>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

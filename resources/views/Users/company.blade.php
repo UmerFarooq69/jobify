@@ -1,5 +1,4 @@
 <x-usersdashboard>
-    <div class="max-w-6xl">
         @if(session('success'))
             <div class="mb-4 p-4 bg-green-100 text-green-700 border border-green-300 rounded-lg shadow-md">
                 {{ session('success') }}
@@ -44,5 +43,4 @@
                 </div>
             @endforeach
         </div>
-    </div>
 </x-usersdashboard>
