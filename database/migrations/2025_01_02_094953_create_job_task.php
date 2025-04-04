@@ -14,9 +14,12 @@ return new class extends Migration
     {
         Schema::create('job_task', function (Blueprint $table) {
             $table->id();
+            $table->uuid('job_uuid')->unique();
             $table->foreignIdFor(Company::class, 'company_id')->nullable()->constrained('companies')
             ->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('image')->nullable();
             $table->string('job_title');
+            $table->string('job_type');
             $table->string('description');
             $table->decimal('job_salary');
             $table->timestamps();

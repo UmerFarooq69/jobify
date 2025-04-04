@@ -36,21 +36,14 @@ class ContactController extends Controller
 
         return redirect()->route('contact.index')->with('success', 'Contact deleted successfully!');
     }
-    public function seen(Contact $contact)
+    public function toggleStatus($id)
     {
-        $contact->status = 'seen';
+        $contact = Contact::findOrFail($id);
+    
+        $contact->status = $contact->status === 'pending' ? 'seen' : 'pending';
         $contact->save();
     
-        return back()->with('success', 'Contact marked as seen.');
-    }
-    
-    public function pending(Contact $contact)
-    {
-        $contact->status = 'pending';
-        $contact->save();
-    
-        return back()->with('error', 'Contact pending.');
+        return back()->with('success', 'Status updated successfully.');
     }
     
 }
-

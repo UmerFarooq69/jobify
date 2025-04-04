@@ -2,12 +2,12 @@
     <div class="flex items-center gap-8 mb-6">
         <!-- Search Form -->
         <form method="GET" action="{{ route('admin.search') }}" class="flex items-center gap-2">
-            <input type="text" name="job_id" value="{{ request('job_id') }}" placeholder="Enter Job ID" 
+            <input type="text" name="job_uuid" value="{{ request('job_uuid') }}" placeholder="Enter Job UUID" 
                 class="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
             <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">
                 Search
             </button>
-        </form>
+        </form>        
         <!-- Create New Job Button -->
         <a href="{{ route('jobs.create') }}" 
         class="bg-blue-600 text-white py-2 px-6 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">           + Create New Job
@@ -35,7 +35,7 @@
                         <p class="text-gray-700 mb-1"><strong>Company:</strong> {{ $job->company->name }}</p>
                         <p class="text-gray-700 mb-1"><strong>Job Type:</strong> {{ $job->job_type }}</p>
                         <p class="text-gray-700 mb-1"><strong>Salary:</strong> {{ $job->job_salary }}</p>
-                        <p class="text-gray-700"><strong>Job ID:</strong> {{ $job->id }}</p>
+                        <p class="text-gray-700"><strong>Job ID:</strong> {{ $job->job_uuid }}</p>
                     </div>
                     <div class="flex justify-between items-center mt-4">
                         <a href="{{ route('jobs.edit', $job->id) }}" class="text-yellow-500 hover:underline">Edit</a>

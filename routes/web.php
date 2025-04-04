@@ -132,8 +132,7 @@ Route::get('/contact', function () {
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 Route::get('/contact/index', [ContactController::class, 'index'])->name('contact.index');
 Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
-Route::post('/contacts/{contact}/seen', [ContactController::class, 'seen'])->name('contacts.seen');
-Route::post('/contacts/{contact}/pending', [ContactController::class, 'pending'])->name('contacts.pending');
+Route::post('/contacts/{contact}/toggle-status', [ContactController::class, 'toggleStatus'])->name('contacts.toggleStatus');
 
 /*
 |--------------------------------------------------------------------------

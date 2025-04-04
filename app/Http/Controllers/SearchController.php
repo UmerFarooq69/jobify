@@ -62,8 +62,8 @@ class SearchController extends Controller
     {
         $query = Job_task::query();
     
-        if ($request->has('job_id') && !empty($request->job_id)) {
-            $query->where('id', $request->job_id);
+        if ($request->has('job_uuid') && !empty($request->job_uuid)) {
+            $query->where('job_uuid', $request->job_uuid);
         }
     
         $jobs = $query->get();

@@ -26,25 +26,12 @@
                                     Reply
                                 </a>
                             
-                                @if($contact->status == 'pending')
-                                    <form action="{{ route('contacts.seen', $contact) }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition">
-                                            Seen
-                                        </button>
-                                    </form>
-                            
-                                    <form action="{{ route('contacts.pending', $contact) }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition">
-                                            Pending
-                                        </button>
-                                    </form>
-                                @else
-                                    <span class="px-3 py-1 rounded text-white {{ $contact->status == 'seen' ? 'bg-green-600' : 'bg-red-600' }}">
-                                        {{ ucfirst($contact->status) }}
-                                    </span>
-                                @endif
+                                <form action="{{ route('contacts.toggleStatus', $contact) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="{{ $contact->status == 'pending' ? 'bg-green-500' : 'bg-yellow-500' }} text-white px-3 py-1 rounded hover:brightness-110 transition">
+                                        {{ $contact->status == 'pending' ? 'Seen' : 'Pending' }}
+                                    </button>
+                                </form>                                
                                                                 
                                 <form action="{{ route('contacts.destroy', $contact) }}" method="POST">
                                     @csrf
