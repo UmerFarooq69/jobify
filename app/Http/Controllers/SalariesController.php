@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job_task;
-use App\Models\Salaries;
 use Illuminate\Http\Request;
 
 class SalariesController extends Controller
@@ -16,8 +15,6 @@ class SalariesController extends Controller
     public function show($id)
     {
         $job = Job_task::findOrFail($id);
-        return view('salaries.show', compact('job'));
+        return view('jobs.apply', compact('job'));
     }
-    
-
 }
