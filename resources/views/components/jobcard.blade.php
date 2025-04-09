@@ -16,14 +16,30 @@
                 <span class="font-normal text-gray-500">{{ $job->job_type }}</span>
             </h3>
         </div>
-        <div class="flex space-x-2">
-            <button class="w-10 h-10 bg-blue-600 mt-2 text-white text-lg cursor-pointer flex justify-center items-center rounded-full hover:bg-blue-700 transition duration-300" data-modal="jobDescriptionModal-{{ $job->id }}">
-                <i class="fas fa-eye"></i>
-            </button>
-            <a href="{{ route('jobs.apply', $job->id) }}" class="bg-gradient-to-r from-green-400 to-green-600 text-white py-4 px-4 rounded-md shadow-lg hover:from-green-500 hover:to-green-700 transition-all duration-300 text-lg">
+        <div class="flex flex-col items-center space-y-2">
+            <div class="flex space-x-2">
+                <button class="w-10 h-10 bg-blue-600 text-white text-lg cursor-pointer flex justify-center items-center rounded-full hover:bg-blue-700 transition duration-300" data-modal="jobDescriptionModal-{{ $job->id }}">
+                    <i class="fas fa-eye"></i>
+                </button>
+
+                <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($job->company->location) }}"
+                   target="_blank"
+                   class="w-10 h-10 bg-yellow-500 text-white text-lg flex justify-center items-center rounded-full hover:bg-yellow-600 transition duration-300"
+                   title="Navigate to Location">
+                    <i class="fas fa-map-marked-alt"></i>
+                </a>
+\
+                <button onclick="copyJobLink('{{ route('jobs.show', $job->id) }}')" title="Share this job"
+                    class="w-10 h-10 bg-purple-500 text-white text-lg flex justify-center items-center rounded-full hover:bg-purple-600 transition duration-300">
+                    <i class="fas fa-share-alt"></i>
+                </button>
+            </div>
+
+            <a href="{{ route('jobs.apply', $job->id) }}"
+               class="bg-gradient-to-r from-green-400 to-green-600 text-white py-4 px-4 rounded-md shadow-lg hover:from-green-500 hover:to-green-700 transition-all duration-300 text-lg">
                 Apply for this job
             </a>
-        </div>
+        </div>        
     </div>
 
     <h3 class="text-gray-500 text-lg mt-1">{{$job->description}}</h3>
@@ -73,4 +89,29 @@
             });
         });
     });
+
+    function copyJobLink(link) {
+    navigator.clipboard.writeText(link).then(() => {
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: 'Link copied to clipboard!',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+        });
+    }).catch(err => {
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: 'Failed to copy link!',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+        });
+    });
+}
+
 </script>
