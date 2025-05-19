@@ -56,6 +56,7 @@
                         Send Message
                     </button>
                     <a href="/problem" class="text-red-500 block text-center mt-6">Report a problem</a>
+                    <a href="/pay" class="text-red-500 block text-center mt-6">Payment?</a>
                 </form>
             </div>
 

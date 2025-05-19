@@ -28,7 +28,7 @@
                    title="Navigate to Location">
                     <i class="fas fa-map-marked-alt"></i>
                 </a>
-\
+
                 <button onclick="copyJobLink('{{ route('jobs.show', $job->id) }}')" title="Share this job"
                     class="w-10 h-10 bg-purple-500 text-white text-lg flex justify-center items-center rounded-full hover:bg-purple-600 transition duration-300">
                     <i class="fas fa-share-alt"></i>

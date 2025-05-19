@@ -12,6 +12,7 @@ use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,7 @@ Route::get('/careers', [CareerController::class, 'index'])->name('career.index')
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('login', [AuthController::class, 'login'])->name('login.submit');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +40,6 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/index', [AdminController::class, 'index'])->name('admin.companies');
 
     // Jobs Management
@@ -154,3 +155,11 @@ Route::delete('/problems/{id}', [ProblemController::class, 'destroy'])->name('pr
 Route::get('/search', [SearchController::class, 'search'])->name('jobs.search');
 Route::get('/autocomplete', [SearchController::class, 'autocomplete']);
 Route::get('/admin/job/search', [SearchController::class, 'adminjobs'])->name('admin.search');
+
+Route::get('/pay', function () {
+    return view('payments/paymentmethods');
+});
+Route::get('payments/show', function(){
+    return view('payments/show');
+});
+Route::post('/payments/store', [PaymentController::class, 'store']);
