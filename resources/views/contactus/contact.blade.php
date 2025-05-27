@@ -1,5 +1,5 @@
 <x-form>
-    <div class="w-full min-h-screen bg-gradient-to-b from-blue-100 to-white flex items-center justify-center p-10">
+    <div class="w-full min-h-screen bg-gradient-to-b from-blue-900 to-blue-100 flex items-center justify-center p-10">
         <div class="w-full max-w-6xl bg-white shadow-xl rounded-lg p-10 flex flex-wrap md:flex-nowrap gap-10">
 
             <!-- Left Side (Contact Details) -->

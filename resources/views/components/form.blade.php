@@ -107,7 +107,7 @@
 
     <div class="page-wrapper">
         <!-- Navbar -->
-        <nav class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-4 shadow-md">
+        <nav class="bg-gradient-to-r from-blue-900 to-blue-100 text-white px-6 py-4 shadow-md">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-3">
                     <a href="/" class="flex items-center space-x-2">

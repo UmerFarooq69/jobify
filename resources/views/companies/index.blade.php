@@ -1,5 +1,5 @@
 <x-form>
-    <div class="bg-gray-200 min-h-48 flex items-center justify-center pt-3">
+    <div class="bg-gradient-to-r from-blue-900 to-blue-100 min-h-48 flex items-center justify-center pt-3">
         <img src="{{ asset('storage/img/logo.jpeg') }}" alt="Logo" class="w-[500px] mr-6 mb-4">
         <div class="max-w-3xl bg-white shadow-lg p-8 rounded-lg">
             <div class="flex items-center space-x-4">
@@ -17,12 +17,12 @@
             </div>            
         </div>
     </div>
-    
+    <hr class="bg-blue-500 border-b border-blue-500">
     <div class="flex justify-between mt-3 ml-auto">
         <div class="w-full pr-4">
             <div class="grid grid-cols-1 gap-8">
                 @foreach ($companies as $company)
-                    <x-companycard :company="$company"/>
+                <x-companycard :company="$company"/>
                 @endforeach
             </div>
         </div>

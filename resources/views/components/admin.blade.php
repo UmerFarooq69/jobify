@@ -13,56 +13,56 @@
 <body class="bg-gray-100">
 
 <div class="flex h-screen">
-    <div class="w-68 bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-6">
+    <div class="w-68 bg-gradient-to-r from-blue-900 to-blue-300 text-white p-6">
         <div class="text-3xl font-semibold mb-10 text-center">
             Admin Panel
         </div>
         <ul>
             <li class="mb-6">
                 <a href="{{ route('admin.dashboard') }}" 
-                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('admin.dashboard') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('admin.dashboard') ? 'bg-blue-600' : 'hover:bg-blue-600' }}">
                     <i class="fas fa-tachometer-alt mr-4"></i> Dashboard
                 </a>
             </li>
             <li class="mb-6">
                 <a href="{{ route('admin.jobs') }}" 
-                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('admin.jobs') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('admin.jobs') ? 'bg-blue-600' : 'hover:bg-blue-600' }}">
                     <i class="fas fa-briefcase mr-4"></i> Manage Jobs
                 </a>
             </li>
             <li class="mb-6">
                 <a href="{{ route('admin.companies') }}" 
-                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('admin.companies') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('admin.companies') ? 'bg-blue-600' : 'hover:bg-blue-600' }}">
                     <i class="fas fa-building mr-4"></i> Manage Companies
                 </a>
             </li>
             <li class="mb-6">
                 <a href="{{ route('users.index') }}" 
-                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('users.index') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('users.index') ? 'bg-blue-600' : 'hover:bg-blue-600' }}">
                     <i class="fas fa-users mr-4"></i> Manage Users
                 </a>
             </li>
             <li class="mb-6">
                 <a href="{{ route('applications.index') }}" 
-                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('applications.index') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('applications.index') ? 'bg-blue-600' : 'hover:bg-blue-600' }}">
                     <i class="fas fa-file-alt mr-4"></i> Manage Applications
                 </a>
             </li>
             <li class="mb-6">
                 <a href="{{ route('contact.index') }}" 
-                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('contact.index') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('contact.index') ? 'bg-blue-600' : 'hover:bg-blue-600' }}">
                     <i class="fas fa-phone-alt mr-4"></i> Who Contact Us
                 </a>
             </li>
             <li class="mb-6">
                 <a href="{{ route('problems.index') }}" 
-                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('problems.index') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('problems.index') ? 'bg-blue-600' : 'hover:bg-blue-600' }}">
                     <i class="fas fa-triangle-exclamation mr-4"></i> Reported Problems
                 </a>
             </li>   
             <li class="mb-6">
                 <a href="{{ route('payment.index') }}" 
-                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('payment.index') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('payment.index') ? 'bg-blue-600' : 'hover:bg-blue-600' }}">
                     <i class="fas fa-credit-card mr-4"></i> Manage Payments
                 </a>
             </li>
