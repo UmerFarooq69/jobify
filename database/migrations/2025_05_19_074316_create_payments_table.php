@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->uuid('payment_uuid')->unique();
             $table->string('name');
             $table->string('email')->unique();
             $table->enum('payment_method', ['JazzCash', 'EasyPaisa', 'Bank', 'GooglePay', 'Paypal', 'CreditCard/DebitCard']);

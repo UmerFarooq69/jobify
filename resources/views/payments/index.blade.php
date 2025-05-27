@@ -16,7 +16,7 @@
                 <tbody class="text-gray-700">
                     @foreach ($payments as $payment)
                         <tr class="hover:bg-gray-100">
-                            <td class="px-4 py-2 text-left">{{ $payment->id }}</td>
+                            <td class="px-4 py-2 text-left">{{ $payment->payment_uuid }}</td>
                             <td class="px-4 py-2 text-left">{{ $payment->name }}</td>
                             <td class="px-4 py-2 text-left">{{ $payment->email }}</td>
                             <td class="px-4 py-2 text-left">{{ ucfirst($payment->payment_method) }}</td>
