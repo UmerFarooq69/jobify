@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->enum('payment_method', ['JazzCash', 'EasyPaisa', 'Bank', 'GooglePay', 'Paypal', 'CreditCard/DebitCard']);
+            $table->enum('plan', ['Monthly', 'Yearly'])->default('Monthly');
             $table->string('attachment');
             $table->timestamps();
         });

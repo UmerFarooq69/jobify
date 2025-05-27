@@ -159,8 +159,8 @@ Route::get('/admin/job/search', [SearchController::class, 'adminjobs'])->name('a
 Route::get('/pay', function () {
     return view('payments/paymentmethods');
 });
-Route::get('payments/show', function(){
-    return view('payments/show');
+Route::get('payments/create', function(){
+    return view('payments/create');
 });
 Route::post('/payments/store', [PaymentController::class, 'store']);
 Route::get('payments', [PaymentController::class, 'index'])->name('payment.index');

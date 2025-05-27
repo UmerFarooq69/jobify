@@ -24,6 +24,7 @@ class PaymentController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:payments,email',
             'payment_method' => 'required|in:JazzCash,EasyPaisa,Bank,GooglePay,Paypal,CreditCard/DebitCard',
+            'plan' => 'required|in:Monthly,Yearly',
             'attachment' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
         ]);
 
@@ -35,6 +36,7 @@ class PaymentController extends Controller
         $payment->name = $request->name;
         $payment->email = $request->email;
         $payment->payment_method = $request->payment_method;
+        $payment->plan = $request->plan;
         $payment->attachment = $filename ?? null;
         $payment->save();
 

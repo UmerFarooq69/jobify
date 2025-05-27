@@ -21,7 +21,12 @@
       <p class="text-3xl font-extrabold text-blue-600">$150 / Rs 43,000<span class="text-base font-normal text-gray-500">/ year</span></p>
     </div>
   </div>
-
+  <div class="flex justify-center mt-6 mb-2">
+    <a href="/payments/create"
+       class="w-full md:w-1/2 lg:w-1/3 bg-blue-600 text-white px-8 py-4 rounded-md hover:bg-blue-700 transition text-center block">
+      Pay the Amount
+    </a>
+  </div>
   <!-- Payment Methods Grid -->
   <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-6">
     <!-- Bank Transfer -->
@@ -78,11 +83,4 @@
       <p class="text-gray-600 text-sm text-center">Pay quickly using your Google account and saved cards.</p>
     </div>
   </div> <!-- End of Grid -->
-
-  <div class="flex justify-center mt-6 mb-2">
-    <a href="/payments/show"
-       class="w-full md:w-1/2 lg:w-1/3 bg-blue-600 text-white px-8 py-4 rounded-md hover:bg-blue-700 transition text-center block">
-      Pay the Amount
-    </a>
-  </div>
 </x-form>
