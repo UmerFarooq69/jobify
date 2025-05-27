@@ -59,6 +59,12 @@
                    class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('problems.index') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
                     <i class="fas fa-triangle-exclamation mr-4"></i> Reported Problems
                 </a>
+            </li>   
+            <li class="mb-6">
+                <a href="{{ route('payment.index') }}" 
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('payment.index') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
+                    <i class="fas fa-credit-card mr-4"></i> Manage Payments
+                </a>
             </li>
         </ul>        
     </div>

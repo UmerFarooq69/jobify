@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\Storage;
 
 class PaymentController extends Controller
 {
+
+    public function index()
+    {
+        $payments = Payment::latest()->get();
+        return view('payments.index', compact('payments'));
+    }
+
     /**
      * Store the payment form data.
      */
@@ -24,7 +31,6 @@ class PaymentController extends Controller
             $filename = $request->file('attachment')->store('payment_receipts', 'public');
         }
 
-        // Store to database
         $payment = new Payment();
         $payment->name = $request->name;
         $payment->email = $request->email;
@@ -32,7 +38,16 @@ class PaymentController extends Controller
         $payment->attachment = $filename ?? null;
         $payment->save();
 
-        // Redirect with message
         return redirect()->back()->with('success', 'Payment submitted successfully!');
+    }
+
+    public function destroy(Payment $payment)
+    {
+        if ($payment->attachment) {
+            Storage::disk('public')->delete($payment->attachment);
+        }
+        $payment->delete();
+
+        return redirect()->back()->with('success', 'Payment deleted successfully!');
     }
 }

@@ -163,3 +163,5 @@ Route::get('payments/show', function(){
     return view('payments/show');
 });
 Route::post('/payments/store', [PaymentController::class, 'store']);
+Route::get('payments', [PaymentController::class, 'index'])->name('payment.index');
+Route::delete('/payments/{payment}', [PaymentController::class, 'destroy'])->name('payment.destroy');
