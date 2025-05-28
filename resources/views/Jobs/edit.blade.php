@@ -1,5 +1,5 @@
 <x-form>
-    <div class="min-h-screen flex items-center justify-center bg-gradient-to-r from-teal-500 to-indigo-600 px-6">
+    <div class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-900 to-blue-100">
         <div class="bg-white shadow-2xl rounded-3xl overflow-hidden max-w-4xl w-full p-8 space-y-6">
             
             <h2 class="text-3xl font-extrabold text-center text-gray-900">Edit Job</h2>

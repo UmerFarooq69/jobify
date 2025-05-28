@@ -1,5 +1,5 @@
 <x-form>
-    <div class="h-full min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-400 to-indigo-500">
+    <div class="h-full min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-900 to-blue-100">
         <div class="bg-white shadow-2xl rounded-3xl overflow-hidden max-w-2xl w-full p-8 space-y-6 mt-4">
             
             <h2 class="text-3xl font-extrabold text-center text-gray-900">Post a New Company</h2>

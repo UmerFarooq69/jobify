@@ -1,5 +1,5 @@
 <x-form>
-    <div class="min-h-screen flex items-center justify-center bg-gray-900">
+    <div class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-900 to-blue-100">
         <form action="{{ route('users.store') }}" method="POST" class="bg-gray-800 p-6 rounded-lg shadow-lg max-w-lg w-full">
             @csrf
             <div class="pt-4">

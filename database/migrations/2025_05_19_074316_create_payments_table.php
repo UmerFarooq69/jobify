@@ -16,6 +16,7 @@ return new class extends Migration
             $table->uuid('payment_uuid')->unique();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('number',15);
             $table->enum('payment_method', ['JazzCash', 'EasyPaisa', 'Bank', 'GooglePay', 'Paypal', 'CreditCard/DebitCard']);
             $table->enum('plan', ['Monthly', 'Yearly'])->default('Monthly');
             $table->string('attachment');
