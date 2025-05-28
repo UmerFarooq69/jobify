@@ -170,7 +170,7 @@
                         </form>
                     @else
                         <a href="{{ route('login') }}"
-                            class="inline-block bg-gradient-to-r from-blue-600 to-indigo-500 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-blue-500 hover:to-indigo-400 hover:shadow-xl">
+                            class="inline-block bg-gradient-to-r from-blue-900 to-blue-300  text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-blue-800 hover:to-blue-400 hover:shadow-xl">
                             🔑 Login
                         </a>
                     @endauth
@@ -179,44 +179,56 @@
                      
             </div>
 
-            <div id="mobile-menu" class="md:hidden hidden bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-4">
-                <a href="{{ route('jobs.welcome') }}" 
-               class="hover:underline {{ request()->routeIs('jobs.welcome') ? 'font-bold border-b-2 border-white' : '' }}">
-               Jobs
+            <div id="mobile-menu" class="md:hidden hidden bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-4 space-y-4">
+    <a href="{{ route('jobs.welcome') }}" 
+       class="block hover:underline {{ request()->routeIs('jobs.welcome') ? 'font-bold border-b-2 border-white' : '' }}">
+       Jobs
+    </a>
+    <a href="{{ route('career.index') }}" 
+       class="block hover:underline {{ request()->routeIs('career.index') ? 'font-bold border-b-2 border-white' : '' }}">
+       Careers
+    </a>
+    <a href="{{ route('salaries.index') }}" 
+       class="block hover:underline {{ request()->routeIs('salaries.index') ? 'font-bold border-b-2 border-white' : '' }}">
+       Salaries
+    </a>
+    <a href="{{ route('companies') }}" 
+       class="block hover:underline {{ request()->routeIs('companies') ? 'font-bold border-b-2 border-white' : '' }}">
+       Companies
+    </a>
+    <a href="{{ route('contact.submit') }}" 
+       class="block hover:underline {{ request()->routeIs('contact.submit') ? 'font-bold border-b-2 border-white' : '' }}">
+       Contact Us
+    </a>
+
+    @auth
+        @if(auth()->user()->role === 'admin')
+            <a href="{{ route('admin.dashboard') }}" 
+               class="block bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 transition">
+               Admin Dashboard
             </a>
-            <a href="{{ route('career.index') }}" 
-               class="hover:underline {{ request()->routeIs('career.index') ? 'font-bold border-b-2 border-white' : '' }}">
-               Careers
+        @else
+            <a href="{{ route('Users.dashboard') }}" 
+               class="block bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 transition">
+               User Dashboard
             </a>
-            <a href="{{ route('salaries.index') }}" 
-               class="hover:underline {{ request()->routeIs('salaries.index') ? 'font-bold border-b-2 border-white' : '' }}">
-               Salaries
-            </a>
-            <a href="{{ route('companies') }}" 
-               class="hover:underline {{ request()->routeIs('companies') ? 'font-bold border-b-2 border-white' : '' }}">
-               Companies
-            </a>
-            <a href="{{ route('contact.submit') }}" 
-               class="hover:underline {{ request()->routeIs('contact.submit') ? 'font-bold border-b-2 border-white' : '' }}">
-               Contact Us
-            </a>
+        @endif
+
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" 
+                    class="w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-500 transition">
+                Logout
+            </button>
+        </form>
+    @else
+        <a href="{{ route('login') }}" 
+           class="block bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 transition">
+           Login
+        </a>
+    @endauth
+</div>
             
-                @auth
-                    <a href="{{ route('admin.dashboard') }}" class="inline-block bg-gray-800 text-white py-2 px-6 rounded-lg shadow-md hover:bg-gray-700 transition duration-300 mb-4">
-                        Dashboard
-                    </a>
-                    <form action="{{ route('logout') }}" method="POST" class="inline-block w-full">
-                        @csrf
-                        <button type="submit" class="bg-red-600 text-white py-2 px-6 rounded-lg shadow-md hover:bg-red-500 transition duration-300 w-full mb-4">
-                            Logout
-                        </button>
-                    </form>
-                @else
-                    <a href="{{ route('login') }}" class="inline-block bg-gray-800 text-white py-2 px-6 rounded-lg shadow-md hover:bg-gray-700 transition duration-300 w-full mb-4">
-                        Login
-                    </a>
-                @endauth
-            </div>             
         </nav>
 
         <div class="content">
@@ -298,25 +310,28 @@
         @endif
     });
 
+ document.addEventListener("DOMContentLoaded", () => {
         const hamburger = document.getElementById("hamburger");
         const mobileMenu = document.getElementById("mobile-menu");
-    
+        const loader = document.getElementById("loader");
+
+        // Toggle menu on hamburger click
         hamburger.addEventListener("click", () => {
             mobileMenu.classList.toggle("hidden");
         });
- 
+
+        // Close menu when clicking outside
         document.addEventListener("click", (event) => {
             if (!hamburger.contains(event.target) && !mobileMenu.contains(event.target)) {
                 mobileMenu.classList.add("hidden");
             }
         });
-    
-        document.addEventListener("DOMContentLoaded", () => {
-            const loader = document.getElementById("loader");
-            setTimeout(() => {
-                loader.classList.add("hidden");
-            }, 500);
-        });
+
+        // Hide loader after delay
+        setTimeout(() => {
+            loader.classList.add("hidden");
+        }, 500);
+    });
     </script>
     
 </body>

@@ -2,11 +2,11 @@
     <div class="flex items-center mb-2">
         <img src="{{ asset('storage/' . $job->image) }}" alt="Job Image" class="w-[70px] h-[70px] object-contain rounded-md shadow-lg mr-4">
     </div>
-    <h1 class="font-bold text-lg">Job ID: <span class="text-blue-800">{{substr($job->job_uuid, 0, 8)}}</span></h1>
+    <h1 class="font-bold text-lg">Job ID: <span class="text-blue-800">{{ substr($job->job_uuid, 0, 8) }}</span></h1>
     <h3 class="text-xl mt-1"><span class="text-blue-500 font-bold">{{ $job->job_title }}</span></h3>
-
-    <div class="flex items-center justify-between">
-        <div class="flex space-x-2">
+    
+    <div class="flex items-center justify-between flex-wrap">
+        <div class="flex space-x-2 mb-4 sm:mb-0">
             <h3 class="text-sm bg-gray-100 px-2 py-1 rounded flex items-center">
                 <i class="mdi mdi-map-marker-outline text-lg mr-1"></i>
                 <span class="font-normal text-gray-500">{{ $job->company->location }}</span>
@@ -16,34 +16,37 @@
                 <span class="font-normal text-gray-500">{{ $job->job_type }}</span>
             </h3>
         </div>
-        <div class="flex flex-col items-center space-y-2">
-            <div class="flex space-x-2">
+        
+        <!-- Right-side buttons and apply -->
+        <div class="flex flex-col items-center space-y-4 w-full sm:w-auto text-center sm:text-left">
+            <div class="flex flex-row space-x-2 items-center justify-center w-full">
                 <button class="w-10 h-10 bg-blue-600 text-white text-lg cursor-pointer flex justify-center items-center rounded-full hover:bg-blue-700 transition duration-300" data-modal="jobDescriptionModal-{{ $job->id }}">
                     <i class="fas fa-eye"></i>
                 </button>
-
+                
                 <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($job->company->location) }}"
-                   target="_blank"
-                   class="w-10 h-10 bg-yellow-500 text-white text-lg flex justify-center items-center rounded-full hover:bg-yellow-600 transition duration-300"
-                   title="Navigate to Location">
+                    target="_blank"
+                    class="w-10 h-10 bg-yellow-500 text-white text-lg flex justify-center items-center rounded-full hover:bg-yellow-600 transition duration-300"
+                    title="Navigate to Location">
                     <i class="fas fa-map-marked-alt"></i>
                 </a>
-
+                
                 <button onclick="copyJobLink('{{ route('jobs.show', $job->id) }}')" title="Share this job"
                     class="w-10 h-10 bg-purple-500 text-white text-lg flex justify-center items-center rounded-full hover:bg-purple-600 transition duration-300">
                     <i class="fas fa-share-alt"></i>
                 </button>
             </div>
-
+            
             <a href="{{ route('jobs.apply', $job->id) }}"
-               class="bg-gradient-to-r from-green-400 to-green-600 text-white py-4 px-4 rounded-md shadow-lg hover:from-green-500 hover:to-green-700 transition-all duration-300 text-lg">
+                class="bg-gradient-to-r from-green-400 to-green-600 text-white py-4 px-4 rounded-md shadow-lg hover:from-green-500 hover:to-green-700 transition-all duration-300 text-lg w-full sm:w-auto max-w-xs">
                 Apply for this job
             </a>
-        </div>        
+        </div>
+        
     </div>
-
-    <h3 class="text-gray-500 text-lg mt-1">{{$job->description}}</h3>
-    <p class="text-lg mt-1">Applicants: 
+    
+    <h3 class="text-gray-500 text-lg mt-4">{{$job->description}}</h3>
+    <p class="text-lg mt-2">Applicants: 
         <span class="font-normal {{ $job->applications->count() < 5 ? 'text-red-500' : 'text-green-500' }}">
             {{ $job->applications->count() }}
         </span>
@@ -73,14 +76,14 @@
                 document.getElementById(modalId).classList.remove('hidden');
             });
         });
-
+        
         document.querySelectorAll('[data-close]').forEach(button => {
             button.addEventListener('click', function () {
                 const modalId = this.getAttribute('data-close');
                 document.getElementById(modalId).classList.add('hidden');
             });
         });
-
+        
         window.addEventListener('click', function (event) {
             document.querySelectorAll('.fixed.inset-0').forEach(modal => {
                 if (event.target === modal) {
@@ -89,29 +92,28 @@
             });
         });
     });
-
+    
     function copyJobLink(link) {
-    navigator.clipboard.writeText(link).then(() => {
-        Swal.fire({
-            toast: true,
-            position: 'top-end',
-            icon: 'success',
-            title: 'Link copied to clipboard!',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
+        navigator.clipboard.writeText(link).then(() => {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'Link copied to clipboard!',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+            });
+        }).catch(err => {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: 'Failed to copy link!',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+            });
         });
-    }).catch(err => {
-        Swal.fire({
-            toast: true,
-            position: 'top-end',
-            icon: 'error',
-            title: 'Failed to copy link!',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true
-        });
-    });
-}
-
+    }
 </script>
