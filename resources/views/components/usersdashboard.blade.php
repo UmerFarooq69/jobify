@@ -25,8 +25,8 @@
                 </a>
             </li>
             <li class="mb-6">
-                <a href="{{ route('Users.jobs') }}" 
-                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('Users.jobs') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
+                <a href="{{ route('User.job.jobs') }}" 
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('User.job.jobs') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
                     <i class="fas fa-briefcase mr-4"></i> Manage Jobs
                 </a>
             </li>
@@ -37,8 +37,8 @@
                 </a>
             </li>
             <li class="mb-6">
-                <a href="{{ route('Users.application') }}" 
-                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('Users.application') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
+                <a href="{{ route('User.applications.application') }}" 
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('User.applications.application') ? 'bg-blue-700' : 'hover:bg-blue-700' }}">
                     <i class="fas fa-file-alt mr-4"></i> Manage Applications
                 </a>
             </li>
@@ -56,7 +56,7 @@
             <div class="flex items-center space-x-4">
                 @auth
                     <!-- Main Page Button -->
-                    <a href="{{ route('jobs.welcome') }}"
+                    <a href="{{ route('jobs.index') }}"
                         class="inline-block bg-gradient-to-r from-indigo-600 to-purple-500 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-indigo-500 hover:to-purple-400 hover:shadow-xl">
                         🏠 Main Page
                     </a>

@@ -25,14 +25,14 @@
                 </a>
             </li>
             <li class="mb-6">
-                <a href="{{ route('admin.jobs') }}" 
+                <a href="{{ route('admin.job.jobs') }}" 
                    class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('admin.jobs') ? 'bg-blue-600' : 'hover:bg-blue-600' }}">
                     <i class="fas fa-briefcase mr-4"></i> Manage Jobs
                 </a>
             </li>
             <li class="mb-6">
-                <a href="{{ route('admin.companies') }}" 
-                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('admin.companies') ? 'bg-blue-600' : 'hover:bg-blue-600' }}">
+                <a href="{{ route('admin.company.companies') }}" 
+                   class="flex items-center text-lg p-3 rounded-md transition-all {{ request()->routeIs('admin.company.companies') ? 'bg-blue-600' : 'hover:bg-blue-600' }}">
                     <i class="fas fa-building mr-4"></i> Manage Companies
                 </a>
             </li>
@@ -80,7 +80,7 @@
             <div class="flex items-center space-x-4">
                 @auth
                     <!-- Main Page Button -->
-                    <a href="{{ route('jobs.welcome') }}"
+                    <a href="{{ route('jobs.index') }}"
                         class="inline-block bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-blue-500 hover:to-cyan-400 hover:shadow-xl">
                         🏠 Main Page
                     </a>

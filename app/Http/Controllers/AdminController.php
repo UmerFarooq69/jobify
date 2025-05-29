@@ -16,7 +16,7 @@ class AdminController extends Controller
     {
           $companies = Company::all();
 
-          return view('admin.companies', compact('companies'));
+          return view('admin.company.companies', compact('companies'));
     }
 
     public function dashboard()
@@ -41,7 +41,7 @@ class AdminController extends Controller
     {
         $jobs = Job_task::all();
         
-        return view('admin.jobs', compact('company', 'jobs'));
+        return view('admin.job.jobs', compact('company', 'jobs'));
     }
     public function Applications(Request $request, Company $company = null)
     {
@@ -60,13 +60,13 @@ class AdminController extends Controller
     {
         $company->delete();
 
-        return redirect()->route('admin.companies')->with('success', 'Company deleted successfully');
+        return redirect()->route('admin.company.companies')->with('success', 'Company deleted successfully');
     }
 
     public function destroyJob(Job_task $job)
     {
         $job->delete();
-        return redirect()->route('admin.jobs')->with('success', 'Job deleted successfully');
+        return redirect()->route('admin.job.jobs')->with('success', 'Job deleted successfully');
     }
     public function destroyApplication(Application $application)
     {

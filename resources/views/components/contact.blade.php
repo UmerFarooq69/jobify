@@ -1,5 +1,4 @@
-<x-form>
-    <div class="w-full min-h-screen bg-gradient-to-r from-blue-900 to-blue-100 flex items-center justify-center p-4 sm:p-6 md:p-10">
+<div class="w-full min-h-screen bg-gradient-to-r from-blue-900 to-blue-100 flex items-center justify-center p-4 sm:p-6 md:p-10">
         <div class="w-full max-w-6xl bg-white shadow-xl rounded-lg p-6 sm:p-8 md:p-10 flex flex-col md:flex-row gap-10">
             
             <!-- Left Side (Contact Details) -->
@@ -66,8 +65,6 @@
         
     </div>
 </div>
-</x-form>
-
 <!-- SweetAlert Success -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @if(session('success'))

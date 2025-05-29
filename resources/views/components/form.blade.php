@@ -125,8 +125,8 @@
                 </div>
                 
                 <div class="hidden md:flex space-x-6 text-lg">
-                    <a href="{{ route('jobs.welcome') }}" 
-               class="hover:underline {{ request()->routeIs('jobs.welcome') ? 'font-bold border-b-2 border-white' : '' }}">
+                    <a href="{{ route('jobs.index') }}" 
+               class="hover:underline {{ request()->routeIs('jobs.index') ? 'font-bold border-b-2 border-white' : '' }}">
                Jobs
             </a>
             <a href="{{ route('career.index') }}" 
@@ -180,8 +180,8 @@
             </div>
 
             <div id="mobile-menu" class="md:hidden hidden bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-4 space-y-4">
-    <a href="{{ route('jobs.welcome') }}" 
-       class="block hover:underline {{ request()->routeIs('jobs.welcome') ? 'font-bold border-b-2 border-white' : '' }}">
+    <a href="{{ route('jobs.index') }}" 
+       class="block hover:underline {{ request()->routeIs('jobs.index') ? 'font-bold border-b-2 border-white' : '' }}">
        Jobs
     </a>
     <a href="{{ route('career.index') }}" 

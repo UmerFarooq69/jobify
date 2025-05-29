@@ -1,5 +1,5 @@
 <x-usersdashboard>
-    <form method="GET" action="{{ route('Users.application') }}">
+    <form method="GET" action="{{ route('User.applications.application') }}">
         <div class="relative w-72 mx-auto mb-6">
             <label for="company-select" class="block text-sm font-medium text-gray-700 mb-2">
                 Select a Company

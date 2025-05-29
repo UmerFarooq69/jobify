@@ -24,7 +24,7 @@
                     </div>
                     <div class="flex justify-between items-center mt-4 border-t pt-3">
                         <a href="{{ route('jobs.edit', $job->id) }}" class="text-yellow-500 hover:text-yellow-600">Edit</a>
-                        <form action="{{ route('Users.jobs.destroy', $job->id) }}" method="POST" class="inline-block">
+                        <form action="{{ route('User.job.jobs.destroy', $job->id) }}" method="POST" class="inline-block">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-red-500 hover:text-red-600 delete-btn">

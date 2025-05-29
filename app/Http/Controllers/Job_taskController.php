@@ -23,7 +23,7 @@ class Job_taskController extends Controller
         $companies = Company::select('name')->distinct()->pluck('name');
         $cities = Company::select('city')->distinct()->pluck('city');
         
-        return view('jobs.welcome', compact('jobs', 'jobTypes', 'locations', 'companies', 'cities'));
+        return view('jobs.index', compact('jobs', 'jobTypes', 'locations', 'companies', 'cities'));
     }
     
     public function create()
@@ -63,7 +63,7 @@ class Job_taskController extends Controller
         $job->image = $companyImage;
         $job->save();
         
-        return redirect()->route('jobs.welcome')->with('success', 'Job posted successfully!');
+        return redirect()->route('jobs.index')->with('success', 'Job posted successfully!');
         
     }
     
@@ -93,10 +93,10 @@ class Job_taskController extends Controller
         
         if (Auth::user()->role === 'admin') {
             
-            return redirect()->route('admin.jobs')->with('success', 'Job updated successfully.');
+            return redirect()->route('admin.job.jobs')->with('success', 'Job updated successfully.');
         } else {
             
-            return redirect()->route('Users.jobs')->with('success', 'Job updated successfully.');    }
+            return redirect()->route('User.job.jobs')->with('success', 'Job updated successfully.');    }
         }
         
         public function apply($jobId)
@@ -121,7 +121,7 @@ class Job_taskController extends Controller
                 'cv' => $cvPath,  
                 'job_id' => $jobId,
             ]);
-            return redirect()->route('jobs.welcome')->with('success', 'Application submitted successfully!');
+            return redirect()->route('jobs.index')->with('success', 'Application submitted successfully!');
         }
     }
     

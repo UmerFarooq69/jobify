@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [HomeController::class, 'index']);
-Route::get('welcome', [Job_taskController::class, 'index'])->name('jobs.welcome');
+Route::get('index', [Job_taskController::class, 'index'])->name('jobs.index');
 Route::get('/careers', [CareerController::class, 'index'])->name('career.index');
 
 /*
@@ -40,10 +40,10 @@ Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboa
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->group(function () {
-    Route::get('/admin/index', [AdminController::class, 'index'])->name('admin.companies');
+    Route::get('/admin/index', [AdminController::class, 'index'])->name('admin.company.companies');
 
     // Jobs Management
-    Route::get('/admin/jobs', [AdminController::class, 'Jobs'])->name('admin.jobs');
+    Route::get('/admin/jobs', [AdminController::class, 'Jobs'])->name('admin.job.jobs');
     Route::delete('/admin/jobs/{job}', [AdminController::class, 'destroyJob'])->name('admin.jobs.destroy');
 
     // User Management
@@ -67,15 +67,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user/dashboard', [DashboardController::class, 'index'])->name('Users.dashboard');
 
     // Jobs Management
-    Route::get('/user/jobs', [DashboardController::class, 'Jobs'])->name('Users.jobs');
-    Route::delete('/user/jobs/{job}', [DashboardController::class, 'destroyJob'])->name('Users.jobs.destroy');
+    Route::get('/user/jobs', [DashboardController::class, 'Jobs'])->name('User.job.jobs');
+    Route::delete('/user/jobs/{job}', [DashboardController::class, 'destroyJob'])->name('User.job.jobs.destroy');
 
     // Company
     Route::get('/user/company', [DashboardController::class, 'company'])->name('Users.company');
     Route::delete('/company/{company}', [DashboardController::class, 'destroy'])->name('user.company.destroy');
 
     // Applications
-    Route::get('/user/applications', [DashboardController::class, 'applications'])->name('Users.application');
+    Route::get('/user/applications', [DashboardController::class, 'applications'])->name('User.applications.application');
     Route::delete('/user/applications/{application}', [DashboardController::class, 'destroyApplication'])->name('application.destroy');
 });
 
@@ -128,7 +128,7 @@ Route::get('/salaries', [SalariesController::class, 'index'])->name('salaries.in
 |--------------------------------------------------------------------------
 */
 Route::get('/contact', function () {
-    return view('contactus.contact');
+    return view('contactus.show');
 });
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 Route::get('/contact/index', [ContactController::class, 'index'])->name('contact.index');

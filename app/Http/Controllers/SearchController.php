@@ -45,7 +45,7 @@ class SearchController extends Controller
         $companies = Company::select('name')->distinct()->pluck('name');
         $cities = Company::select('city')->distinct()->pluck('city'); // New City filter
 
-        return view('jobs.welcome', compact('jobs', 'jobTypes', 'locations', 'companies', 'cities'));
+        return view('jobs.index', compact('jobs', 'jobTypes', 'locations', 'companies', 'cities'));
     }
 
     public function autocomplete(Request $request)
@@ -68,6 +68,6 @@ class SearchController extends Controller
     
         $jobs = $query->get();
     
-        return view('admin.jobs', compact('jobs'));
+        return view('admin.job.jobs', compact('jobs'));
     }
 }

@@ -27,7 +27,7 @@ class PaymentController extends Controller
         
         $payments = $query->latest()->get();
         
-        return view('payments.index', compact('payments'));
+        return view('admin.payment.payment', compact('payments'));
     }
     
     

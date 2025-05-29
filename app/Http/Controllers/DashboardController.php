@@ -30,7 +30,7 @@ class DashboardController extends Controller
     {
         $jobs = Job_task::whereIn('company_id', Auth::user()->companies->pluck('id'))->get();
     
-        return view('Users.jobs', compact('jobs'));
+        return view('User.job.jobs', compact('jobs'));
     }
     public function company()
     {
@@ -51,13 +51,13 @@ class DashboardController extends Controller
             }))
             ->get();
 
-        return view('Users.application', compact('applications', 'jobs', 'companies'));
+        return view('User.applications.application', compact('applications', 'jobs', 'companies'));
     }
     public function destroyApplication(Application $application){
         
         $application->delete();
 
-        return redirect()->route('Users.application')->with('success', 'Application deleted successfully');
+        return redirect()->route('User.applications.application')->with('success', 'Application deleted successfully');
     }
 
     public function destroy(Company $company)
@@ -69,6 +69,6 @@ class DashboardController extends Controller
     public function destroyJob(Job_task $job)
     {
         $job->delete();
-        return redirect()->route('Users.jobs')->with('success', 'Job deleted successfully');
+        return redirect()->route('User.job.jobs')->with('success', 'Job deleted successfully');
     }
 }
