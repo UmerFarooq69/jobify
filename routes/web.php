@@ -71,7 +71,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/user/jobs/{job}', [DashboardController::class, 'destroyJob'])->name('User.job.jobs.destroy');
 
     // Company
-    Route::get('/user/company', [DashboardController::class, 'company'])->name('Users.company');
+    Route::get('/user/company', [DashboardController::class, 'company'])->name('User.company.companies');
     Route::delete('/company/{company}', [DashboardController::class, 'destroy'])->name('user.company.destroy');
 
     // Applications

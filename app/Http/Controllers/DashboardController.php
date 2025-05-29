@@ -35,7 +35,7 @@ class DashboardController extends Controller
     public function company()
     {
         $companies = Auth::user()->companies ? Auth::user()->companies : collect();
-        return view('Users.company', compact('companies'));
+        return view('User.company.companies', compact('companies'));
     }
     public function Applications(Request $request)
     {
@@ -64,7 +64,7 @@ class DashboardController extends Controller
     {
         $company->delete();
 
-        return redirect()->route('Users.company')->with('success', 'Company deleted successfully');
+        return redirect()->route('User.company.companies')->with('success', 'Company deleted successfully');
     }
     public function destroyJob(Job_task $job)
     {
