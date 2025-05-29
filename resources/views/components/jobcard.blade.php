@@ -20,6 +20,13 @@
         <!-- Right-side buttons and apply -->
         <div class="flex flex-col items-center space-y-4 w-full sm:w-auto text-center sm:text-left">
             <div class="flex flex-row space-x-2 items-center justify-center w-full">
+                <!-- Report Button -->
+                <a href="/problem?job_id={{ $job->job_uuid }}"
+                    class="w-10 h-10 bg-red-500 text-white text-lg flex justify-center items-center rounded-full hover:bg-red-600 transition duration-300"
+                    title="Report this job">
+                    <i class="fas fa-flag"></i>
+                </a>
+
                 <button class="w-10 h-10 bg-blue-600 text-white text-lg cursor-pointer flex justify-center items-center rounded-full hover:bg-blue-700 transition duration-300" data-modal="jobDescriptionModal-{{ $job->id }}">
                     <i class="fas fa-eye"></i>
                 </button>

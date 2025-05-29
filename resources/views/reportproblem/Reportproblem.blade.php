@@ -1,4 +1,8 @@
 <x-form>
+    @php
+        $jobId = request('job_id');
+    @endphp
+
     <div class="py-3 flex justify-center">
         <form action="{{ route('report.problem') }}" method="POST" enctype="multipart/form-data" class="max-w-4xl w-full bg-white p-8 rounded-2xl shadow-lg space-y-6">
             @csrf
@@ -14,53 +18,50 @@
                         <div class="relative">
                             <select id="purpose" name="purpose" required
                             class="appearance-none w-full border border-gray-300 bg-white text-gray-700 px-4 py-3 rounded-lg shadow-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition duration-300 hover:border-blue-400">
-                            <option value="report_problem">📌 Report a Problem</option>
-                            <option value="report_job">📢 Report a Job</option>
-                            <option value="report_company">🏢 Report a Company</option>
-                        </select>
-                        <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
-                            <svg class="w-5 h-5 text-gray-500 transition-transform duration-200 transform rotate-0" fill="none"
-                            stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
-                        </svg>
+                                <option value="report_problem" {{ !$jobId ? 'selected' : '' }}>📌 Report a Problem</option>
+                                <option value="report_job" {{ $jobId ? 'selected' : '' }}>📢 Report a Job</option>
+                                <option value="report_company">🏢 Report a Company</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
+                                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Report Type Dropdown -->
+                    <div class="relative">
+                        <label for="report_type" class="block text-gray-800 font-semibold mb-2">Report Type</label>
+                        <div class="relative">
+                            <select id="report_type" name="report_type" required
+                            class="appearance-none w-full border border-gray-300 bg-white text-gray-700 px-4 py-3 rounded-lg shadow-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition duration-300 hover:border-blue-400">
+                                <option value="spam">🚨 Spam</option>
+                                <option value="fraud">⚠️ Fraud</option>
+                                <option value="harassment">😡 Harassment</option>
+                                <option value="misinformation">❌ Misinformation</option>
+                                <option value="other">❓ Other</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
+                                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job ID -->
+                    <div id="job-container" class="{{ $jobId ? '' : 'hidden' }} space-y-4">
+                        <label for="job_id" class="block text-gray-700 font-medium mb-1">Job ID</label>
+                        <input type="number" id="job_id" name="job_id" value="{{ $jobId }}" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+
+                    <!-- Company ID -->
+                    <div id="company-container" class="hidden space-y-4">
+                        <label for="company_id" class="block text-gray-700 font-medium mb-1">Company ID</label>
+                        <input type="number" id="company_id" name="company_id" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                     </div>
                 </div>
-            </div>
-            
-            <!-- Report Type Dropdown -->
-            <div class="relative">
-                <label for="report_type" class="block text-gray-800 font-semibold mb-2">Report Type</label>
-                <div class="relative">
-                    <select id="report_type" name="report_type" required
-                    class="appearance-none w-full border border-gray-300 bg-white text-gray-700 px-4 py-3 rounded-lg shadow-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition duration-300 hover:border-blue-400">
-                    <option value="spam">🚨 Spam</option>
-                    <option value="fraud">⚠️ Fraud</option>
-                    <option value="harassment">😡 Harassment</option>
-                    <option value="misinformation">❌ Misinformation</option>
-                    <option value="other">❓ Other</option>
-                </select>
-                <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
-                    <svg class="w-5 h-5 text-gray-500 transition-transform duration-200 transform rotate-0" fill="none"
-                    stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
-                </svg>
-            </div>
-        </div>
-    </div>
-    
-    
-    <!-- Job ID (Shown Only for Job Reports) -->
-    <div id="job-container" class="hidden space-y-4">
-        <label for="job_id" class="block text-gray-700 font-medium mb-1">Job ID</label>
-        <input type="number" id="job_id" name="job_id" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-    </div>
-    
-    <!-- Company ID (Shown Only for Company Reports) -->
-    <div id="company-container" class="hidden space-y-4">
-        <label for="company_id" class="block text-gray-700 font-medium mb-1">Company ID</label>
-        <input type="number" id="company_id" name="company_id" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-    </div>
-</div>
 
 <!-- Right Column -->
 <div class="space-y-6">
@@ -136,7 +137,14 @@
         document.getElementById('preview-container').classList.add('hidden');
         document.getElementById('remove-image').classList.add('hidden');
     });
-    
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const jobId = "{{ $jobId }}";
+        if (jobId) {
+            document.getElementById('job-container').classList.remove('hidden');
+        }
+    });
+
     document.getElementById('purpose').addEventListener('change', function () {
         const jobContainer = document.getElementById('job-container');
         const companyContainer = document.getElementById('company-container');
