@@ -26,15 +26,18 @@
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <a href="{{ route('admin.job.jobs') }}" class="bg-gradient-to-r from-green-400 to-green-600 text-white py-3 px-6 rounded-md shadow-lg hover:from-green-500 hover:to-green-700 transition-all duration-300 text-center flex items-center justify-center">
+        <a href="{{ route('admin.job.jobs') }}"
+            class="bg-gradient-to-r from-green-400 to-green-600 text-white py-3 px-6 rounded-md shadow-lg hover:from-green-500 hover:to-green-700 transition-all duration-300 text-center flex items-center justify-center">
             <i class="fas fa-briefcase mr-2"></i> Manage Jobs
         </a>
 
-        <a href="{{ route('admin.company.companies') }}" class="bg-gradient-to-r from-blue-400 to-blue-600 text-white py-3 px-6 rounded-md shadow-lg hover:from-blue-500 hover:to-blue-700 transition-all duration-300 text-center flex items-center justify-center">
+        <a href="{{ route('admin.company.companies') }}"
+            class="bg-gradient-to-r from-blue-400 to-blue-600 text-white py-3 px-6 rounded-md shadow-lg hover:from-blue-500 hover:to-blue-700 transition-all duration-300 text-center flex items-center justify-center">
             <i class="fas fa-building mr-2"></i> Manage Companies
         </a>
 
-        <a href="{{ route('users.index') }}" class="bg-gradient-to-r from-sky-400 to-sky-600 text-white py-3 px-6 rounded-md shadow-lg hover:from-sky-500 hover:to-sky-700 transition-all duration-300 text-center flex items-center justify-center">
+        <a href="{{ route('users.index') }}"
+            class="bg-gradient-to-r from-sky-400 to-sky-600 text-white py-3 px-6 rounded-md shadow-lg hover:from-sky-500 hover:to-sky-700 transition-all duration-300 text-center flex items-center justify-center">
             <i class="fas fa-users mr-2"></i> Manage Users
         </a>
     </div>
@@ -59,20 +62,20 @@
 <script>
     const ctx1 = document.getElementById('jobsCompaniesChart').getContext('2d');
     const jobsCompaniesChart = new Chart(ctx1, {
-        type: 'bar', 
+        type: 'bar',
         data: {
-            labels: ['Jobs', 'Companies', 'Users'], 
+            labels: ['Jobs', 'Companies', 'Users'],
             datasets: [{
                 label: 'Total Count',
-                data: [{{ $jobs }}, {{ $companies }}, {{$users}}], 
+                data: [{{ $jobs }}, {{ $companies }}, {{$users}}],
                 backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)', 
-                    'rgba(255, 99, 132, 0.2)', 
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
                     'rgba(255, 159, 64, 0.2)'
                 ],
                 borderColor: [
-                    'rgba(54, 162, 235, 1)',  
-                    'rgba(255, 99, 132, 1)',   
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
                     'rgba(255, 159, 64, 1)'
                 ],
                 borderWidth: 2
@@ -89,35 +92,35 @@
     });
 
     const ctx2 = document.getElementById('applicationsReportsChart').getContext('2d');
-const applicationsReportsChart = new Chart(ctx2, {
-    type: 'doughnut', 
-    data: {
-        labels: ['Applications', 'Reports', 'Contact'],
-        datasets: [{
-            label: 'Total Count',
-            data: [{{ $applications }}, {{ $reports }}, {{ $contact }}],
-            backgroundColor: [
-                'rgba(75, 192, 192, 0.6)',
-                'rgba(153, 102, 255, 0.6)',
-                'rgba(255, 206, 86, 0.6)'
-            ],
-            borderColor: [
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 206, 86, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutout: '50%',
-        plugins: {
-            legend: {
-                position: 'bottom',
+    const applicationsReportsChart = new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: ['Applications', 'Reports', 'Contact'],
+            datasets: [{
+                label: 'Total Count',
+                data: [{{ $applications }}, {{ $reports }}, {{ $contact }}],
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 206, 86, 0.6)'
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '50%',
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                }
             }
         }
-    }
-});
+    });
 </script>

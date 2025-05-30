@@ -1,7 +1,7 @@
 <x-usersdashboard>
     <div class="max-w-6xl">
         <div class="flex justify-between items-center mb-6">
-            <a href="{{ route('jobs.create') }}" class="bg-blue-600 text-white py-2 px-6 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
+            <a href="{{ route('jobs.create') }}" class="bg-gradient-to-b from-blue-900 to-blue-300 text-white py-2 px-6 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
                 + Create New Job
             </a>
         </div>

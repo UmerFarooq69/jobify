@@ -6,14 +6,15 @@
                 <p class="text-md">There are no job openings in this company right now. Please check back later!</p>
             </div>
         @else
-        <h3 class="text-3xl mb-6 font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-indigo-500 to-pink-600">
-            Jobs in this Company
-        </h3>
-        <div class="grid grid-cols-1 gap-8">
-            @foreach ($jobs as $job)
-                <x-jobcard :job="$job" />
-            @endforeach
-        </div>
+            <h3
+                class="text-3xl mb-6 font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-indigo-500 to-pink-600">
+                Jobs in this Company
+            </h3>
+            <div class="grid grid-cols-1 gap-8">
+                @foreach ($jobs as $job)
+                    <x-jobcard :job="$job" />
+                @endforeach
+            </div>
         @endif
-    </section>   
+    </section>
 </x-form>
