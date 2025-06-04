@@ -37,7 +37,7 @@
                             <select name="{{ $name }}" class="appearance-none px-4 py-3 border border-gray-300 rounded-lg bg-white 
                                                    focus:ring-2 focus:ring-blue-500 focus:outline-none w-full cursor-pointer 
                                                    text-gray-700 font-medium shadow-sm transition hover:border-blue-400">
-                                <option value="" disabled selected class="text-gray-400">
+                                <option value="" {{ request($name) ? '' : 'selected' }} class="text-gray-400">
                                     {{ $filter['label'] }}
                                 </option>
                                 @foreach ($filter['options'] as $option)
@@ -62,8 +62,7 @@
                                    transition duration-200 w-full sm:w-auto">
                         Search
                     </button>
-                    <button type="button" id="clear-form" class="bg-gray-400 hover:bg-gray-500 text-white font-semibold px-6 py-3 rounded-lg 
-                                   transition duration-200 w-full sm:w-auto">
+                    <button type="button" id="clear-form" class="bg-gray-400 hover:bg-gray-500 text-white font-semibold px-6 py-3 rounded-lg transition duration-200 w-full sm:w-auto">
                         Clear Form
                     </button>
                 </div>
