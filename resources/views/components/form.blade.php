@@ -129,10 +129,6 @@
                class="hover:underline {{ request()->routeIs('jobs.index') ? 'font-bold border-b-2 border-white' : '' }}">
                Jobs
             </a>
-            <a href="{{ route('career.index') }}" 
-               class="hover:underline {{ request()->routeIs('career.index') ? 'font-bold border-b-2 border-white' : '' }}">
-               Careers
-            </a>
             <a href="{{ route('salaries.index') }}" 
                class="hover:underline {{ request()->routeIs('salaries.index') ? 'font-bold border-b-2 border-white' : '' }}">
                Salaries
@@ -183,10 +179,6 @@
     <a href="{{ route('jobs.index') }}" 
        class="block hover:underline {{ request()->routeIs('jobs.index') ? 'font-bold border-b-2 border-white' : '' }}">
        Jobs
-    </a>
-    <a href="{{ route('career.index') }}" 
-       class="block hover:underline {{ request()->routeIs('career.index') ? 'font-bold border-b-2 border-white' : '' }}">
-       Careers
     </a>
     <a href="{{ route('salaries.index') }}" 
        class="block hover:underline {{ request()->routeIs('salaries.index') ? 'font-bold border-b-2 border-white' : '' }}">

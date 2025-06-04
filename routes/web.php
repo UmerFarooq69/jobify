@@ -4,7 +4,6 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\Job_taskController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CareerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SalariesController;
 use App\Http\Controllers\UserController;
@@ -22,7 +21,6 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', [HomeController::class, 'index']);
 Route::get('index', [Job_taskController::class, 'index'])->name('jobs.index');
-Route::get('/careers', [CareerController::class, 'index'])->name('career.index');
 
 /*
 |--------------------------------------------------------------------------
