@@ -1,56 +1,56 @@
 <x-admin>
-    <div class="container mx-auto mt-8">
-        <h2 class="text-3xl font-semibold text-center mb-6">Who Contact Us</h2>
+    <h2 class="text-base font-semibold text-gray-900 mb-6">Contact Submissions</h2>
+
+    <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
         <div class="overflow-x-auto">
-            <table class="min-w-full table-auto bg-white border border-gray-200 rounded-lg shadow-md">
-                <thead class="bg-gray-800 text-white">
+            <table class="min-w-full text-sm">
+                <thead class="bg-gray-50 border-b border-gray-200">
                     <tr>
-                        <th class="px-4 py-2 text-left">ID</th>
-                        <th class="px-4 py-2 text-left">Name</th>
-                        <th class="px-4 py-2 text-left">Email</th>
-                        <th class="px-4 py-2 text-left">Message</th>
-                        <th class="px-4 py-2 text-left">Contact time</th>
-                        <th class="px-24 py-4 text-left">Action</th>
+                        <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">#</th>
+                        <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Name</th>
+                        <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Email</th>
+                        <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Message</th>
+                        <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Date</th>
+                        <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="text-gray-700">
+                <tbody class="divide-y divide-gray-100">
                     @foreach ($contacts as $contact)
-                        <tr class="hover:bg-gray-100">
-                            <td class="px-4 py-2">{{ $loop->iteration }}</td>
-                            <td class="px-4 py-2">{{ $contact->name }}</td>
-                            <td class="px-4 py-2">{{ $contact->email }}</td>                            
-                            <td class="px-4 py-2 text-blue-700 font-bold">{{ $contact->message }}</td>
-                            <td class="px-4 py-2">{{ $contact->created_at->timezone('Asia/Karachi')->format('d M Y, h:i A') }}</td>
-                            <td class="px-6 py-4 flex flex-wrap gap-2 items-center">
-                                <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ $contact->email }}" target="_blank" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition">
-                                    Reply
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-4 py-3 text-xs text-gray-400">{{ $loop->iteration }}</td>
+                        <td class="px-4 py-3 text-sm font-medium text-gray-900">{{ $contact->name }}</td>
+                        <td class="px-4 py-3 text-sm text-gray-500">{{ $contact->email }}</td>
+                        <td class="px-4 py-3 text-sm text-gray-700 max-w-xs">
+                            <p class="truncate">{{ $contact->message }}</p>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-400 whitespace-nowrap">
+                            {{ $contact->created_at->timezone('Asia/Karachi')->format('d M Y, h:i A') }}
+                        </td>
+                        <td class="px-4 py-3">
+                            <div class="flex items-center gap-2">
+                                <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ $contact->email }}" target="_blank"
+                                    class="inline-flex items-center gap-1 text-xs font-medium bg-blue-50 text-blue-600 hover:bg-blue-100 px-2.5 py-1.5 rounded-lg transition-colors">
+                                    <i class="fas fa-reply text-xs"></i> Reply
                                 </a>
-                            
-                                <form action="{{ route('contacts.toggleStatus', $contact) }}" method="POST">
+                                <form action="{{ route('contacts.toggleStatus', $contact) }}" method="POST" class="inline">
                                     @csrf
-                                    <button type="submit" class="{{ $contact->status == 'pending' ? 'bg-green-500' : 'bg-yellow-500' }} text-white px-3 py-1 rounded hover:brightness-110 transition">
-                                        {{ $contact->status == 'pending' ? 'Seen' : 'Pending' }}
-                                    </button>
-                                </form>                                
-                                                                
-                                <form action="{{ route('contacts.destroy', $contact) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-500 hover:text-red-700 cursor-pointer pl-3">
-                                        <i class="fas fa-trash-alt fa-xl hover:scale-105 transition-all duration-200"></i>
+                                    <button type="submit" class="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1.5 rounded-lg transition-colors {{ $contact->status == 'pending' ? 'bg-green-50 text-green-700 hover:bg-green-100' : 'bg-amber-50 text-amber-700 hover:bg-amber-100' }}">
+                                        {{ $contact->status == 'pending' ? 'Mark Seen' : 'Mark Pending' }}
                                     </button>
                                 </form>
-                            </td>   
-                        </tr>
+                                <form action="{{ route('contacts.destroy', $contact) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="p-1.5 rounded-lg text-red-500 hover:bg-red-50 transition-colors">
+                                        <i class="fas fa-trash text-sm"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 </x-admin>
-
-<style>
-    .table {
-        font-size: 14px;
-    }
-</style>

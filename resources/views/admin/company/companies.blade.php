@@ -1,35 +1,40 @@
 <x-admin>
-    <div class="flex flex-wrap mb-6">
-        <a href="{{ route('companies.create') }}"
-            class="bg-gradient-to-r from-blue-900 to-blue-300 text-white py-2 px-6 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
-            + Create New Company</a>
+    <!-- Toolbar -->
+    <div class="flex flex-wrap items-center gap-3 mb-6">
+        <a href="{{ route('companies.create') }}" class="inline-flex items-center gap-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 text-sm font-medium px-4 py-2 rounded-lg transition-colors">
+            <i class="fas fa-plus text-xs text-gray-500"></i> Create New Company
+        </a>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Companies Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         @foreach($companies as $company)
-            <div class="bg-white p-4 border border-gray-200 rounded-lg shadow-md h-80 flex flex-col justify-between">
-                <img src="{{ asset('storage/' . $company->image) }}" alt="Company Image"
-                    class="w-full h-40 object-cover rounded">
-                <div>
-                    <h2 class="text-gray-700 mb-2 truncate"><strong>Company Name:</strong> {{ $company->name }}</h2>
-                    <p class="text-gray-700 mb-2"><strong>Location:</strong> {{ $company->location }}</p>
-                    <p class="text-gray-700 mb-1"><strong>City:</strong> {{ $company->city }}</p>
-                    <p class="text-gray-700"><strong>Company associated:</strong> {{ $company->user->name }}</p>
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden flex flex-col">
+            <img src="{{ asset('storage/' . $company->image) }}" alt="{{ $company->name }}" class="w-full h-36 object-cover">
+            <div class="p-4 flex-1 flex flex-col">
+                <h2 class="text-sm font-semibold text-gray-900 truncate mb-2">{{ $company->name }}</h2>
+                <div class="space-y-1 text-xs text-gray-500 flex-1">
+                    <div class="flex items-center gap-2"><i class="fas fa-map-marker-alt w-3 text-gray-400"></i> {{ $company->location }}</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-city w-3 text-gray-400"></i> {{ $company->city }}</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-user w-3 text-gray-400"></i> {{ $company->user->name }}</div>
                 </div>
-                <div class="flex justify-between items-center">
-                    <a href="{{ route('companies.show', $company) }}" class="text-blue-500 hover:underline">View Jobs</a>
-                    <a href="{{route('company.edit', $company)}}" class="text-yellow-500 hover:underline">Edit</a>
-                    <form action="{{ route('company.destroy', $company) }}" method="POST" style="display:inline;">
+                <div class="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
+                    <a href="{{ route('companies.show', $company) }}" class="inline-flex items-center gap-1 text-xs font-medium text-blue-600 hover:text-blue-700 transition-colors">
+                        <i class="fas fa-briefcase"></i> View Jobs
+                    </a>
+                    <a href="{{ route('company.edit', $company) }}" class="inline-flex items-center gap-1 text-xs font-medium text-amber-600 hover:text-amber-700 transition-colors">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <form action="{{ route('company.destroy', $company) }}" method="POST" class="inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="text-red-500 hover:underline delete-btn">
-                            <i class="fas fa-trash"></i>
+                        <button type="submit" class="inline-flex items-center gap-1 text-xs font-medium text-red-500 hover:text-red-600 transition-colors delete-btn">
+                            <i class="fas fa-trash"></i> Delete
                         </button>
                     </form>
                 </div>
             </div>
+        </div>
         @endforeach
-    </div>
-
     </div>
 </x-admin>

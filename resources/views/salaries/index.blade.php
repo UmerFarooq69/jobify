@@ -1,39 +1,47 @@
 <x-form>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6 mt-3">
-        @foreach ($jobs as $job)
-        <div class="w-full">
-            <div class="bg-gradient-to-r from-blue-900 to-blue-500 text-white py-6 px-8 rounded-2xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl hover:bg-blue-600 w-full">
-                <div class="text-left mb-4">
-                    <i class="fas fa-money-bill-wave text-4xl mb-3"></i>
-                    <h3 class="text-xl font-bold mb-2">PKR: {{ number_format($job->job_salary, 0) }}</h3>
-                    <h4 class="text-sm font-medium text-blue-200">Job Title: {{ $job->job_title }}</h4>
-                
-                    <div x-data="{ 
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <!-- Page Header -->
+        <div class="mb-8">
+            <h1 class="text-2xl font-bold text-gray-900">Salary Insights</h1>
+            <p class="text-gray-500 text-sm mt-1">Explore compensation data across roles and industries</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            @foreach ($jobs as $job)
+            <div class="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                <!-- Card Header -->
+                <div class="bg-gradient-to-br from-slate-800 to-blue-900 p-5">
+                    <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center mb-3">
+                        <i class="fas fa-dollar-sign text-blue-300 text-lg"></i>
+                    </div>
+                    <p class="text-2xl font-bold text-white">PKR {{ number_format($job->job_salary, 0) }}</p>
+                    <p class="text-blue-200 text-sm mt-1">{{ $job->job_title }}</p>
+                </div>
+
+                <!-- Card Body -->
+                <div class="p-5">
+                    <div x-data="{
                         showFull: false,
-                        shortDesc: '{{ addslashes(\Illuminate\Support\Str::limit($job->description, 20)) }}',
+                        shortDesc: '{{ addslashes(\Illuminate\Support\Str::limit($job->description, 80)) }}',
                         fullDesc: '{{ addslashes($job->description) }}'
-                        }">
-                        <p class="text-sm font-medium text-gray-300 mt-1">
+                    }">
+                        <p class="text-sm text-gray-600 leading-relaxed">
                             <span x-html="showFull ? fullDesc : shortDesc"></span>
-                            
-                            @if(strlen($job->description) > 20)
-                            <button @click="showFull = !showFull" class="text-blue-200 underline text-sm ml-2">
-                                <span x-show="!showFull">Read More</span>
-                                <span x-show="showFull">Show Less</span>
+                            @if(strlen($job->description) > 80)
+                            <button @click="showFull = !showFull" class="text-blue-600 hover:text-blue-700 text-sm ml-1 font-medium">
+                                <span x-show="!showFull">Read more</span>
+                                <span x-show="showFull">Show less</span>
                             </button>
                             @endif
                         </p>
                     </div>
-                </div>                
-
-                <a href="{{ route('jobs.show', $job->id) }}" class="w-full">
-                    <div class="bg-gradient-to-r from-blue-900 to-blue-100 text-white py-3 px-8 rounded-md shadow-md transition-all duration-300 text-center mt-4">
-                        <p class="text-md font-semibold">Explore Job</p>
-                    </div>
-                </a>
+                    <a href="{{ route('jobs.show', $job->id) }}" class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors">
+                        View Job <i class="fas fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
             </div>
+            @endforeach
         </div>
-        @endforeach
     </div>
 </x-form>
 

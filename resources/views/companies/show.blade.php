@@ -1,20 +1,26 @@
 <x-form>
-    <section>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         @if ($jobs->isEmpty())
-            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md shadow-md ml-4 mt-4">
-                <h4 class="font-bold text-lg">Oops!</h4>
-                <p class="text-md">There are no job openings in this company right now. Please check back later!</p>
+            <div class="flex flex-col items-center justify-center py-20">
+                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                    <i class="fas fa-briefcase text-gray-400 text-xl"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-700 mb-1">No job openings right now</h3>
+                <p class="text-sm text-gray-400">This company hasn't posted any jobs yet. Check back later!</p>
+                <a href="{{ route('companies') }}" class="mt-6 inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 text-sm font-medium transition-colors">
+                    <i class="fas fa-arrow-left text-xs"></i> Back to Companies
+                </a>
             </div>
         @else
-            <h3
-                class="text-3xl mb-6 font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-indigo-500 to-pink-600">
-                Jobs in this Company
-            </h3>
-            <div class="grid grid-cols-1 gap-8">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">Jobs at this Company</h2>
+                <p class="text-gray-500 text-sm mt-1">{{ $jobs->count() }} position{{ $jobs->count() !== 1 ? 's' : '' }} available</p>
+            </div>
+            <div class="space-y-4">
                 @foreach ($jobs as $job)
                     <x-jobcard :job="$job" />
                 @endforeach
             </div>
         @endif
-    </section>
+    </div>
 </x-form>

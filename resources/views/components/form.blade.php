@@ -10,321 +10,218 @@
     <link rel="icon" href="{{ asset('storage/img/logo.jpeg') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Ensuring the body takes the full height of the screen */
-        body, html {
-            height: 100%;
-            margin: 0;
-        }
-
-        /* Flexbox layout to ensure footer stays at the bottom */
-        .page-wrapper {
-            display: flex;
-            flex-direction: column;
-            min-height: 100%;
-        }
-
-        /* Ensuring content grows and pushes footer to the bottom */
-        .content {
-            flex-grow: 1;
-        }
+        body, html { height: 100%; margin: 0; }
+        .page-wrapper { display: flex; flex-direction: column; min-height: 100%; }
+        .content { flex-grow: 1; }
 
         #loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(0, 123, 255, 0.4), rgba(0, 0, 0, 0.6));
-            backdrop-filter: blur(15px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            visibility: visible;
-            opacity: 1;
-            transition: visibility 0.3s ease, opacity 0.3s ease;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 9999; visibility: visible; opacity: 1;
+            transition: visibility 0.4s ease, opacity 0.4s ease;
         }
-
-        #loader.hidden {
-            visibility: hidden;
-            opacity: 0;
-        }
-
+        #loader.hidden { visibility: hidden; opacity: 0; }
+        .loader-inner { text-align: center; }
         .spinner {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            border: 8px solid transparent;
-            border-top: 8px solid #4caf50;
-            border-right: 8px solid #2196f3;
+            width: 44px; height: 44px;
+            border: 3px solid rgba(255,255,255,0.15);
+            border-top-color: #3b82f6;
             border-radius: 50%;
-            animation: rotate 1s linear infinite;
+            animation: spin 0.75s linear infinite;
+            margin: 0 auto;
         }
-
-        .spinner::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 120%;
-            height: 120%;
-            border: 8px solid transparent;
-            border-bottom: 8px solid #ff9800;
+        .loader-logo {
+            width: 48px; height: 48px;
             border-radius: 50%;
-            transform: translate(-50%, -50%);
-            animation: rotate 1.5s linear infinite reverse;
+            object-fit: cover;
+            margin: 0 auto 16px;
+            display: block;
         }
-
-        .logo {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            background: url('{{ asset('storage/img/logo.jpeg') }}') no-repeat center center;
-            background-size: contain;
-            border-radius: 50%;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 25px rgba(0, 123, 255, 0.6);
-        }
-
-        @keyframes rotate {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-900">
+<body class="bg-gray-50 text-gray-900 antialiased">
     <div id="loader">
-        <div class="spinner">
-            <div class="logo"></div>
+        <div class="loader-inner">
+            <img src="{{ asset('storage/img/logo.jpeg') }}" class="loader-logo" alt="Jobify">
+            <div class="spinner"></div>
         </div>
     </div>
 
     <div class="page-wrapper">
         <!-- Navbar -->
-        <nav class="bg-gradient-to-r from-blue-900 to-blue-100 text-white px-6 py-4 shadow-md">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-3">
-                    <a href="/" class="flex items-center space-x-2">
-                        <img src="{{ asset('storage/img/logo.jpeg') }}" alt="Jobify Logo" class="w-12 h-12 rounded-full">
-                        <span class="text-2xl font-bold text-white">Jobify</span>
+        <nav class="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <!-- Logo -->
+                    <a href="/" class="flex items-center space-x-2 flex-shrink-0">
+                        <img src="{{ asset('storage/img/logo.jpeg') }}" alt="Jobify" class="w-9 h-9 rounded-full object-cover ring-2 ring-blue-100">
+                        <span class="text-xl font-bold text-gray-900 tracking-tight">Jobify</span>
                     </a>
-                </div>                
 
-                <div class="md:hidden flex items-center">
-                    <button id="hamburger" class="text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    <!-- Desktop Nav Links -->
+                    <div class="hidden md:flex items-center space-x-1">
+                        <a href="{{ route('jobs.index') }}" class="px-4 py-2 text-sm font-medium rounded-md transition-colors {{ request()->routeIs('jobs.index') ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100' }}">
+                            Jobs
+                        </a>
+                        <a href="{{ route('salaries.index') }}" class="px-4 py-2 text-sm font-medium rounded-md transition-colors {{ request()->routeIs('salaries.index') ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100' }}">
+                            Salaries
+                        </a>
+                        <a href="{{ route('companies') }}" class="px-4 py-2 text-sm font-medium rounded-md transition-colors {{ request()->routeIs('companies') ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100' }}">
+                            Companies
+                        </a>
+                        <a href="{{ route('contact.submit') }}" class="px-4 py-2 text-sm font-medium rounded-md transition-colors {{ request()->routeIs('contact.submit') ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100' }}">
+                            Contact
+                        </a>
+                    </div>
+
+                    <!-- Auth Buttons -->
+                    <div class="hidden md:flex items-center space-x-3">
+                        @auth
+                            @if(auth()->user()->role === 'admin')
+                                <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors">
+                                    <i class="fas fa-th-large text-xs"></i> Dashboard
+                                </a>
+                            @else
+                                <a href="{{ route('Users.dashboard') }}" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors">
+                                    <i class="fas fa-user text-xs"></i> Dashboard
+                                </a>
+                            @endif
+                            <form action="{{ route('logout') }}" method="POST" class="inline">
+                                @csrf
+                                <button type="submit" class="inline-flex items-center gap-2 border border-gray-300 hover:bg-gray-100 text-gray-600 text-sm font-medium py-2 px-4 rounded-lg transition-colors">
+                                    <i class="fas fa-sign-out-alt text-xs"></i> Sign Out
+                                </button>
+                            </form>
+                        @else
+                            <a href="{{ route('login') }}" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors">
+                                <i class="fas fa-sign-in-alt text-xs"></i> Sign In
+                            </a>
+                        @endauth
+                    </div>
+
+                    <!-- Hamburger -->
+                    <button id="hamburger" class="md:hidden p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                         </svg>
                     </button>
                 </div>
-                
-                <div class="hidden md:flex space-x-6 text-lg">
-                    <a href="{{ route('jobs.index') }}" 
-               class="hover:underline {{ request()->routeIs('jobs.index') ? 'font-bold border-b-2 border-white' : '' }}">
-               Jobs
-            </a>
-            <a href="{{ route('salaries.index') }}" 
-               class="hover:underline {{ request()->routeIs('salaries.index') ? 'font-bold border-b-2 border-white' : '' }}">
-               Salaries
-            </a>
-            <a href="{{ route('companies') }}" 
-               class="hover:underline {{ request()->routeIs('companies') ? 'font-bold border-b-2 border-white' : '' }}">
-               Companies
-            </a>
-            <a href="{{ route('contact.submit') }}" 
-               class="hover:underline {{ request()->routeIs('contact.submit') ? 'font-bold border-b-2 border-white' : '' }}">
-               Contact Us
-            </a>
-                </div>                
-
-                <div class="hidden md:flex space-x-4 items-center">
-                    @auth
-                        @if(auth()->user()->role === 'admin')
-                            <a href="{{ route('admin.dashboard') }}"
-                                class="inline-block bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-purple-500 hover:to-indigo-500 hover:shadow-xl">
-                                🚀 Admin Dashboard
-                            </a>
-                        @else
-                            <a href="{{ route('Users.dashboard') }}"
-                                class="inline-block bg-gradient-to-r from-blue-600 to-teal-500 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-blue-500 hover:to-teal-400 hover:shadow-xl">
-                                👤 User Dashboard
-                            </a>
-                        @endif
-                
-                        <form action="{{ route('logout') }}" method="POST" class="inline-block">
-                            @csrf
-                            <button type="submit"
-                                class="bg-gradient-to-r from-red-600 to-pink-500 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-red-500 hover:to-pink-400 hover:shadow-xl">
-                                🚪 Logout
-                            </button>
-                        </form>
-                    @else
-                        <a href="{{ route('login') }}"
-                            class="inline-block bg-gradient-to-r from-blue-900 to-blue-300  text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-blue-800 hover:to-blue-400 hover:shadow-xl">
-                            🔑 Login
-                        </a>
-                    @endauth
-                </div>
-                
-                     
             </div>
 
-            <div id="mobile-menu" class="md:hidden hidden bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-4 space-y-4">
-    <a href="{{ route('jobs.index') }}" 
-       class="block hover:underline {{ request()->routeIs('jobs.index') ? 'font-bold border-b-2 border-white' : '' }}">
-       Jobs
-    </a>
-    <a href="{{ route('salaries.index') }}" 
-       class="block hover:underline {{ request()->routeIs('salaries.index') ? 'font-bold border-b-2 border-white' : '' }}">
-       Salaries
-    </a>
-    <a href="{{ route('companies') }}" 
-       class="block hover:underline {{ request()->routeIs('companies') ? 'font-bold border-b-2 border-white' : '' }}">
-       Companies
-    </a>
-    <a href="{{ route('contact.submit') }}" 
-       class="block hover:underline {{ request()->routeIs('contact.submit') ? 'font-bold border-b-2 border-white' : '' }}">
-       Contact Us
-    </a>
-
-    @auth
-        @if(auth()->user()->role === 'admin')
-            <a href="{{ route('admin.dashboard') }}" 
-               class="block bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 transition">
-               Admin Dashboard
-            </a>
-        @else
-            <a href="{{ route('Users.dashboard') }}" 
-               class="block bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 transition">
-               User Dashboard
-            </a>
-        @endif
-
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button type="submit" 
-                    class="w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-500 transition">
-                Logout
-            </button>
-        </form>
-    @else
-        <a href="{{ route('login') }}" 
-           class="block bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 transition">
-           Login
-        </a>
-    @endauth
-</div>
-            
-        </nav>
-
-        <div class="content">
-            {{$slot}}
-        </div>
-
-        <footer class="bg-white text-blue-900 py-8 border-t border-gray-300 mt-1">
-            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <img src="{{ asset('storage/img/logo.jpeg') }}" alt="Jobify Logo" class="h-16 mb-2"> 
-                    <h2 class="text-xl font-bold">Jobify</h2>
-                    <p class="mt-2 text-lg">
-                        Jobify is the leading HR outsourcing firm in the whole world
-                        with two decades of specialized experience.
-                    </p>
-                </div>
-
-                <div>
-                    <h2 class="text-xl font-bold">Quick Links</h2>
-                    <ul class="mt-2 space-y-1">
-                        <li><a href="#" class="hover:underline">Blogs</a></li>
-                        <li><a href="#" class="hover:underline">About Us</a></li>
-                        <li><a href="#" class="hover:underline">Resources</a></li>
-                        <li><a href="#" class="hover:underline">Privacy Policy</a></li>
-                    </ul>
-                </div>
- 
-                <div>
-                    <h2 class="text-xl font-bold">Our Partners</h2>
-                    <ul class="mt-2 space-y-1">
-                        <li>Intellisense</li>
-                        <li>Ecare</li>
-                        <li>MCare360</li>
-                        <li>World Health Coorporation</li>
-                        <li>MONUSCO</li>
-                    </ul>
-                </div>
-        
-                <!-- Contact Info -->
-                <div class="col-span-1 md:col-span-3 text-center mt-6">
-                    <h2 class="text-xl font-bold">CONTACT US</h2>
-                    <p class="mt-2 text-sm">Jobify</p>
-                    <p class="text-sm">Ross Resenditia, Canal Rd, Quaid-i-Azam Campus, Lahore, Punjab, Pakistan</p>
-                    <p class="text-sm">info@jobify.official</p>
-                    <p class="text-sm font-bold text-green-600">+92-301-4370259</p>
-                    <div class="flex justify-center space-x-4 mt-4">
-                        <a href="#" class="text-blue-600 text-2xl"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-blue-700 text-2xl"><i class="fab fa-linkedin"></i></a>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden border-t border-gray-100 bg-white">
+                <div class="px-4 py-3 space-y-1">
+                    <a href="{{ route('jobs.index') }}" class="block px-3 py-2 text-sm font-medium rounded-md {{ request()->routeIs('jobs.index') ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:bg-gray-100' }}">Jobs</a>
+                    <a href="{{ route('salaries.index') }}" class="block px-3 py-2 text-sm font-medium rounded-md {{ request()->routeIs('salaries.index') ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:bg-gray-100' }}">Salaries</a>
+                    <a href="{{ route('companies') }}" class="block px-3 py-2 text-sm font-medium rounded-md {{ request()->routeIs('companies') ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:bg-gray-100' }}">Companies</a>
+                    <a href="{{ route('contact.submit') }}" class="block px-3 py-2 text-sm font-medium rounded-md {{ request()->routeIs('contact.submit') ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:bg-gray-100' }}">Contact</a>
+                    <div class="pt-2 border-t border-gray-100 space-y-1">
+                        @auth
+                            @if(auth()->user()->role === 'admin')
+                                <a href="{{ route('admin.dashboard') }}" class="block px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100">Admin Dashboard</a>
+                            @else
+                                <a href="{{ route('Users.dashboard') }}" class="block px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100">My Dashboard</a>
+                            @endif
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="w-full text-left block px-3 py-2 text-sm font-medium rounded-md text-red-600 hover:bg-red-50">Sign Out</button>
+                            </form>
+                        @else
+                            <a href="{{ route('login') }}" class="block px-3 py-2 text-sm font-medium rounded-md text-blue-600 hover:bg-blue-50">Sign In</a>
+                        @endauth
                     </div>
                 </div>
             </div>
+        </nav>
+
+        <div class="content">{{ $slot }}</div>
+
+        <!-- Footer -->
+        <footer class="bg-slate-900 text-slate-300 mt-auto">
+            <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Brand -->
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-2">
+                        <img src="{{ asset('storage/img/logo.jpeg') }}" alt="Jobify" class="h-9 w-9 rounded-full object-cover">
+                        <span class="text-white font-bold text-lg">Jobify</span>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed">The leading HR outsourcing platform with two decades of specialized experience connecting talent with opportunity.</p>
+                    <div class="flex space-x-3 pt-1">
+                        <a href="#" class="text-slate-400 hover:text-white transition-colors"><i class="fab fa-facebook text-lg"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-white transition-colors"><i class="fab fa-linkedin text-lg"></i></a>
+                    </div>
+                </div>
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-white font-semibold text-xs uppercase tracking-wider mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors">Resources</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <!-- Partners -->
+                <div>
+                    <h3 class="text-white font-semibold text-xs uppercase tracking-wider mb-4">Our Partners</h3>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li>Intellisense</li>
+                        <li>Ecare</li>
+                        <li>MCare360</li>
+                        <li>World Health Corporation</li>
+                        <li>MONUSCO</li>
+                    </ul>
+                </div>
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-white font-semibold text-xs uppercase tracking-wider mb-4">Contact Us</h3>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-map-marker-alt mt-0.5 text-blue-400 flex-shrink-0"></i>
+                            Ross Residentia, Canal Rd, Lahore, Punjab, Pakistan
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-phone text-blue-400 flex-shrink-0"></i>
+                            +92-301-4370259
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-envelope text-blue-400 flex-shrink-0"></i>
+                            info@jobify.official
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800">
+                <div class="max-w-7xl mx-auto px-6 py-4 text-center text-xs text-slate-500">
+                    &copy; {{ date('Y') }} Jobify. All rights reserved.
+                </div>
+            </div>
         </footer>
-        
     </div>
+
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         @if(session('success'))
-            Swal.fire({
-                toast: true,
-                position: "top-end",
-                icon: "success",
-                title: "{{ session('success') }}",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true
-            });
+            Swal.fire({ toast: true, position: "top-end", icon: "success", title: "{{ session('success') }}", showConfirmButton: false, timer: 3000, timerProgressBar: true });
         @endif
-
         @if(session('error'))
-            Swal.fire({
-                toast: true,
-                position: "top-end",
-                icon: "error",
-                title: "{{ session('error') }}",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true
-            });
+            Swal.fire({ toast: true, position: "top-end", icon: "error", title: "{{ session('error') }}", showConfirmButton: false, timer: 3000, timerProgressBar: true });
         @endif
-    });
 
- document.addEventListener("DOMContentLoaded", () => {
         const hamburger = document.getElementById("hamburger");
         const mobileMenu = document.getElementById("mobile-menu");
         const loader = document.getElementById("loader");
 
-        // Toggle menu on hamburger click
-        hamburger.addEventListener("click", () => {
-            mobileMenu.classList.toggle("hidden");
+        hamburger.addEventListener("click", () => mobileMenu.classList.toggle("hidden"));
+        document.addEventListener("click", (e) => {
+            if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) mobileMenu.classList.add("hidden");
         });
-
-        // Close menu when clicking outside
-        document.addEventListener("click", (event) => {
-            if (!hamburger.contains(event.target) && !mobileMenu.contains(event.target)) {
-                mobileMenu.classList.add("hidden");
-            }
-        });
-
-        // Hide loader after delay
-        setTimeout(() => {
-            loader.classList.add("hidden");
-        }, 500);
+        setTimeout(() => loader.classList.add("hidden"), 450);
     });
     </script>
-    
 </body>
 </html>

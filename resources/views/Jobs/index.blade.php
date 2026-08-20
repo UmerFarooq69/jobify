@@ -1,95 +1,84 @@
 <x-form>
-    <section>
-        <!-- Page Title -->
-        <div class="font-bold text-2xl px-4 sm:px-6 md:px-10 pt-4 sm:pt-6">
-            All jobs
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Page Header -->
+        <div class="mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">Browse Jobs</h1>
+            <p class="text-gray-500 text-sm mt-1">Find your next opportunity from thousands of listings</p>
         </div>
 
         <!-- Search & Filter Form -->
-        <div class="px-4 sm:px-6 md:px-10 mt-6">
-            <form action="{{ route('jobs.search') }}" method="GET"
-                class="bg-white p-4 sm:p-6 rounded-xl shadow-lg flex flex-col md:flex-row md:flex-wrap gap-4 items-stretch md:items-center">
-
+        <form action="{{ route('jobs.search') }}" method="GET"
+            class="bg-white border border-gray-200 rounded-xl shadow-sm p-5 mb-6">
+            <div class="flex flex-col md:flex-row gap-4">
                 <!-- Search Input -->
-                <div class="relative w-full md:flex-1">
-                    <input type="text" name="query" id="search-input" placeholder="Search for jobs..."
+                <div class="relative flex-1">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-search text-gray-400 text-sm"></i>
+                    </div>
+                    <input type="text" name="query" id="search-input" placeholder="Search jobs, companies, or skills..."
                         value="{{ request('query') }}"
-                        class="px-4 py-3 border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                        class="pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg w-full text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
                         autocomplete="off">
                     <div id="suggestions"
-                        class="absolute bg-white shadow-lg rounded-md hidden w-full mt-1 z-50 max-h-60 overflow-auto">
+                        class="absolute bg-white border border-gray-200 shadow-lg rounded-lg hidden w-full mt-1 z-50 max-h-60 overflow-auto">
                     </div>
                 </div>
 
                 <!-- Filter Dropdowns -->
-                <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto flex-wrap">
+                <div class="flex flex-wrap gap-3">
                     @php
                         $filters = [
-                            'job_type' => ['label' => 'Select Job Type', 'options' => $jobTypes],
-                            'location' => ['label' => 'Select Location', 'options' => $locations],
-                            'company' => ['label' => 'Select Company', 'options' => $companies],
-                            'city' => ['label' => 'Select City', 'options' => $cities],
+                            'job_type' => ['label' => 'Job Type', 'options' => $jobTypes],
+                            'location' => ['label' => 'Location', 'options' => $locations],
+                            'company' => ['label' => 'Company', 'options' => $companies],
+                            'city' => ['label' => 'City', 'options' => $cities],
                         ];
                     @endphp
 
                     @foreach ($filters as $name => $filter)
-                        <div class="relative w-full sm:w-48">
-                            <select name="{{ $name }}" class="appearance-none px-4 py-3 border border-gray-300 rounded-lg bg-white 
-                                                   focus:ring-2 focus:ring-blue-500 focus:outline-none w-full cursor-pointer 
-                                                   text-gray-700 font-medium shadow-sm transition hover:border-blue-400">
-                                <option value="" {{ request($name) ? '' : 'selected' }} class="text-gray-400">
-                                    {{ $filter['label'] }}
-                                </option>
+                        <div class="relative">
+                            <select name="{{ $name }}" class="appearance-none pl-3 pr-8 py-2.5 border border-gray-300 rounded-lg bg-white text-sm text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors cursor-pointer">
+                                <option value="" {{ request($name) ? '' : 'selected' }}>{{ $filter['label'] }}</option>
                                 @foreach ($filter['options'] as $option)
-                                    <option value="{{ $option }}" {{ request($name) == $option ? 'selected' : '' }}>
-                                        {{ $option }}
-                                    </option>
+                                    <option value="{{ $option }}" {{ request($name) == $option ? 'selected' : '' }}>{{ $option }}</option>
                                 @endforeach
                             </select>
-                            <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-                                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="2"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
-                                </svg>
+                            <div class="absolute inset-y-0 right-2.5 flex items-center pointer-events-none">
+                                <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
                             </div>
                         </div>
                     @endforeach
                 </div>
 
                 <!-- Buttons -->
-                <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-                    <button type="submit" class="bg-gradient-to-r from-blue-900 to-blue-300 text-white font-semibold px-6 py-3 rounded-lg 
-                                   transition duration-200 w-full sm:w-auto">
+                <div class="flex gap-2">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap">
                         Search
                     </button>
-                    <button type="button" id="clear-form" class="bg-gray-400 hover:bg-gray-500 text-white font-semibold px-6 py-3 rounded-lg transition duration-200 w-full sm:w-auto">
-                        Clear Form
+                    <button type="button" id="clear-form" class="border border-gray-300 hover:bg-gray-100 text-gray-600 text-sm font-medium px-4 py-2.5 rounded-lg transition-colors whitespace-nowrap">
+                        Clear
                     </button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
 
-        <!-- Job Count -->
-        <div class="mt-4 px-4 sm:px-6 md:px-10">
-            <p class="text-lg text-gray-500">
-                Showing {{ $jobs->count() }} jobs of {{ $jobs->total() }}
-            </p>
-        </div>
+        <!-- Results Count -->
+        <p class="text-sm text-gray-500 mb-4">
+            Showing <span class="font-semibold text-gray-900">{{ $jobs->count() }}</span> of <span class="font-semibold text-gray-900">{{ $jobs->total() }}</span> jobs
+        </p>
 
         <!-- Job Listings -->
-        <div class="mt-6 px-4 sm:px-6 md:px-10">
-            <div class="grid grid-cols-1 gap-6">
-                @foreach ($jobs as $job)
-                    <x-jobcard :job="$job" />
-                @endforeach
-            </div>
+        <div class="space-y-4">
+            @foreach ($jobs as $job)
+                <x-jobcard :job="$job" />
+            @endforeach
         </div>
 
         <!-- Pagination -->
-        <div class="mt-6 px-4 sm:px-6 md:px-10">
+        <div class="mt-8">
             {{ $jobs->appends(request()->query())->links() }}
         </div>
-    </section>
+    </div>
 </x-form>
 
 <script>
@@ -108,7 +97,7 @@
                         if (data.length > 0) {
                             data.forEach(item => {
                                 let div = document.createElement('div');
-                                div.classList.add('p-2', 'cursor-pointer', 'hover:bg-gray-200');
+                                div.classList.add('px-4', 'py-2.5', 'cursor-pointer', 'hover:bg-gray-50', 'text-sm', 'text-gray-700', 'border-b', 'border-gray-100', 'last:border-0');
                                 div.textContent = item;
                                 div.addEventListener('click', function () {
                                     searchInput.value = item;
@@ -135,7 +124,6 @@
         clearButton.addEventListener("click", function () {
             let form = document.querySelector("form");
             form.reset();
-            // Reset selects explicitly to placeholder (first option)
             form.querySelectorAll("select").forEach(select => select.selectedIndex = 0);
             suggestionsBox.classList.add('hidden');
         });
