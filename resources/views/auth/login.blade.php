@@ -52,18 +52,35 @@
             </div>
 
             <!-- Side Banner -->
-            <div class="hidden md:flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 to-blue-900 text-white p-10">
+            <div class="hidden md:flex flex-col items-center justify-center bg-blue-600 text-white p-10">
                 <div class="text-center max-w-xs">
-                    <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-briefcase text-2xl text-blue-300"></i>
+                    <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-briefcase text-2xl text-white"></i>
                     </div>
-                    <h2 class="text-2xl font-bold mb-3">Join Jobify</h2>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        Register your business today and connect with thousands of qualified candidates across every industry.
+                    <h2 class="text-2xl font-bold mb-3">Welcome to Jobify</h2>
+                    <p class="text-blue-100 text-sm leading-relaxed">
+                        Connect with thousands of qualified candidates and top employers across every industry.
                     </p>
-                    <a href="/contact" class="inline-block mt-6 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-6 py-2.5 rounded-lg transition-colors">
-                        Contact Us
-                    </a>
+                    <div class="mt-8 space-y-3 text-left">
+                        <div class="flex items-center gap-3 text-blue-100 text-sm">
+                            <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-check text-xs text-white"></i>
+                            </div>
+                            500K+ job listings
+                        </div>
+                        <div class="flex items-center gap-3 text-blue-100 text-sm">
+                            <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-check text-xs text-white"></i>
+                            </div>
+                            AI-powered matching
+                        </div>
+                        <div class="flex items-center gap-3 text-blue-100 text-sm">
+                            <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-check text-xs text-white"></i>
+                            </div>
+                            Verified employers only
+                        </div>
+                    </div>
                 </div>
             </div>
 
