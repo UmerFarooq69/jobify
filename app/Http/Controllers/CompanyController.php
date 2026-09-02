@@ -45,7 +45,10 @@ class CompanyController extends Controller
         ]);
         
         auth()->user()->company()->save($company);
-        
+
+        if (auth()->user()->role === 'admin') {
+            return redirect()->route('admin.company.companies')->with('success', 'Company created successfully!');
+        }
         return redirect()->route('companies')->with('success', 'Company created successfully!');
     }
 
@@ -81,6 +84,9 @@ class CompanyController extends Controller
             'description' => $request->description,
         ]);
     
+        if (auth()->user()->role === 'admin') {
+            return redirect()->route('admin.company.companies')->with('success', 'Company updated successfully!');
+        }
         return redirect()->route('companies')->with('success', 'Company updated successfully!');
     }
     

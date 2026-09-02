@@ -12,13 +12,13 @@
             <p class="text-sm text-gray-500 mt-0.5">{{ $job->company->name }}</p>
             <div class="flex flex-wrap items-center gap-3 mt-2">
                 <span class="inline-flex items-center gap-1 text-xs text-gray-500">
-                    <i class="fas fa-map-marker-alt text-gray-400"></i> {{ $job->company->location }}
+                    <i class="mdi mdi-map-marker text-gray-400"></i> {{ $job->company->location }}
                 </span>
                 <span class="inline-flex items-center gap-1 text-xs text-gray-500">
-                    <i class="fas fa-briefcase text-gray-400"></i> {{ $job->job_type }}
+                    <i class="mdi mdi-briefcase text-gray-400"></i> {{ $job->job_type }}
                 </span>
                 <span class="inline-flex items-center gap-1 text-xs {{ $job->applications->count() < 5 ? 'text-amber-600' : 'text-green-600' }}">
-                    <i class="fas fa-users text-current"></i> {{ $job->applications->count() }} applicants
+                    <i class="mdi mdi-account-multiple text-current"></i> {{ $job->applications->count() }} applicants
                 </span>
             </div>
         </div>
@@ -26,25 +26,25 @@
         <!-- Action Buttons -->
         <div class="flex items-center gap-2 flex-shrink-0">
             <button data-modal="jobDescriptionModal-{{ $job->id }}"
-                class="p-2 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-600 transition-colors"
+                class="p-2 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 transition-colors"
                 title="View Description">
-                <i class="fas fa-eye text-sm"></i>
+                <i class="mdi mdi-eye text-sm"></i>
             </button>
             <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($job->company->location) }}"
                 target="_blank"
                 class="p-2 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-600 transition-colors"
                 title="View on Map">
-                <i class="fas fa-map-marker-alt text-sm"></i>
+                <i class="mdi mdi-map-marker text-sm"></i>
             </a>
             <button onclick="copyJobLink('{{ route('jobs.show', $job->id) }}')"
                 class="p-2 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-600 transition-colors"
                 title="Share Job">
-                <i class="fas fa-share-alt text-sm"></i>
+                <i class="mdi mdi-share-variant text-sm"></i>
             </button>
             <a href="/problem?job_id={{ $job->job_uuid }}"
                 class="p-2 rounded-lg bg-red-50 hover:bg-red-100 text-red-500 transition-colors"
                 title="Report Job">
-                <i class="fas fa-flag text-sm"></i>
+                <i class="mdi mdi-flag text-sm"></i>
             </a>
         </div>
     </div>
@@ -56,8 +56,8 @@
     <div class="mt-4 flex items-center justify-between">
         <span class="text-xs text-gray-400">Job ID: <span class="font-mono">{{ substr($job->job_uuid, 0, 8) }}</span></span>
         <a href="{{ route('jobs.apply', $job->id) }}"
-            class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-5 rounded-lg transition-colors">
-            Apply Now <i class="fas fa-arrow-right text-xs"></i>
+            class="inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white text-sm font-medium py-2 px-5 rounded-lg transition-colors">
+            Apply Now <i class="mdi mdi-arrow-right text-xs"></i>
         </a>
     </div>
 </div>
@@ -73,7 +73,7 @@
             </div>
             <button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 text-gray-500 transition-colors"
                 data-close="jobDescriptionModal-{{ $job->id }}">
-                <i class="fas fa-times"></i>
+                <i class="mdi mdi-close"></i>
             </button>
         </div>
         <div class="px-6 py-5 overflow-y-auto flex-1">
@@ -82,7 +82,7 @@
         <div class="px-6 py-4 border-t border-gray-200 flex justify-end gap-3">
             <button class="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
                 data-close="jobDescriptionModal-{{ $job->id }}">Close</button>
-            <a href="{{ route('jobs.apply', $job->id) }}" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
+            <a href="{{ route('jobs.apply', $job->id) }}" class="px-4 py-2 text-sm bg-blue-700 hover:bg-blue-800 text-white font-medium rounded-lg transition-colors">
                 Apply Now
             </a>
         </div>

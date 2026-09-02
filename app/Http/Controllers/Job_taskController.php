@@ -63,6 +63,9 @@ class Job_taskController extends Controller
         $job->image = $companyImage;
         $job->save();
         
+        if (Auth::user()->role === 'admin') {
+            return redirect()->route('admin.job.jobs')->with('success', 'Job posted successfully!');
+        }
         return redirect()->route('jobs.index')->with('success', 'Job posted successfully!');
         
     }

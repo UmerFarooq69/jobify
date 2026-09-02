@@ -1,54 +1,57 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class UserController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $users = User::where('role', '!=', 'admin')->get();
-        return view('Users.index', compact('users'));
+        return Inertia::render('Admin/Users', ['users' => $users]);
     }
 
-    public function create(){
+    public function create()
+    {
         return view('users.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|email|unique:users',
             'password' => 'required|min:6',
-            'role' => 'nullable|in:admin,user',
-            'active' => 'nullable|boolean',
+            'role'     => 'nullable|in:admin,user',
+            'active'   => 'nullable|boolean',
         ]);
 
         $role = $request->has('role') && $request->role === 'admin' ? 'admin' : 'user';
-    
+
         User::create([
-            'name' => $request->name,
-            'email' => $request->email,
+            'name'     => $request->name,
+            'email'    => $request->email,
             'password' => bcrypt($request->password),
-            'active' => $request->input('active', true),  
-            'role' => $role,
+            'active'   => $request->input('active', true),
+            'role'     => $role,
         ]);
+
         return redirect()->route('users.index')->with('success', 'User created successfully!');
-    }   
-        
+    }
+
     public function toggleStatus(User $user)
     {
         $user->active = !$user->active;
         $user->save();
-    
         return redirect()->back()->with('success', 'User status updated successfully.');
     }
 
     public function destroyUser(User $user)
     {
         $user->delete();
-        
         return redirect()->route('users.index')->with('success', 'User deleted successfully');
     }
 }
