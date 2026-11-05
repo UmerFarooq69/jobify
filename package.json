@@ -19,7 +19,11 @@
         "@inertiajs/react": "^3.7.0",
         "@mdi/js": "^7.4.47",
         "@mdi/react": "^1.6.1",
+        "cropperjs": "^2.3.1",
+        "lucide-react": "^1.68.0",
+        "qrcode": "^1.5.4",
         "react": "^19.2.8",
-        "react-dom": "^19.2.8"
+        "react-dom": "^19.2.8",
+        "sweetalert2": "^11.26.25"
     }
 }

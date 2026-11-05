@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.job-html-content h1,
+.job-html-content h2 { @apply text-sm font-bold text-gray-900 mt-4 mb-1.5; }
+.job-html-content h3 { @apply text-sm font-semibold text-gray-800 mt-3 mb-1; }
+.job-html-content p  { @apply mb-2; }
+.job-html-content ul { @apply list-disc pl-5 mb-2 space-y-1; }
+.job-html-content ol { @apply list-decimal pl-5 mb-2 space-y-1; }
+.job-html-content li { @apply text-gray-600; }
+.job-html-content strong { @apply font-semibold text-gray-800; }
