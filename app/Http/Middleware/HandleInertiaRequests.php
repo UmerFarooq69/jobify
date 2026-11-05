@@ -18,7 +18,7 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             'auth' => [
-                'user' => $request->user(),
+                'user' => $request->user()?->load('candidateProfile'),
             ],
             'flash' => [
                 'success' => fn () => $request->session()->get('success'),
