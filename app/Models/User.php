@@ -23,6 +23,14 @@ class User extends Authenticatable
         'password',
         'active',
         'role',
+        'role_type',
+        'phone',
+        'status',
+        'email_verified_at',
+        'phone_verified_at',
+        'auth_provider',
+        'first_name',
+        'last_name',
     ];
 
     /**
@@ -47,29 +55,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function isAdmin()
-    {
-        return $this->role === 'admin';
-    }
+    public function isAdmin(): bool { return $this->role === 'admin' || $this->role_type === 'platform_admin'; }
+    public function isUser(): bool { return $this->role === 'user'; }
+    public function isCandidate(): bool { return $this->role_type === 'candidate'; }
+    public function isEmployer(): bool { return in_array($this->role_type, ['company_admin','company_hiring_manager','company_recruiter','company_viewer']); }
 
-    /**
-     * Check if the user is a regular user
-     */
-    public function isUser()
-    {
-        return $this->role === 'user';
-    }
-    public function company()
-    {
-        return $this->hasOne(Company::class);
-    }
-    public function companies()
-    {
-    return $this->hasMany(Company::class);
-    }
-    public function job_tasks()
-    {
-    return $this->belongsto(Company::class);
-    }
+    public function company() { return $this->hasOne(Company::class); }
+    public function companies() { return $this->hasMany(Company::class); }
+    public function candidateProfile() { return $this->hasOne(\App\Models\CandidateProfile::class); }
+    public function organizationUsers() { return $this->hasMany(\App\Models\OrganizationUser::class); }
+    public function organizations() { return $this->belongsToMany(\App\Models\Organization::class, 'organization_users')->withPivot(['role','permissions']); }
+    public function primaryOrganization() { return $this->hasOneThrough(\App\Models\Organization::class, \App\Models\OrganizationUser::class, 'user_id', 'id', 'id', 'organization_id'); }
 
 }
