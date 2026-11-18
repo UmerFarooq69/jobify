@@ -111,25 +111,27 @@ class OtpController extends Controller
         Auth::login($user, true);
         $request->session()->regenerate(false); // preserve CSRF token
 
+        $csrf = csrf_token();
+
         if ($user->role_type === 'candidate') {
             $completed = CandidateProfile::where('user_id', $user->id)
                 ->where('onboarding_completed', true)
                 ->exists();
             if (! $completed) {
-                return response()->json(['redirect' => route('candidate.onboarding')]);
+                return response()->json(['redirect' => '/candidate/onboarding', 'csrf' => $csrf]);
             }
-            return response()->json(['redirect' => route('candidate.dashboard')]);
+            return response()->json(['redirect' => '/candidate/dashboard', 'csrf' => $csrf]);
         }
 
         if ($user->role_type === 'company_admin') {
             $hasCompany = OrganizationUser::where('user_id', $user->id)->exists();
             if (! $hasCompany) {
-                return response()->json(['redirect' => route('employer.setup')]);
+                return response()->json(['redirect' => '/employer/setup', 'csrf' => $csrf]);
             }
-            return response()->json(['redirect' => route('employer.dashboard')]);
+            return response()->json(['redirect' => '/employer/dashboard', 'csrf' => $csrf]);
         }
 
-        return response()->json(['redirect' => '/']);
+        return response()->json(['redirect' => '/', 'csrf' => $csrf]);
     }
 
     public function employerLogin(Request $request)
@@ -147,16 +149,17 @@ class OtpController extends Controller
 
         $user = Auth::user();
         $request->session()->regenerate();
+        $csrf = csrf_token();
 
         if ($user->role_type === 'platform_admin' || $user->role === 'admin') {
-            $redirect = route('platform-admin.dashboard');
+            $redirect = '/platform-admin/dashboard';
         } elseif ($user->role_type === 'company_admin') {
             $hasCompany = OrganizationUser::where('user_id', $user->id)->exists();
-            $redirect   = $hasCompany ? route('employer.dashboard') : route('employer.setup');
+            $redirect   = $hasCompany ? '/employer/dashboard' : '/employer/setup';
         } else {
-            $redirect = route('candidate.dashboard');
+            $redirect = '/candidate/dashboard';
         }
 
-        return response()->json(['redirect' => $redirect]);
+        return response()->json(['redirect' => $redirect, 'csrf' => $csrf]);
     }
 }

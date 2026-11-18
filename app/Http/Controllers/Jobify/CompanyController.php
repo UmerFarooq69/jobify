@@ -261,13 +261,17 @@ class CompanyController extends Controller
         $orgEmails      = $application->job?->organization?->users()->pluck('email')->filter()->all() ?? [];
 
         foreach ($automations as $automation) {
-            match ($automation->action_type) {
-                'send_email', 'schedule_interview', 'request_assessment' =>
-                    $candidateEmail ? Mail::to($candidateEmail)->queue(new CandidateStageChangedMail($application, $automation, $stage->name)) : null,
-                'notify_team' =>
-                    $orgEmails ? Mail::to($orgEmails)->queue(new TeamStageNotificationMail($application, $automation, $stage->name)) : null,
-                default => null,
-            };
+            try {
+                match ($automation->action_type) {
+                    'send_email', 'schedule_interview', 'request_assessment' =>
+                        $candidateEmail ? Mail::to($candidateEmail)->send(new CandidateStageChangedMail($application, $automation, $stage->name)) : null,
+                    'notify_team' =>
+                        $orgEmails ? Mail::to($orgEmails)->send(new TeamStageNotificationMail($application, $automation, $stage->name)) : null,
+                    default => null,
+                };
+            } catch (\Throwable $e) {
+                \Illuminate\Support\Facades\Log::warning("Automation mail failed for automation {$automation->id}: " . $e->getMessage());
+            }
         }
     }
 
@@ -357,7 +361,8 @@ class CompanyController extends Controller
     }
 
     public function destroyDepartment(Department $dept) {
-        $this->getOrg();
+        $org = $this->getOrg();
+        abort_if($dept->organization_id !== $org->id, 403);
         $dept->delete();
         return back()->with('success','Department removed.');
     }

@@ -42,6 +42,15 @@ class CandidateController extends Controller
         ]);
         $profile->update(['completeness_score' => $this->calculateCompleteness($profile->fresh())]);
 
+        if ($request->filled('resume_path')) {
+            $isPrimary = !$profile->resumes()->where('is_primary', true)->exists();
+            $profile->resumes()->create([
+                'file_path'     => $request->resume_path,
+                'original_name' => basename($request->resume_path),
+                'is_primary'    => $isPrimary,
+            ]);
+        }
+
         return redirect()->route('candidate.dashboard')->with('success','Profile setup complete!');
     }
 
@@ -86,6 +95,7 @@ class CandidateController extends Controller
 
     public function updateProfile(Request $request) {
         $profile = auth()->user()->candidateProfile;
+        abort_if(!$profile, 404);
         $profile->update($request->only(['headline','summary','skills','experience','education','certifications','preferences']));
         $profile->update(['completeness_score' => $this->calculateCompleteness($profile->fresh())]);
         return back()->with('success','Profile updated.');
@@ -94,6 +104,7 @@ class CandidateController extends Controller
     // Applications
     public function applications() {
         $profile = auth()->user()->candidateProfile;
+        abort_if(!$profile, 404);
         $apps    = $profile->applications()->with(['job.organization','stage'])->latest()->paginate(20);
         return Inertia::render('Jobify/Candidate/Applications', ['applications' => $apps]);
     }
@@ -101,18 +112,22 @@ class CandidateController extends Controller
     // Saved Jobs
     public function savedJobs() {
         $profile  = auth()->user()->candidateProfile;
+        abort_if(!$profile, 404);
         $saved    = $profile->savedJobs()->with('job.organization')->latest()->paginate(20);
         return Inertia::render('Jobify/Candidate/SavedJobs', ['savedJobs' => $saved]);
     }
 
     public function saveJob(Request $request) {
         $profile = auth()->user()->candidateProfile;
+        abort_if(!$profile, 404);
         $job     = JobRequisition::findOrFail($request->job_id);
         SavedJob::firstOrCreate(['candidate_profile_id' => $profile->id, 'job_requisition_id' => $job->id]);
         return back()->with('success','Job saved.');
     }
 
     public function unsaveJob(SavedJob $savedJob) {
+        $profile = auth()->user()->candidateProfile;
+        abort_if(!$profile || $savedJob->candidate_profile_id !== $profile->id, 403);
         $savedJob->delete();
         return back()->with('success','Job removed from saved.');
     }
@@ -120,16 +135,20 @@ class CandidateController extends Controller
     // Job Alerts
     public function alerts() {
         $profile = auth()->user()->candidateProfile;
+        abort_if(!$profile, 404);
         return Inertia::render('Jobify/Candidate/JobAlerts', ['alerts' => $profile->alerts]);
     }
 
     public function storeAlert(Request $request) {
         $profile = auth()->user()->candidateProfile;
+        abort_if(!$profile, 404);
         $profile->alerts()->create($request->only(['keywords','employment_type','location','frequency']));
         return back()->with('success','Alert created.');
     }
 
     public function deleteAlert(JobAlert $alert) {
+        $profile = auth()->user()->candidateProfile;
+        abort_if(!$profile || $alert->candidate_profile_id !== $profile->id, 403);
         $alert->delete();
         return back()->with('success','Alert deleted.');
     }
@@ -137,6 +156,7 @@ class CandidateController extends Controller
     // AI: Skill Gap
     public function skillGap(Request $request, SkillGapService $service) {
         $profile = auth()->user()->candidateProfile;
+        abort_if(!$profile, 404);
         if ($request->isMethod('post')) {
             $result = $service->analyse($profile, $request->target_role);
             return response()->json($result);
@@ -147,6 +167,7 @@ class CandidateController extends Controller
     // AI: Interview Prep
     public function interviewPrep(Request $request, InterviewPrepService $service) {
         $profile = auth()->user()->candidateProfile;
+        abort_if(!$profile, 404);
         if ($request->isMethod('post')) {
             $job    = JobRequisition::findOrFail($request->job_id);
             $result = $service->generate($profile, $job);
@@ -159,6 +180,7 @@ class CandidateController extends Controller
     // AI: Resume Generator
     public function resumeGenerator(Request $request, ResumeGeneratorService $service) {
         $profile = auth()->user()->candidateProfile;
+        abort_if(!$profile, 404);
         if ($request->isMethod('post')) {
             $job    = $request->job_id ? JobRequisition::find($request->job_id) : null;
             $result = $service->generate($profile, $job);
@@ -172,6 +194,7 @@ class CandidateController extends Controller
     public function uploadResume(Request $request) {
         $request->validate(['resume' => 'required|file|mimes:pdf,doc,docx|max:5120']);
         $profile    = auth()->user()->candidateProfile;
+        abort_if(!$profile, 404);
         $path       = $request->file('resume')->store('resumes', 'public');
         $isPrimary  = !$profile->resumes()->where('is_primary',true)->exists();
         $profile->resumes()->create([

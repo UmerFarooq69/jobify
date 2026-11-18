@@ -17,6 +17,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => \App\Http\Middleware\EnsureAdmin::class,
         ]);
+        $middleware->validateCsrfTokens(except: [
+            '/otp/send',
+            '/otp/verify',
+            '/employer/login',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
