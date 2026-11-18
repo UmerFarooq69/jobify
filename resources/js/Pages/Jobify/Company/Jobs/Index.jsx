@@ -13,7 +13,7 @@ export default function CompanyJobs({ org, jobs }) {
                         <h2 className="text-lg font-semibold text-gray-900">Job Postings</h2>
                         <p className="text-gray-500 text-sm">{jobs?.total ?? 0} total</p>
                     </div>
-                    <Link href="/employer/jobs/create" className="bg-indigo-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors flex items-center gap-2">
+                    <Link href="/employer/jobs/create" className="text-white px-4 py-2.5 rounded-lg text-sm font-semibold transition hover:opacity-90 flex items-center gap-2" style={{ background: 'linear-gradient(135deg, #38009A, #9E0059)' }}>
                         + Post New Job
                     </Link>
                 </div>
@@ -60,7 +60,7 @@ export default function CompanyJobs({ org, jobs }) {
                             <div className="text-4xl mb-3">💼</div>
                             <h3 className="font-semibold text-gray-900 mb-1">No jobs yet</h3>
                             <p className="text-gray-500 text-sm mb-4">Post your first job to start receiving applications</p>
-                            <Link href="/employer/jobs/create" className="bg-indigo-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors">Post a Job</Link>
+                            <Link href="/employer/jobs/create" className="inline-block text-white px-6 py-2.5 rounded-lg text-sm font-semibold transition hover:opacity-90" style={{ background: 'linear-gradient(135deg, #38009A, #9E0059)' }}>Post a Job</Link>
                         </div>
                     )}
                 </div>

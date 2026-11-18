@@ -216,6 +216,7 @@ class CompanyController extends Controller
         $applications = $query->latest()->paginate(20)->withQueryString();
 
         return Inertia::render('Jobify/Company/Applications/Index', [
+            'org'          => $org,
             'jobs'         => $jobs,
             'selectedJob'  => $selectedJob,
             'stages'       => $stages,
@@ -281,7 +282,7 @@ class CompanyController extends Controller
         abort_if($job->organization_id !== $org->id, 403);
         $stages      = $job->pipelineStages()->orderBy('order')->get();
         $automations = $job->automations()->with('stage')->get();
-        return Inertia::render('Jobify/Company/Jobs/Automations', compact('job','stages','automations'));
+        return Inertia::render('Jobify/Company/Jobs/Automations', compact('org','job','stages','automations'));
     }
 
     public function storeAutomation(Request $request, JobRequisition $job) {
