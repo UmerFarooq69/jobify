@@ -45,8 +45,6 @@ const EMPLOYER_NAV = [
     { label: 'Job Listings', icon: 'briefcase', href: '/employer/jobs' },
     { label: 'Applications', icon: 'clip',      href: '/employer/applications' },
     { label: 'Profile',      icon: 'building',  href: '/employer/profile' },
-    { label: 'Departments',  icon: 'list',      href: '/employer/departments' },
-    { label: 'Team',         icon: 'team',      href: '/employer/team' },
 ];
 const ADMIN_NAV = [
     { label: 'Dashboard',       icon: 'grid',    href: '/platform-admin',                section: null },
@@ -282,7 +280,11 @@ export default function JobifyLayout({ children, title = 'Dashboard', noPadding 
 
                     {/* Avatar */}
                     <div className="h-9 w-9 rounded-xl flex items-center justify-center text-xs font-bold text-white ring-2 ring-white overflow-hidden flex-shrink-0" style={{ background: 'linear-gradient(135deg, #38009A, #9E0059)' }}>
-                        {initials}
+                        {isCompany && org?.logo
+                            ? <img src={`/storage/${org.logo}`} alt="" className="w-full h-full object-cover" onError={e => { e.target.style.display = 'none'; }} />
+                            : !isCompany && !isAdmin && user.avatar
+                            ? <img src={`/storage/${user.avatar}`} alt="" className="w-full h-full object-cover" onError={e => { e.target.style.display = 'none'; }} />
+                            : initials}
                     </div>
 
                     {/* Hamburger mobile */}
