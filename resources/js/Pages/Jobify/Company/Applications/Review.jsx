@@ -1,5 +1,5 @@
+import React, { useState } from 'react';
 import { Head, router } from '@inertiajs/react';
-import { useState } from 'react';
 
 const PALETTE = ['#9E0059','#38009A','#0D9488','#F97316','#6366F1','#059669'];
 function avatarColor(str) {
@@ -73,7 +73,7 @@ export default function ReviewApplication({ application, stages, org }) {
 
     function saveNote() {
         setSavingNote(true);
-        router.patch(`/employer/applications/${application.id}/note`, { note }, {
+        router.patch(`/employer/applications/${application.id}/note`, { note, rating }, {
             preserveScroll: true,
             onFinish: () => setSavingNote(false),
         });
@@ -133,13 +133,13 @@ export default function ReviewApplication({ application, stages, org }) {
                 </header>
 
                 {/* Stage stepper 60px */}
-                <div className="flex h-[60px] shrink-0 items-center gap-0 border-b border-gray-100 bg-gray-50 px-5 overflow-x-auto">
+                <div className="flex h-[60px] shrink-0 items-center border-b border-gray-100 bg-gray-50 px-6 w-full">
                     {stages.map((stage, i) => {
                         const past = i < currentStageIndex;
                         const current = i === currentStageIndex;
                         return (
-                            <div key={stage.id} className="flex shrink-0 items-center">
-                                <div className="flex flex-col items-center">
+                            <React.Fragment key={stage.id}>
+                                <div className="flex flex-col items-center shrink-0">
                                     <div className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold border-2 transition
                                         ${past ? 'bg-[#38009A] border-[#38009A] text-white' :
                                           current ? 'bg-white border-[#38009A] text-[#38009A]' :
@@ -151,9 +151,9 @@ export default function ReviewApplication({ application, stages, org }) {
                                     <span className={`mt-0.5 text-[10px] whitespace-nowrap font-medium ${current ? 'text-[#38009A]' : 'text-gray-400'}`}>{stage.name}</span>
                                 </div>
                                 {i < stages.length - 1 && (
-                                    <div className={`mx-1 h-px w-6 ${i < currentStageIndex ? 'bg-[#38009A]' : 'bg-gray-300'}`} />
+                                    <div className={`flex-1 h-px mx-2 min-w-[12px] ${i < currentStageIndex ? 'bg-[#38009A]' : 'bg-gray-300'}`} />
                                 )}
-                            </div>
+                            </React.Fragment>
                         );
                     })}
                     {stages.length === 0 && (
@@ -200,9 +200,10 @@ export default function ReviewApplication({ application, stages, org }) {
                             {/* Match Analysis */}
                             <Accordion title="Match Analysis">
                                 {application.match_score != null ? (
-                                    <div className="space-y-3">
+                                    <div className="space-y-4">
+                                        {/* Score row */}
                                         <div className="flex items-center gap-3">
-                                            <div className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold
+                                            <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-sm font-bold
                                                 ${application.match_score >= 70 ? 'bg-green-100 text-green-700' :
                                                   application.match_score >= 40 ? 'bg-yellow-100 text-yellow-700' :
                                                                                   'bg-red-100 text-red-600'}`}>
@@ -216,10 +217,50 @@ export default function ReviewApplication({ application, stages, org }) {
                                                 </p>
                                             </div>
                                         </div>
-                                        {report.summary && <p className="text-xs text-gray-600 leading-relaxed">{report.summary}</p>}
+
+                                        {/* Score bar */}
+                                        <div className="h-1.5 w-full rounded-full bg-gray-100">
+                                            <div className={`h-1.5 rounded-full transition-all ${application.match_score >= 70 ? 'bg-green-500' : application.match_score >= 40 ? 'bg-yellow-400' : 'bg-red-400'}`}
+                                                style={{ width: `${application.match_score}%` }} />
+                                        </div>
+
+                                        {/* AI summary */}
+                                        {report.summary && (
+                                            <p className="text-xs text-gray-600 leading-relaxed border-l-2 border-gray-200 pl-2">{report.summary}</p>
+                                        )}
+
+                                        {/* Matched skills */}
+                                        {report.matched_skills?.length > 0 && (
+                                            <div>
+                                                <p className="text-[11px] font-semibold text-green-700 mb-1.5 flex items-center gap-1">
+                                                    <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                                    Matched ({report.matched_skills.length})
+                                                </p>
+                                                <div className="flex flex-wrap gap-1.5">
+                                                    {report.matched_skills.map((s, i) => (
+                                                        <span key={i} className="rounded-full bg-green-50 border border-green-200 px-2 py-0.5 text-[11px] font-medium text-green-700">{s}</span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {/* Missing skills */}
+                                        {report.missing_skills?.length > 0 && (
+                                            <div>
+                                                <p className="text-[11px] font-semibold text-red-600 mb-1.5 flex items-center gap-1">
+                                                    <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                                                    Missing ({report.missing_skills.length})
+                                                </p>
+                                                <div className="flex flex-wrap gap-1.5">
+                                                    {report.missing_skills.map((s, i) => (
+                                                        <span key={i} className="rounded-full bg-red-50 border border-red-200 px-2 py-0.5 text-[11px] font-medium text-red-600">{s}</span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
                                 ) : (
-                                    <p className="text-xs text-gray-400">No AI analysis yet. Run AI ranking from the jobs page.</p>
+                                    <p className="text-xs text-gray-400">No AI analysis yet. Run <span className="font-medium text-[#38009A]">AI Rank</span> from the pipeline page.</p>
                                 )}
                             </Accordion>
 

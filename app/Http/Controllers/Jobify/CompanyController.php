@@ -322,7 +322,7 @@ class CompanyController extends Controller
     public function saveNote(Request $request, CandidateApplication $application) {
         $org = $this->getOrg();
         abort_if(!$org->jobRequisitions()->where('id',$application->job_requisition_id)->exists(), 403);
-        $application->update(['note' => $request->note]);
+        $application->update(['note' => $request->note, 'screening_rating' => $request->rating]);
         return back()->with('success','Note saved.');
     }
 
@@ -422,7 +422,14 @@ class CompanyController extends Controller
         ])->toArray();
         $rankings = $ai->rankCandidates($candidates, ['title' => $job->title, 'skills' => $job->skills, 'description' => $job->description]);
         foreach ($rankings as $r) {
-            CandidateApplication::where('id',$r['candidate_id'])->update(['match_score' => $r['score']]);
+            CandidateApplication::where('id', $r['candidate_id'])->update([
+                'match_score'  => $r['score'],
+                'match_report' => [
+                    'summary'        => $r['reasoning']       ?? null,
+                    'matched_skills' => $r['matched_skills']  ?? [],
+                    'missing_skills' => $r['missing_skills']  ?? [],
+                ],
+            ]);
         }
         return response()->json(['rankings' => $rankings]);
     }

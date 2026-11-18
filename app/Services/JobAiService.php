@@ -19,7 +19,7 @@ class JobAiService
     public function rankCandidates(array $candidates, array $job): array
     {
         $result = $this->llm->chatJson([
-            ['role' => 'system', 'content' => 'You are a recruiting AI. Rank the candidates for this job and return JSON with: rankings (array of {candidate_id, score: 0-100, reasoning: string}) sorted by score descending.'],
+            ['role' => 'system', 'content' => 'You are a recruiting AI. Rank the candidates for this job and return JSON with: rankings (array of {candidate_id, score: 0-100, reasoning: string (2-3 sentences), matched_skills: array of strings the candidate has that match the job, missing_skills: array of strings required by the job that the candidate lacks}) sorted by score descending.'],
             ['role' => 'user', 'content' => "Job: " . json_encode($job) . "\n\nCandidates: " . json_encode($candidates)],
         ]);
 

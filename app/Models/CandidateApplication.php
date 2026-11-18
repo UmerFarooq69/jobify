@@ -3,7 +3,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class CandidateApplication extends Model {
-    protected $fillable = ['uuid','candidate_profile_id','job_requisition_id','pipeline_stage_id','resume_id','status','source','match_score','match_report','screening_answers','note','stage_entered_at','applied_at'];
+    protected $fillable = ['uuid','candidate_profile_id','job_requisition_id','pipeline_stage_id','resume_id','status','source','match_score','match_report','screening_answers','note','screening_rating','stage_entered_at','applied_at'];
     protected $casts = ['match_report'=>'array','screening_answers'=>'array','applied_at'=>'datetime','stage_entered_at'=>'datetime'];
 
     public function candidate() { return $this->belongsTo(CandidateProfile::class,'candidate_profile_id'); }
