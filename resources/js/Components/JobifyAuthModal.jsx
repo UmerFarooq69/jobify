@@ -130,6 +130,10 @@ function CandidateModal({ onClose }) {
             }
             if (!res.ok) { setOtpErr('Verification failed. Please try again.'); return; }
             const d = await res.json();
+            if (d.csrf) {
+                const meta = document.head.querySelector('meta[name="csrf-token"]');
+                if (meta) meta.setAttribute('content', d.csrf);
+            }
             const dest = d.redirect ?? '/candidate/dashboard';
             if (dest.includes('onboarding')) {
                 setRedirectUrl(dest);
@@ -155,7 +159,7 @@ function CandidateModal({ onClose }) {
             if (!res.ok) { const d = await res.json().catch(() => ({})); setCvErr(d.message ?? 'Upload failed.'); return; }
             const d = await res.json();
             setParsedData(d.parsed);
-            setResumeId(d.resume_id);
+            setResumeId(d.file_path);
             setStep('parsed');
         } catch { setCvErr('Upload failed. Please try again.'); }
         finally { setUploading(false); }
@@ -167,7 +171,7 @@ function CandidateModal({ onClose }) {
     }
 
     async function continueToApp() {
-        await postJson('/candidate/onboarding', { resume_id: resumeId, phone: parsedData?.phone ?? '' }).catch(() => {});
+        await postJson('/candidate/onboarding', { resume_path: resumeId, phone: parsedData?.phone ?? '' }).catch(() => {});
         window.location.href = redirectUrl || '/candidate/dashboard';
     }
 
@@ -387,6 +391,10 @@ function EmployerModal({ onClose }) {
             }
             if (!res.ok) { setLoginErr({ email: ['Login failed. Please try again.'] }); return; }
             const d = await res.json();
+            if (d.csrf) {
+                const meta = document.head.querySelector('meta[name="csrf-token"]');
+                if (meta) meta.setAttribute('content', d.csrf);
+            }
             window.location.href = d.redirect ?? '/employer/dashboard';
         } catch { setLoginErr({ email: ['Login failed. Please try again.'] }); }
         finally { setLoggingIn(false); }

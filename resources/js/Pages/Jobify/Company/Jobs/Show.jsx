@@ -40,6 +40,21 @@ function csrf() {
     return document.querySelector('meta[name="csrf-token"]')?.content ?? '';
 }
 
+// ── sort header (defined outside component to prevent remounting on re-render)
+function SortTh({ label, k, sortKey, sortDir, doSort }) {
+    return (
+        <th className="px-4 py-3 whitespace-nowrap">
+            <button onClick={() => doSort(k)} className="flex items-center gap-1 hover:text-gray-700 transition text-xs font-semibold text-gray-400">
+                {label}
+                <span className="inline-flex flex-col gap-px ml-0.5">
+                    <svg viewBox="0 0 6 4" className="w-2 h-1.5 fill-current" style={{ color: sortKey === k && sortDir === 'asc' ? '#38009A' : '#D1D5DB' }}><path d="M3 0L6 4H0Z"/></svg>
+                    <svg viewBox="0 0 6 4" className="w-2 h-1.5 fill-current" style={{ color: sortKey === k && sortDir === 'desc' ? '#38009A' : '#D1D5DB' }}><path d="M3 4L0 0H6Z"/></svg>
+                </span>
+            </button>
+        </th>
+    );
+}
+
 // ── main component ────────────────────────────────────────────────────────────
 export default function JobShow({ org, job }) {
     const storedView = typeof localStorage !== 'undefined' ? (localStorage.getItem('pipeline_view') ?? 'board') : 'board';
@@ -204,23 +219,9 @@ export default function JobShow({ org, job }) {
     function publish() { router.patch(`/employer/jobs/${job.id}/publish`, {}, { preserveScroll: true }); }
     function destroy() {
         if (!confirm('Delete this job and all its pipeline data? This cannot be undone.')) return;
-        router.delete(`/employer/jobs/${job.id}`, {}, { onSuccess: () => router.visit('/employer/jobs') });
+        router.delete(`/employer/jobs/${job.id}`, { onSuccess: () => router.visit('/employer/jobs') });
     }
 
-    // ── sort header ───────────────────────────────────────────────────────
-    function SortTh({ label, k }) {
-        return (
-            <th className="px-4 py-3 whitespace-nowrap">
-                <button onClick={() => doSort(k)} className="flex items-center gap-1 hover:text-gray-700 transition text-xs font-semibold text-gray-400">
-                    {label}
-                    <span className="inline-flex flex-col gap-px ml-0.5">
-                        <svg viewBox="0 0 6 4" className="w-2 h-1.5 fill-current" style={{ color: sortKey === k && sortDir === 'asc' ? '#38009A' : '#D1D5DB' }}><path d="M3 0L6 4H0Z"/></svg>
-                        <svg viewBox="0 0 6 4" className="w-2 h-1.5 fill-current" style={{ color: sortKey === k && sortDir === 'desc' ? '#38009A' : '#D1D5DB' }}><path d="M3 4L0 0H6Z"/></svg>
-                    </span>
-                </button>
-            </th>
-        );
-    }
 
     return (
         <JobifyLayout title={`${job.title} — Pipeline`} noPadding>
@@ -480,10 +481,10 @@ export default function JobShow({ org, job }) {
                             <table className="w-full text-sm text-left">
                                 <thead>
                                     <tr className="border-b border-gray-100 select-none">
-                                        <SortTh label="Candidate" k="name" />
-                                        <SortTh label="Applied"   k="date" />
-                                        <SortTh label="CV Score"  k="score" />
-                                        <SortTh label="Stage"     k="stage" />
+                                        <SortTh label="Candidate" k="name"  sortKey={sortKey} sortDir={sortDir} doSort={doSort} />
+                                        <SortTh label="Applied"   k="date"  sortKey={sortKey} sortDir={sortDir} doSort={doSort} />
+                                        <SortTh label="CV Score"  k="score" sortKey={sortKey} sortDir={sortDir} doSort={doSort} />
+                                        <SortTh label="Stage"     k="stage" sortKey={sortKey} sortDir={sortDir} doSort={doSort} />
                                         <th className="px-3 py-3 w-8" />
                                     </tr>
                                 </thead>

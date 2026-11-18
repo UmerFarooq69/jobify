@@ -164,7 +164,7 @@ export default function CandidateProfile({ profile, resumes }) {
         fd.append('resume', file);
         fd.append('_token', document.querySelector('meta[name=csrf-token]').content);
         fetch('/candidate/resume/upload', { method: 'POST', body: fd })
-            .then(() => router.reload({ only: ['resumes'] }))
+            .then(res => { if (res.ok) router.reload({ only: ['resumes'] }); })
             .finally(() => setUploading(false));
     }
 
