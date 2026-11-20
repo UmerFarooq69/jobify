@@ -119,15 +119,15 @@ class CandidateController extends Controller
 
     public function saveJob(Request $request) {
         $profile = auth()->user()->candidateProfile;
-        abort_if(!$profile, 404);
-        $job     = JobRequisition::findOrFail($request->job_id);
+        if (!$profile) return back()->with('error', 'Complete your profile first.');
+        $job = JobRequisition::findOrFail($request->job_id);
         SavedJob::firstOrCreate(['candidate_profile_id' => $profile->id, 'job_requisition_id' => $job->id]);
         return back()->with('success','Job saved.');
     }
 
     public function unsaveJob(SavedJob $savedJob) {
         $profile = auth()->user()->candidateProfile;
-        abort_if(!$profile || $savedJob->candidate_profile_id !== $profile->id, 403);
+        if (!$profile || $savedJob->candidate_profile_id !== $profile->id) return back()->with('error','Unauthorized.');
         $savedJob->delete();
         return back()->with('success','Job removed from saved.');
     }

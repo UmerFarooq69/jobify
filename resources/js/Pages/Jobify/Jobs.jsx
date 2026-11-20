@@ -317,13 +317,15 @@ function JobDetail({ job, onBack, setModal, savedJobMap = {} }) {
                         className="rounded-full border border-gray-300 px-6 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">
                         View Details
                     </Link>
-                    <button onClick={handleSave} title={localSaved ? 'Remove from saved' : 'Save job'}
-                        className="flex items-center justify-center rounded-full border w-12 h-12 transition hover:bg-gray-50"
-                        style={{ borderColor: localSaved ? '#9E0059' : '#D1D5DB', color: localSaved ? '#9E0059' : '#6B7280' }}>
-                        <svg className="h-5 w-5" fill={localSaved ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 3a2 2 0 00-2 2v16l7-3 7 3V5a2 2 0 00-2-2H5z"/>
-                        </svg>
-                    </button>
+                    {user?.role_type !== 'company_admin' && (
+                        <button onClick={handleSave} title={localSaved ? 'Remove from saved' : 'Save job'}
+                            className="flex items-center justify-center rounded-full border w-12 h-12 transition hover:bg-gray-50"
+                            style={{ borderColor: localSaved ? '#9E0059' : '#D1D5DB', color: localSaved ? '#9E0059' : '#6B7280' }}>
+                            <svg className="h-5 w-5" fill={localSaved ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M5 3a2 2 0 00-2 2v16l7-3 7 3V5a2 2 0 00-2-2H5z"/>
+                            </svg>
+                        </button>
+                    )}
                 </div>
             </div>
 
