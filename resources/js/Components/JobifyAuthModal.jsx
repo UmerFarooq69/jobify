@@ -171,7 +171,15 @@ function CandidateModal({ onClose }) {
     }
 
     async function continueToApp() {
-        await postJson('/candidate/onboarding', { resume_path: resumeId, phone: parsedData?.phone ?? '' }).catch(() => {});
+        await postJson('/candidate/onboarding', {
+            resume_path: resumeId,
+            phone:       parsedData?.phone      ?? '',
+            headline:    parsedData?.headline   ?? '',
+            summary:     parsedData?.summary    ?? '',
+            skills:      parsedData?.skills     ?? [],
+            experience:  parsedData?.experience ?? [],
+            education:   parsedData?.education  ?? [],
+        }).catch(() => {});
         window.location.href = redirectUrl || '/candidate/dashboard';
     }
 
