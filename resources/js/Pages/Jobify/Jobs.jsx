@@ -222,14 +222,18 @@ function JobCard({ job, selected, onClick, appliedIds = [] }) {
 }
 
 // ─── JobDetail (right panel) ─────────────────────────────────────────────────
-function JobDetail({ job, onBack, setModal }) {
+function JobDetail({ job, onBack, setModal, savedJobMap = {} }) {
     const { props } = usePage();
     const user       = props.auth?.user ?? null;
     const appliedIds = props.appliedIds ?? [];
     const hasApplied = appliedIds.includes(job.id);
     const [summaryOpen, setSummaryOpen] = useState(true);
+    const [localSaved, setLocalSaved]   = useState(savedJobMap[job.id] ?? null);
     const salary = fmtSalary(job);
     const reqs   = reqList(job);
+
+    // sync when job changes
+    useState(() => { setLocalSaved(savedJobMap[job.id] ?? null); });
 
     function handleApply() {
         if (hasApplied) return;
@@ -237,6 +241,22 @@ function JobDetail({ job, onBack, setModal }) {
             router.post(`/find-jobs/${job.uuid}/apply`);
         } else {
             setModal('candidate');
+        }
+    }
+
+    function handleSave() {
+        if (!user) { setModal('candidate'); return; }
+        if (localSaved) {
+            setLocalSaved(null);
+            router.delete(`/saved-jobs/${localSaved}`, { preserveScroll: true });
+        } else {
+            router.post('/saved-jobs', { job_id: job.id }, {
+                preserveScroll: true,
+                onSuccess: (page) => {
+                    const map = page.props.savedJobMap ?? {};
+                    setLocalSaved(map[job.id] ?? true);
+                },
+            });
         }
     }
 
@@ -287,7 +307,7 @@ function JobDetail({ job, onBack, setModal }) {
                 </div>
 
                 {/* Actions */}
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-3 items-center">
                     <button onClick={handleApply} disabled={hasApplied}
                         className="rounded-full px-10 py-3 text-sm font-semibold text-white transition shadow-sm disabled:cursor-default"
                         style={{ background: hasApplied ? '#6B7280' : '#9E0059' }}>
@@ -297,6 +317,13 @@ function JobDetail({ job, onBack, setModal }) {
                         className="rounded-full border border-gray-300 px-6 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">
                         View Details
                     </Link>
+                    <button onClick={handleSave} title={localSaved ? 'Remove from saved' : 'Save job'}
+                        className="flex items-center justify-center rounded-full border w-12 h-12 transition hover:bg-gray-50"
+                        style={{ borderColor: localSaved ? '#9E0059' : '#D1D5DB', color: localSaved ? '#9E0059' : '#6B7280' }}>
+                        <svg className="h-5 w-5" fill={localSaved ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 3a2 2 0 00-2 2v16l7-3 7 3V5a2 2 0 00-2-2H5z"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
 
@@ -507,7 +534,7 @@ function MobileSearchOverlay({ initialQ, onClose, onSearch }) {
 }
 
 // ─── Main component ──────────────────────────────────────────────────────────
-export default function Jobs({ jobs, filters, selectedJob: initialSelected, appliedIds = [] }) {
+export default function Jobs({ jobs, filters, selectedJob: initialSelected, appliedIds = [], savedJobMap = {} }) {
     const [f, setF]               = useState(filters ?? {});
     const [selected, setSelected] = useState(initialSelected ?? null);
     const [mobileView, setMobileView]   = useState('list'); // 'list' | 'detail'
@@ -648,7 +675,7 @@ export default function Jobs({ jobs, filters, selectedJob: initialSelected, appl
                         <main className={`scrollbar-hide flex-1 overflow-y-auto
                             ${mobileView === 'list' ? 'hidden lg:block' : 'block'}`}>
                             {selected ? (
-                                <JobDetail job={selected} onBack={() => setMobileView('list')} setModal={setModal} />
+                                <JobDetail job={selected} onBack={() => setMobileView('list')} setModal={setModal} savedJobMap={savedJobMap} />
                             ) : (
                                 <div className="hidden lg:flex h-full items-center justify-center rounded-2xl bg-white shadow-sm">
                                     <p className="text-sm text-gray-400">Select a job to view details</p>

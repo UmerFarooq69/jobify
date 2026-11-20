@@ -44,13 +44,13 @@ class PublicJobsController extends Controller
             $selectedJob = $jobs->first();
         }
 
-        $appliedIds = [];
+        $appliedIds  = [];
+        $savedJobMap = []; // job_id => saved_job_id
         if (auth()->check()) {
             $profile = auth()->user()->candidateProfile;
             if ($profile) {
-                $appliedIds = $profile->applications()
-                    ->pluck('job_requisition_id')
-                    ->toArray();
+                $appliedIds = $profile->applications()->pluck('job_requisition_id')->toArray();
+                $savedJobMap = $profile->savedJobs()->pluck('id','job_requisition_id')->toArray();
             }
         }
 
@@ -59,6 +59,7 @@ class PublicJobsController extends Controller
             'filters'     => $filters,
             'selectedJob' => $selectedJob,
             'appliedIds'  => $appliedIds,
+            'savedJobMap' => $savedJobMap,
         ]);
     }
 
