@@ -248,9 +248,9 @@ function JobDetail({ job, onBack, setModal, savedJobMap = {} }) {
         if (!user) { setModal('candidate'); return; }
         if (localSaved) {
             setLocalSaved(null);
-            router.delete(`/saved-jobs/${localSaved}`, { preserveScroll: true });
+            router.delete(`/candidate/saved-jobs/${localSaved}`, { preserveScroll: true });
         } else {
-            router.post('/saved-jobs', { job_id: job.id }, {
+            router.post('/candidate/saved-jobs', { job_id: job.id }, {
                 preserveScroll: true,
                 onSuccess: (page) => {
                     const map = page.props.savedJobMap ?? {};
