@@ -26,7 +26,7 @@ export default function CreateJob({ org, departments, jobTypes, functions: jobFu
                 headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content }
             });
             const d = res.data;
-            if (d.title) setData(prev => ({ ...prev, ...d, skills: d.skills ?? prev.skills }));
+            if (d.title) setData({ ...data, ...d, skills: d.skills ?? data.skills });
             setAiPrompt('');
         } catch { alert('AI draft failed.'); }
         setAiLoading(false);
