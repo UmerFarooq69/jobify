@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
@@ -40,13 +41,31 @@ class OtpController extends Controller
         Log::info(">>> OTP for {$identifier} ({$request->role}): {$code}");
 
         if ($type === 'email') {
-            try {
-                Mail::raw(
-                    "Your Jobify verification code is: {$code}\n\nThis code expires in 10 minutes.",
-                    fn ($m) => $m->to($identifier)->subject('Your Jobify OTP Code')
-                );
-            } catch (\Throwable $e) {
-                Log::warning("OTP email failed for {$identifier}: " . $e->getMessage());
+            $apiKey = env('RESEND_API_KEY');
+            if ($apiKey) {
+                try {
+                    $res = Http::withToken($apiKey)
+                        ->post('https://api.resend.com/emails', [
+                            'from'    => config('mail.from.address', 'onboarding@resend.dev'),
+                            'to'      => [$identifier],
+                            'subject' => 'Your Jobify OTP Code',
+                            'text'    => "Your Jobify verification code is: {$code}\n\nThis code expires in 10 minutes.",
+                        ]);
+                    if (! $res->successful()) {
+                        Log::warning("Resend API error for {$identifier}: " . $res->body());
+                    }
+                } catch (\Throwable $e) {
+                    Log::warning("Resend HTTP failed for {$identifier}: " . $e->getMessage());
+                }
+            } else {
+                try {
+                    Mail::raw(
+                        "Your Jobify verification code is: {$code}\n\nThis code expires in 10 minutes.",
+                        fn ($m) => $m->to($identifier)->subject('Your Jobify OTP Code')
+                    );
+                } catch (\Throwable $e) {
+                    Log::warning("OTP email failed for {$identifier}: " . $e->getMessage());
+                }
             }
         }
 
