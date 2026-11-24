@@ -38,7 +38,10 @@ class LlmService
                 'messages' => $messages,
             ], $options));
 
-        if (!$response->successful()) return null;
+        if (!$response->successful()) {
+            \Log::error('LLM API error: ' . $response->status() . ' ' . $response->body());
+            return null;
+        }
 
         return $response->json('choices.0.message.content');
     }
