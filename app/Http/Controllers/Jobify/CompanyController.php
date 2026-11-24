@@ -25,7 +25,11 @@ class CompanyController extends Controller
     }
 
     public function store(Request $request) {
-        $request->validate(['name' => 'required|string|max:255', 'industry' => 'required']);
+        $request->validate([
+            'name'                  => 'required|string|max:255',
+            'industry'              => 'required',
+            'password'              => 'required|string|min:8|confirmed',
+        ]);
         $slug = Str::slug($request->name) . '-' . Str::random(4);
         $org  = Organization::create([
             'name'     => $request->name,
@@ -37,7 +41,10 @@ class CompanyController extends Controller
             'size'     => $request->size,
         ]);
         OrganizationUser::create(['user_id' => auth()->id(), 'organization_id' => $org->id, 'role' => 'admin']);
-        auth()->user()->update(['role_type' => 'company_admin']);
+        auth()->user()->update([
+            'role_type' => 'company_admin',
+            'password'  => bcrypt($request->password),
+        ]);
         return redirect()->route('employer.dashboard')->with('success','Company created!');
     }
 

@@ -8,6 +8,7 @@ use App\Models\Otp;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
@@ -132,6 +133,16 @@ class OtpController extends Controller
         }
 
         return response()->json(['redirect' => '/', 'csrf' => $csrf]);
+    }
+
+    public function employerLoginPage()
+    {
+        if (auth()->check()) {
+            $user = auth()->user();
+            if ($user->role_type === 'company_admin') return redirect('/employer/dashboard');
+            return redirect('/');
+        }
+        return Inertia::render('Jobify/Company/Login');
     }
 
     public function employerLogin(Request $request)

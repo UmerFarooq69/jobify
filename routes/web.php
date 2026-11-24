@@ -171,6 +171,7 @@ Route::delete('/payments/{payment}', [PaymentController::class, 'destroy'])->nam
 */
 Route::post('/otp/send',           [\App\Http\Controllers\Jobify\OtpController::class, 'send'])->name('otp.send');
 Route::post('/otp/verify',         [\App\Http\Controllers\Jobify\OtpController::class, 'verify'])->name('otp.verify');
+Route::get('/employer/login',      [\App\Http\Controllers\Jobify\OtpController::class, 'employerLoginPage'])->name('employer.login.page');
 Route::post('/employer/login',     [\App\Http\Controllers\Jobify\OtpController::class, 'employerLogin'])->name('employer.login');
 
 /*
