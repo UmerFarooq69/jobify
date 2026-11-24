@@ -72,7 +72,7 @@ class QAdminController extends Controller
 
     public function updateSettings(Request $request) {
         foreach ($request->settings ?? [] as $key => $value) {
-            AdminSetting::where('key',$key)->update(['value' => is_bool($value) ? ($value ? 'true' : 'false') : $value]);
+            AdminSetting::updateOrCreate(['key' => $key], ['value' => is_bool($value) ? ($value ? 'true' : 'false') : $value]);
         }
         return back()->with('success','Settings saved.');
     }
