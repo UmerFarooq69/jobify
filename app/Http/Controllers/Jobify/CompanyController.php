@@ -120,7 +120,8 @@ class CompanyController extends Controller
     public function jobAiDraft(Request $request, JobAiService $ai) {
         $org    = $this->getOrg();
         $result = $ai->draftJob($request->prompt, $org->name);
-        return response()->json($result);
+        \Log::info('AI draft result: ' . json_encode($result));
+        return response()->json($result ?: ['error' => 'AI returned no data']);
     }
 
     public function jobStore(Request $request) {

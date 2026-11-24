@@ -26,9 +26,13 @@ export default function CreateJob({ org, departments, jobTypes, functions: jobFu
                 headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content }
             });
             const d = res.data;
-            if (d.title) setData({ ...data, ...d, skills: d.skills ?? data.skills });
-            setAiPrompt('');
-        } catch { alert('AI draft failed.'); }
+            if (d.title) {
+                setData({ ...data, ...d, skills: d.skills ?? data.skills });
+                setAiPrompt('');
+            } else {
+                alert('AI returned no data. Check that the PARSER_API_KEY is valid in Railway variables.');
+            }
+        } catch (err) { alert('AI draft failed: ' + (err.response?.data?.message ?? err.message)); }
         setAiLoading(false);
     };
 
